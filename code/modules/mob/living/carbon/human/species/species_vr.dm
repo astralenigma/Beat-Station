@@ -39,3 +39,5 @@
 		/datum/unarmed_attack/bite
 	)
 	var/list/unarmed_attacks = null // For empty hand harm-intent attack
+	
+	var/num_alternate_languages = 0
