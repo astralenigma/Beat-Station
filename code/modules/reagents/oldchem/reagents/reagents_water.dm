@@ -294,11 +294,22 @@
 		M.Dizzy(5)
 		if(iscultist(M) && prob(5))
 			M.say(pick("Av'te Nar'sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","Egkau'haom'nai en Chaous","Ho Diak'nos tou Ap'iron","R'ge Na'sie","Diabo us Vo'iscum","Si gn'um Co'nu"))
+		else if(is_servant_of_ratvar(M) && prob(5))
+			switch(pick("speech", "message", "emote"))
+				if("speech")
+					M.say("...[pick("Ratvar... lbhe yvtug tebjf qnex", "Jurer ner lbh, znfgre?", "Ur yvrf ehfgvat va Reebe", "Chetr nyy hagehguf naq... naq... fbzrguvat")]...")
+				if("message")
+					M << "<span class='warning'><b>[pick("Ratvar's illumination of your mind has begun to flicker.", "He lies rusting in Reebe, derelict and forgotten. And there he shall stay.", \
+					"You can't save him. Nothing can save him now.", "It seems that Nar-Sie will triumph after all.")]</b></span>"
+				if("emote")
+					M.visible_message("<span class='warning'>[M] [pick("whimpers quietly", "shivers as though cold", "glances around in paranoia")]</span>")
+
 	if(data >= 75 && prob(33))	// 30 units, 150 seconds
 		if (!M.confused) M.confused = 1
 		M.confused += 3
-		if(iscultist(M))
+		if(iscultist(M)|| is_servant_of_ratvar(M))
 			ticker.mode.remove_cultist(M.mind)
+			remove_servant_of_ratvar(M.mind)
 			holder.remove_reagent(src.id, src.volume)	// maybe this is a little too perfect and a max() cap on the statuses would be better??
 			M.jitteriness = 0
 			M.stuttering = 0
@@ -326,6 +337,9 @@
 
 /datum/reagent/holywater/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 	// Vampires have their powers weakened by holy water applied to the skin.
+	if(is_servant_of_ratvar(M))
+		M << "<span class='userdanger'>A darkness begins to spread its unholy tendrils through your mind, purging the Justiciar's influence!</span>"
+	..()
 	if(ishuman(M) && M.mind && M.mind.vampire && !M.mind.vampire.get_ability(/datum/vampire_passive/full))
 		var/mob/living/carbon/human/H=M
 		if(method == TOUCH)

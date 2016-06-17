@@ -987,7 +987,7 @@ var/list/robot_verbs_default = list(
 
 	overlays.Cut()
 	if(stat != DEAD && !(paralysis || stunned || weakened)) //Not dead, not stunned.
-		overlays += "eyes-[icon_state]"
+		overlays += "eyes-[icon_state][is_servant_of_ratvar(src) ? "_r" : ""]"
 	else
 		overlays -= "eyes"
 
