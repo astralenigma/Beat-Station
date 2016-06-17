@@ -157,6 +157,9 @@
 		vision_organ = /obj/item/organ/internal/eyes
 
 	unarmed = new unarmed_type()
+	unarmed_attacks = list()
+	for(var/u_type in unarmed_types)
+		unarmed_attacks += new u_type()
 
 /datum/species/proc/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[language]

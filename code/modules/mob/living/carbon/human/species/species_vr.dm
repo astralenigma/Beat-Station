@@ -33,3 +33,9 @@
 	var/appearance_flags = 0      // Appearance/display related features.
 	var/spawn_flags = 0 // Flags that specify who can spawn as this species
 	var/tail_animation
+	
+	var/list/unarmed_types = list(           // Possible unarmed attacks that the mob will use in combat,
+		/datum/unarmed_attack,
+		/datum/unarmed_attack/bite
+	)
+	var/list/unarmed_attacks = null // For empty hand harm-intent attack
