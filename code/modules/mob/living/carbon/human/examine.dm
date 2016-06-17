@@ -266,6 +266,9 @@
 
 	msg += "</span>"
 
+	if(stun_absorption)
+		msg += "[t_He] is radiating with a soft yellow light!\n" //Used by Vanguard
+
 	if(getBrainLoss() >= 60)
 		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
 

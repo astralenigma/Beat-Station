@@ -30,6 +30,9 @@
 	if(!has_power)
 		msg += "<span class='warning'>It appears to be running on backup power.</span>\n"
 
+	if(is_servant_of_ratvar(src) && user.Adjacent(src) && !stat) //To counter pseudo-stealth by using headlamps
+		msg += "<span class='warning'>Its eyes are glowing a blazing yellow!</span>\n"
+
 	switch(src.stat)
 		if(CONSCIOUS)
 			if(!src.client)	msg += "It appears to be in stand-by mode.\n" //afk

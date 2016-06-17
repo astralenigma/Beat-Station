@@ -10,12 +10,14 @@
 
 	//Revised. Brainmob is now contained directly within object of transfer. MMI in this case.
 	var/alien = 0
-	var/syndiemmi = 0 //Whether or not this is a Syndicate MMI
+	var/hacked = 0 //Whether or not this is a Syndicate MMI
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
 	var/obj/item/organ/internal/brain/held_brain = null // This is so MMI's aren't brainscrubber 9000's
 	var/mob/living/silicon/robot/robot = null//Appears unused.
 	var/obj/mecha/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 // I'm using this for mechs giving MMIs HUDs now
+	var/clockwork = FALSE //If this is a soul vessel
+
 
 /obj/item/device/mmi/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
 	if(istype(O, /obj/item/organ/internal/brain/crystal ))
@@ -178,4 +180,4 @@
 /obj/item/device/mmi/syndie
 	name = "Syndicate Man-Machine Interface"
 	desc = "Syndicate's own brand of MMI. It enforces laws designed to help Syndicate agents achieve their goals upon cyborgs created with it, but doesn't fit in Nanotrasen AI cores."
-	syndiemmi = 1
+	hacked = 1

@@ -56,3 +56,9 @@
 	var/list/surgeries = list()	//a list of surgery datums. generally empty, they're added when the player wants them.
 
 	var/gene_stability = DEFAULT_GENE_STABILITY
+
+	var/stun_absorption = FALSE //If all incoming stuns are being absorbed
+	var/stun_absorption_count = 0 //How many seconds of stun that have been absorbed
+
+	var/mob/living/mental_dominator //The person controlling the mind of this person, if applicable
+	var/mob/living/mind_control_holder/mind_control_holder //If the mob is being mind controlled, where their old mind is stored (check clock_mobs.dm)

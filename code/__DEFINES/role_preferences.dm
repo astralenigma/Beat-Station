@@ -39,7 +39,7 @@
 #define ROLE_MORPH				"morph"
 #define ROLE_ERT				"emergency response team"
 #define ROLE_NYMPH				"Dionaea"
-
+#define ROLE_SERVANT_OF_RATVAR	"servant of Ratvar"
 
 //Missing assignment means it's not a gamemode specific role, IT'S NOT A BUG OR ERROR.
 //The gamemode specific ones are just so the gamemodes can query whether a player is old enough
@@ -73,4 +73,5 @@ var/global/list/special_roles = list(
 	ROLE_GUARDIAN,
 	ROLE_MORPH,
 	ROLE_TRADER,
+	ROLE_SERVANT_OF_RATVAR = /datum/game_mode/clockwork_cult,
 )

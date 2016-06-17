@@ -147,7 +147,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Relinquish your life and enter the land of the dead."
 
 	var/mob/M = src
-
+	if(mental_dominator)
+		src << "<span class='warning'>This body's force of will is too strong! You can't break it enough to force them into a catatonic state.</span>"
+		if(mind_control_holder)
+			mind_control_holder << "<span class='userdanger'>Through tremendous force of will, you stop a catatonia attempt!</span>"
+		return 0
 	if(stat == DEAD)
 		ghostize(1)
 	else
@@ -157,6 +161,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/mob/dead/observer/ghost = ghostize(0)            //0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 
+
+		
 	var/obj/structure/morgue/Morgue = locate() in M.loc
 	if(istype(M.loc,/obj/structure/morgue))
 		Morgue = M.loc

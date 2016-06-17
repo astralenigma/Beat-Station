@@ -20,6 +20,7 @@ var/datum/atom_hud/huds = list( \
 	ANTAG_HUD_ABDUCTOR = new/datum/atom_hud/antag/hidden(),\
 	ANTAG_HUD_HOG_BLUE = new/datum/atom_hud/antag(),\
 	ANTAG_HUD_HOG_RED = new/datum/atom_hud/antag(),\
+	ANTAG_HUD_CLOCKWORK = new/datum/atom_hud/antag(),\
  	)
 
 /datum/atom_hud

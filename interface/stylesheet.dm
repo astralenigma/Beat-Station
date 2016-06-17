@@ -118,6 +118,10 @@ h1.alert, h2.alert		{color: #000000;}
 .revenwarning			{color: #760fbb;	font-style: italic;}
 .revendanger			{color: #760fbb;	font-weight: bold; font-size: 3;}
 
+.brass					{color: #BE8700;}
+.heavy_brass			{color: #BE8700; font-weight: bold; font-style: italic;}
+.large_brass			{color: #BE8700; font-size: 3;}
+
 .memo					{color: #638500;	text-align: center;}
 .memoedit				{text-align: center;	font-size: 2;}
 
