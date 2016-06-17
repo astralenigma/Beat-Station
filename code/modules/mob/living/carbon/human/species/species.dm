@@ -8,7 +8,8 @@
 	var/path 					// Species path
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
-
+	var/min_age = 17
+	var/max_age = 70
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
 	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
@@ -35,7 +36,7 @@
 	var/cold_level_3 = 120  // Cold damage level 3 below this point.
 	var/cold_env_multiplier = 1 // Damage multiplier for being in a cold environment
 
-	var/heat_level_1 = 360  // Heat damage level 1 above this point.
+	var/heat_level_1 = 360  // Heat dam level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 460 // Heat damage level 3 above this point; used for body temperature
 	var/hot_env_multiplier = 1 // Damage multiplier for being in a hot environment
@@ -112,6 +113,7 @@
 	// Language/culture vars.
 	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
 	var/language = "Galactic Common"         // Default racial language, if any.
+	var/name_language = "Galactic Common"
 	var/secondary_langs = list()             // The names of secondary languages that are available to this species.
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
@@ -119,11 +121,26 @@
 	var/male_scream_sound = 'sound/goonstation/voice/male_scream.ogg'
 	var/female_scream_sound = 'sound/goonstation/voice/female_scream.ogg'
 
+	var/heat_discomfort_level = 315                   // Aesthetic messages about feeling warm.
+	var/cold_discomfort_level = 285                   // Aesthetic messages about feeling chilly.
+	var/list/heat_discomfort_strings = list(
+		"You feel sweat drip down your neck.",
+		"You feel uncomfortably warm.",
+		"Your skin prickles in the heat."
+		)
+	var/list/cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your chilly flesh stands out in goosebumps."
+		)
+
 	//Default hair/headacc style vars.
 	var/default_hair = "Bald" 		//Default hair style for newly created humans unless otherwise set.
 	var/default_fhair = "Shaved"	//Default facial hair style for newly created humans unless otherwise set.
 	var/default_headacc = "None"	//Default head accessory style for newly created humans unless otherwise set.
-
+	var/appearance_flags = 0      // Appearance/display related features.
+	var/spawn_flags = 0 // Flags that specify who can spawn as this species
+	var/tail_animation
                               // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
 		"heart" =    /obj/item/organ/internal/heart,
