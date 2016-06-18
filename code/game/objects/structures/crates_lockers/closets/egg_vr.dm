@@ -7,8 +7,8 @@
 	icon_closed = "egg"
 	icon_opened = "egg_open"
 	icon_locked = "egg"
-	open_sound = 'sound/vore/schlorp.ogg'
-	close_sound = 'sound/vore/schlorp.ogg'
+	var/open_sound = 'sound/vore/schlorp.ogg'
+	var/close_sound = 'sound/vore/schlorp.ogg'
 	opened = 0
 	welded = 0 //Don't touch this.
 	health = 100

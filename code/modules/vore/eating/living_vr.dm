@@ -268,14 +268,14 @@
 			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (PC) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
 
 	//You're in a dogborg!
-	else if(istype(src.loc, /obj/item/device/dogborg/sleeper))
-		var/mob/living/silicon/pred = src.loc.loc //Thing holding the belly!
-		var/obj/item/device/dogborg/sleeper/belly = src.loc //The belly!
+//	else if(istype(src.loc, /obj/item/device/dogborg/sleeper))
+//		var/mob/living/silicon/pred = src.loc.loc //Thing holding the belly!
+//		var/obj/item/device/dogborg/sleeper/belly = src.loc //The belly!
 
-		var/confirm = alert(src, "You're in a dogborg sleeper. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
-		if(confirm == "Okay")
-			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (BORG) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
-			belly.go_out(src) //Just force-ejects from the borg as if they'd clicked the eject button.
+//		var/confirm = alert(src, "You're in a dogborg sleeper. This is for escaping from preference-breaking and if your predator disconnects/AFKs. If your preferences were being broken, please admin-help as well.", "Confirmation", "Okay", "Cancel")
+//		if(confirm == "Okay")
+//			message_admins("[key_name(src)] used the OOC escape button to get out of [key_name(pred)] (BORG) ([pred ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[pred.x];Y=[pred.y];Z=[pred.z]'>JMP</a>" : "null"])")
+//			belly.go_out(src) //Just force-ejects from the borg as if they'd clicked the eject button.
 
 
 	else
@@ -357,19 +357,19 @@
 // Magical pred-air breathing for inside preds
 // overrides a proc defined on atom called by breathe.dm
 //
-/mob/living/return_air()
-	return return_air_for_internal_lifeform()
+///mob/living/return_air()
+//	return return_air_for_internal_lifeform()
 
-/mob/living/return_air_for_internal_lifeform()
+///mob/living/return_air_for_internal_lifeform()
 	//Free air until someone wants to code processing it for reals from predbreaths
-	var/datum/gas_mixture/belly_air/air = new(1000)
-	return air
+//	var/datum/gas_mixture/belly_air/air = new(1000)
+//	return air
 
 // This is about 0.896m^3 of atmosphere
 /datum/gas_mixture/belly_air
 	volume = 1000
-	gas = list(
+	var/gas = list(
 		"oxygen" = 21,
 		"nitrogen" = 79)
 	temperature = 293.150
-	total_moles = 40
+	var/total_moles = 40

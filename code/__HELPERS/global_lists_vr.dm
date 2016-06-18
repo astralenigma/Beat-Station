@@ -25,7 +25,7 @@ var/global/list/important_items = list(
 		/obj/item/weapon/pinpointer,
 		/obj/item/clothing/suit,
 		/obj/item/clothing/shoes/magboots,
-		/obj/item/blueprints,
+//		/obj/item/blueprints,
 		/obj/item/clothing/head/helmet/space,
 		/obj/item/weapon/storage/internal,
 		/obj/item/weapon/disk/nuclear)

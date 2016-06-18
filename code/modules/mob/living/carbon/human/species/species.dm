@@ -433,12 +433,7 @@
 //Species unarmed attacks
 
 /datum/unarmed_attack
-	var/attack_verb = list("attack")	// Empty hand hurt intent verb.
-	var/damage = 0						// How much flat bonus damage an attack will do. This is a *bonus* guaranteed damage amount on top of the random damage attacks do.
-	var/attack_sound = "punch"
-	var/miss_sound = 'sound/weapons/punchmiss.ogg'
-	var/sharp = 0
-	var/edge = 0
+	attack_verb = list("attack")	// Empty hand hurt intent verb.
 
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")

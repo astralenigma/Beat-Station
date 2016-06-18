@@ -55,6 +55,9 @@
 	var/zoomed = FALSE //Zoom toggle
 	var/zoom_amt = 3 //Distance in TURFs to move the user's screen forward (the "zoom" effect)
 	var/datum/action/toggle_scope_zoom/azoom
+	//vore var :(
+//	var/list/firemodes = list()
+
 
 	proc/ready_to_fire()
 		if(world.time >= last_fired + fire_delay)
@@ -90,6 +93,10 @@
 /obj/item/weapon/gun/New()
 	build_zooming()
 	..()
+	//Vore guns :(
+//	for(var/i in 1 to firemodes.len)
+//		firemodes[i] = new /datum/firemode(src, firemodes[i])
+
 
 /obj/item/weapon/gun/pickup(mob/user)
 

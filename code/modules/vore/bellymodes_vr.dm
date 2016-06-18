@@ -118,6 +118,7 @@
 		return
 
 ///////////////////////////// DM_TRANSFORM_MALE /////////////////////////////
+/*
 	if(digest_mode == DM_TRANSFORM_MALE && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
@@ -165,9 +166,9 @@
 				P.nutrition += 1
 		return
 
-
+*/
 ///////////////////////////// DM_TRANSFORM_FEMALE /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_FEMALE && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_FEMALE && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -210,7 +211,7 @@
 			if(P.nutrition < 400)
 				P.nutrition += 1
 		return
-
+*/
 ///////////////////////////// DM_TRANSFORM_KEEP_GENDER  /////////////////////////////
 	if(digest_mode == DM_TRANSFORM_KEEP_GENDER && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
@@ -322,7 +323,7 @@
 
 
 ///////////////////////////// DM_TRANSFORM_CHANGE_SPECIES_EGG /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES_EGG && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES_EGG && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -479,9 +480,9 @@
 						J.name = "Odd egg" //Something went wrong. Since the default is "egg", they shouldn't see this.
 						internal_contents -= P
 		return
-
+*/
 ///////////////////////////// DM_TRANSFORM_KEEP_GENDER_EGG  /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_KEEP_GENDER_EGG && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_KEEP_GENDER_EGG && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -764,9 +765,9 @@
 						J.name = "Odd egg" //Something went wrong. Since the default is "egg", they shouldn't see this.
 						internal_contents -= P
 		return
-
+*/
 ///////////////////////////// DM_TRANSFORM_FEMALE_EGG /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_FEMALE_EGG && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_FEMALE_EGG && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -909,7 +910,7 @@
 						J.name = "Odd egg" //Something went wrong. Since the default is "egg", they shouldn't see this.
 						internal_contents -= P
 		return
-
+*/
 
 ///////////////////////////// DM_EGG /////////////////////////////
 	if(digest_mode == DM_EGG && ishuman(owner))
