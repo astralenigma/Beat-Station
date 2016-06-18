@@ -6,7 +6,7 @@
 	icon_state = "micro"
 	slot_flags = SLOT_FEET | SLOT_HEAD | SLOT_ID
 	w_class = 2
-	item_icons = null 	// Override value from parent. We don't have magic sprites.
+//	item_icons = null 	// Override value from parent. We don't have magic sprites.
 	pixel_y = 0			// Override value from parent.
 
 /obj/item/weapon/holder/micro/examine(var/mob/user)
@@ -26,7 +26,7 @@
 	for(var/mob/living/carbon/human/M in contents)
 		M.help_shake_act(user)
 
-/obj/item/weapon/holder/micro/update_state()
+/obj/item/weapon/holder/micro/proc/update_state()
 	// If any items have been dropped by contained mob, drop them to floor.
 	for(var/obj/O in contents)
 		O.forceMove(get_turf(src))

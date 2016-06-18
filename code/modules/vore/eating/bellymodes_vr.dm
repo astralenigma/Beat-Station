@@ -1,6 +1,6 @@
 // Process the predator's effects upon the contents of its belly (i.e digestion/transformation etc)
 // Called from /mob/living/Life() proc.
-/datum/belly/proc/process_Life()
+/datum/belly/process_Life()
 
 /////////////////////////// Auto-Emotes ///////////////////////////
 	if((digest_mode in emote_lists) && !emotePend)
@@ -118,7 +118,7 @@
 		return
 
 ///////////////////////////// DM_TRANSFORM_MALE /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_MALE && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_MALE && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -910,7 +910,7 @@
 						internal_contents -= P
 		return
 
-
+*/
 ///////////////////////////// DM_EGG /////////////////////////////
 	if(digest_mode == DM_EGG && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)

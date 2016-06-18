@@ -1,6 +1,6 @@
 
 #define isTaurTail(A)	istype(A, /datum/sprite_accessory/tail/taur)
-
+/*
 /mob/living/carbon/human/proc/get_ears_overlay()
 	if(ear_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
 		var/icon/ears_s = new/icon("icon" = ear_style.icon, "icon_state" = ear_style.icon_state)
@@ -11,7 +11,6 @@
 			ears_s.Blend(overlay, ICON_OVERLAY)
 		return ears_s
 	return null
-
 
 /mob/living/carbon/human/proc/get_tail_image()
 	//If you are FBP with tail style
@@ -34,3 +33,4 @@
 		else
 			return image(tail_s)
 	return null
+*/

@@ -213,7 +213,7 @@
 		return
 */
 ///////////////////////////// DM_TRANSFORM_KEEP_GENDER  /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_KEEP_GENDER && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_KEEP_GENDER && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -253,9 +253,9 @@
 			if(P.nutrition < 400)
 				P.nutrition += 1
 		return
-
+*/
 ///////////////////////////// DM_TRANSFORM_CHANGE_SPECIES  /////////////////////////////
-	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES && ishuman(owner))
+/*	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES && ishuman(owner))
 		for (var/mob/living/carbon/human/P in internal_contents)
 			if(P.stat)
 				continue
@@ -320,7 +320,7 @@
 			if(P.nutrition < 400)
 				P.nutrition += 1
 		return
-
+*/
 
 ///////////////////////////// DM_TRANSFORM_CHANGE_SPECIES_EGG /////////////////////////////
 /*	if(digest_mode == DM_TRANSFORM_CHANGE_SPECIES_EGG && ishuman(owner))

@@ -278,13 +278,13 @@
 		internal_contents += W
 
 	// Posibrains have to be pulled 'out' of their organ version.
-	else if(istype(W,/obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/MMI = W
+/*	else if(istype(W,/obj/item/device/mmi))
+		var/obj/item/device/mmi/MMI = W
 		var/atom/movable/brain = MMI.removed()
 		if(brain)
 			brain.forceMove(owner)
 			internal_contents += brain
-
+*/
 	else
 		if(!_is_digestable(W))
 			W.forceMove(owner)
@@ -333,7 +333,7 @@
 	if (!(R in internal_contents))
 		return  // User is not in this belly, or struggle too soon.
 
-	R.setClickCooldown(50)
+//	R.setClickCooldown(50)
 
 	if(owner.stat || escapable) //If owner is stat (dead, KO) we can actually escape, or if belly is set to escapable (non-default)
 		R << "<span class='warning'>You attempt to climb out of \the [name]. (This will take around [escapetime/10] seconds.)</span>"
