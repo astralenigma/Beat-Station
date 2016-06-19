@@ -6,7 +6,6 @@
 *.lk
 
 #ignore any files in config/, except those in subdirectories.
-/config/*
 !/config/*/*
 
 #ignore other, specific files and folers
