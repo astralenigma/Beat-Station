@@ -44,9 +44,9 @@
 
 
 /obj/singularity/narsie/process()
-	eat()
 	if(clashing)
 		return 0
+	eat()
 	if(!target || prob(5))
 		pickcultist()
 	move()
@@ -92,6 +92,12 @@
 /obj/singularity/narsie/proc/pickcultist() //Narsie rewards his cultists with being devoured first, then picks a ghost to follow. --NEO
 	var/list/cultists = list()
 	var/list/noncultists = list()
+	for(var/obj/structure/clockwork/massive/ratvar/enemy in poi_list) //Prioritize killing Ratvar
+		if(enemy.z != z)
+			continue
+		acquire(enemy)
+		return
+
 	for(var/mob/living/carbon/food in living_mob_list) //we don't care about constructs or cult-Ians or whatever. cult-monkeys are fair game i guess
 		var/turf/pos = get_turf(food)
 		if(pos.z != src.z)
@@ -123,7 +129,7 @@
 		return
 
 
-/obj/singularity/narsie/proc/acquire(var/mob/food)
+/obj/singularity/narsie/proc/acquire(atom/food)
 	to_chat(target, "<span class='notice'>NAR-SIE HAS LOST INTEREST IN YOU</span>")
 	target = food
 	if(ishuman(target))
