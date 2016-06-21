@@ -91,6 +91,9 @@
 /obj/item/device/mmi/posibrain/proc/transfer_personality(var/mob/candidate)
 	src.searching = 0
 	src.brainmob.key = candidate.key
+	if(clockwork)
+		add_servant_of_ratvar(brainmob, TRUE)
+
 	src.name = "positronic brain ([src.brainmob.name])"
 
 	to_chat(src.brainmob, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")

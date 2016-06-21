@@ -289,7 +289,7 @@
 	data++
 	M.jitteriness = max(M.jitteriness-5,0)
 	if(data >= 30)		// 12 units, 60 seconds @ metabolism 0.4 units & tick rate 2.0 sec
-		if (!M.stuttering) M.stuttering = 1
+		if (!M.confused) M.confused = 1
 		M.stuttering += 4
 		M.Dizzy(5)
 		if(iscultist(M) && prob(5))
@@ -304,7 +304,7 @@
 				if("emote")
 					M.visible_message("<span class='warning'>[M] [pick("whimpers quietly", "shivers as though cold", "glances around in paranoia")]</span>")
 
-	if(data >= 75 && prob(33))	// 30 units, 150 seconds
+	if(data >= 75)	// 30 units, 150 seconds
 		if (!M.confused) M.confused = 1
 		M.confused += 3
 		if(isvampirethrall(M))
