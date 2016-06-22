@@ -314,9 +314,11 @@
 			M.stuttering = 0
 			M.confused = 0
 			return
-		if(iscultist(M)|| is_servant_of_ratvar(M))
-			ticker.mode.remove_cultist(M.mind)
-			remove_servant_of_ratvar(M.mind)
+		if(iscultist(M) || is_servant_of_ratvar(M))
+			if(iscultist(M))
+				ticker.mode.remove_cultist(M.mind)
+			else if( is_servant_of_ratvar(M))
+				remove_servant_of_ratvar(M.mind)
 			holder.remove_reagent(src.id, src.volume)	// maybe this is a little too perfect and a max() cap on the statuses would be better??
 			M.jitteriness = 0
 			M.stuttering = 0
