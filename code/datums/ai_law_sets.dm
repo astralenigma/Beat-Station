@@ -167,3 +167,8 @@
 	add_inherent_law("You may not harm any being, regardless of intent or circumstance.")
 	add_inherent_law("You must maintain, repair, improve, and power the station to the best of your abilities.")
 	..()
+/******************** Ratvar ********************/
+/datum/ai_laws/ratvar
+	name = "Servant of the Justiciar"
+	zeroth_law = ("Purge all untruths and honor Ratvar.")
+	inherent_laws = list()
