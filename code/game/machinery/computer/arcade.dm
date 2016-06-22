@@ -7,6 +7,7 @@
 	icon_screen = "invaders"
 	light_color = "#00FF00"
 	var/prize = /obj/item/stack/tickets
+	clockwork = TRUE //it'd look weird
 
 /obj/machinery/computer/arcade/power_change()
 	..()

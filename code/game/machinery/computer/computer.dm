@@ -15,7 +15,7 @@
 	var/light_power_on = 1
 	var/overlay_layer
 	atom_say_verb = "beeps"
-
+	var/clockwork = FALSE
 /obj/machinery/computer/New()
 	overlay_layer = layer
 	..()
@@ -67,6 +67,22 @@
 			verbs -= x
 		set_broken()
 		density = 0
+
+/obj/machinery/computer/ratvar_act()
+	if(!clockwork && prob(20))
+		clockwork = TRUE
+		icon_screen = "ratvar[rand(1, 4)]"
+		icon_keyboard = "ratvar_key[rand(1, 6)]"
+		icon_state = "ratvarcomputer[rand(1, 4)]"
+		update_icon()
+
+/obj/machinery/computer/narsie_act()
+	if(clockwork && clockwork != initial(clockwork) && prob(20)) //if it's clockwork but isn't normally clockwork
+		clockwork = FALSE
+		icon_screen = initial(icon_screen)
+		icon_keyboard = initial(icon_keyboard)
+		icon_state = initial(icon_state)
+		update_icon()
 
 /obj/machinery/computer/update_icon()
 	overlays.Cut()
