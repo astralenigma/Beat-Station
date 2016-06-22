@@ -1054,6 +1054,14 @@ About the new airlock wires panel:
 			electrify(duration)
 	..()
 
+/obj/machinery/door/airlock/ratvar_act() //Airlocks become pinion airlocks that only allow servants
+	if(prob(20))
+		if(glass)
+			new/obj/machinery/door/airlock/clockwork/brass(get_turf(src))
+		else
+			new/obj/machinery/door/airlock/clockwork(get_turf(src))
+		qdel(src)
+ 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
 	..()
 	if(stat & NOPOWER)
@@ -1135,7 +1143,8 @@ About the new airlock wires panel:
 			user.visible_message("<span class='notice'>[user] loosens [src]'s gear!</span>", "<span class='notice'>[src]'s gear pops off and dangles loosely.</span>")
 			playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 			construction_state = GEAR_LOOSE
-		else if(construction_state == GEAR_LOOSE)+			user.visible_message("<span class='notice'>[user] begins tightening [src]'s gear...</span>", "<span class='notice'>You begin tightening [src]'s gear into lace...</span>")
+		else if(construction_state == GEAR_LOOSE)
+			user.visible_message("<span class='notice'>[user] begins tightening [src]'s gear...</span>", "<span class='notice'>You begin tightening [src]'s gear into lace...</span>")
 			playsound(src, 'sound/items/Ratchet.ogg', 50, 1)
 			if(!do_after(user, 80 / I.toolspeed, target = src))
 				return 1

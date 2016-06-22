@@ -6,7 +6,7 @@ var/list/possible_uplinker_IDs = list("Alfa","Bravo","Charlie","Delta","Echo","F
 /obj/machinery/computer/telecrystals
 	name = "telecrystal assignment station"
 	desc = "A device used to manage telecrystals during group operations. You shouldn't be looking at this particular one..."
-
+	clockwork=TRUE
 /////////////////////////////////////////////
 /obj/machinery/computer/telecrystals/uplinker
 	name = "telecrystal upload/recieve station"

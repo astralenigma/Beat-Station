@@ -438,6 +438,9 @@
 /atom/proc/narsie_act()
 	return
 
+/atom/proc/ratvar_act()
+	return
+
 /atom/proc/atom_say(var/message)
 	if((!message))
 		return
