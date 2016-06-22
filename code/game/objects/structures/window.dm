@@ -517,3 +517,30 @@ var/global/wcCommon = pick(list("#379963", "#0d8395", "#58b5c3", "#49e46e", "#8f
 
 /obj/machinery/button/windowtint/update_icon()
 	icon_state = "light[active]"
+	
+/obj/structure/window/reinforced/clockwork
+	name = "ratvarian window"
+	desc = "A paper-thin pane of translucent yet reinforced brass."
+	icon = 'icons/obj/clockwork_objects.dmi'
+	icon_state = "clockwork_window_single"
+
+/obj/structure/window/reinforced/clockwork/New(loc, direct)
+	..()
+	if(!fulltile)
+		var/obj/effect/E = PoolOrNew(/obj/effect/overlay/temp/ratvar/window/single, get_turf(src))
+		if(direct)
+			dir = direct
+			E.dir = direct
+	else
+		PoolOrNew(/obj/effect/overlay/temp/ratvar/window, get_turf(src))
+	for(var/obj/item/I in debris)
+		debris -= I
+		qdel(I)
+	debris += new/obj/item/clockwork/component/vanguard_cogwheel(src)
+
+/obj/structure/window/reinforced/clockwork/fulltile
+	icon_state = "clockwork_window"
+	smooth = SMOOTH_TRUE
+	canSmoothWith = null
+	fulltile = 1
+	dir = 5
