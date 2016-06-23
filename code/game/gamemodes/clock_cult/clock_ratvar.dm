@@ -1,9 +1,9 @@
 /obj/structure/clockwork/massive //For objects that are typically very large
 	name = "massive construct"
 	desc = "A very large construction."
-	layer = MASSIVE_OBJ_LAYER
+//	layer = MASSIVE_OBJ_LAYER
 	density = FALSE
-	burn_state = LAVA_PROOF
+//	burn_state = LAVA_PROOF
 
 /obj/structure/clockwork/massive/New()
 	..()
