@@ -2,7 +2,7 @@
 /datum/action/innate/function_call
 	name = "Function Call"
 	button_icon_state = "ratvarian_spear"
-	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUNNED|AB_CHECK_CONSCIOUS
+	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUNNED //|AB_CHECK_CONSCIOUS
 
 /datum/action/innate/function_call/IsAvailable()
 	if(!is_servant_of_ratvar(owner))

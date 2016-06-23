@@ -84,7 +84,7 @@ This file's folder contains:
 			Ratvar, the Clockwork Justiciar, lies derelict and forgotten in an unseen realm.</span>"
 		var/mob/living/simple_animal/drone/D = M
 		D.update_drone_hack(TRUE, TRUE)
-		D.languages |= HUMAN
+		D.languages |= LANGUAGE_HUMAN
 	else if(!silent)
 		M << "<span class='heavy_brass'>Your world glows a brilliant yellow! All at once it comes to you. Ratvar, the Clockwork Justiciar, lies in exile, derelict and forgotten in an unseen realm.</span>"
 
@@ -172,7 +172,7 @@ This file's folder contains:
 	required_players = 30
 	required_enemies = 2
 	recommended_enemies = 4
-	enemy_minimum_age = 14
+//	enemy_minimum_age = 14
 	protected_jobs = list("AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain") //Silicons can eventually be converted
 	restricted_jobs = list("Chaplain", "Captain")
 	var/servants_to_serve = list()

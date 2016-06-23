@@ -314,7 +314,7 @@
 	layer = HIGH_OBJ_LAYER
 	break_message = "<span class='warning'>The warden's eye gives a glare of utter hate before falling dark!</span>"
 	debris = list(/obj/item/clockwork/component/belligerent_eye/blind_eye)
-	burn_state = LAVA_PROOF
+//	burn_state = LAVA_PROOF
 	var/damage_per_tick = 3
 	var/sight_range = 3
 	var/mob/living/target
@@ -379,7 +379,7 @@
 	anchored = 0
 	density = 0
 	takes_damage = FALSE
-	burn_state = LAVA_PROOF
+//	burn_state = LAVA_PROOF
 
 /obj/structure/clockwork/anima_fragment/attackby(obj/item/I, mob/living/user, params)
 	if(istype(I, /obj/item/device/mmi/posibrain/soul_vessel))
@@ -440,7 +440,7 @@
 	anchored = 1
 	density = 0
 	opacity = 0
-	burn_state = LAVA_PROOF
+//	burn_state = LAVA_PROOF
 
 /obj/effect/clockwork/New()
 	..()
@@ -664,7 +664,7 @@
 	icon_state = "sigil"
 	layer = LOW_OBJ_LAYER
 	alpha = 50
-	burn_state = FIRE_PROOF
+//	burn_state = FIRE_PROOF
 	burntime = 1
 	var/affects_servants = FALSE
 	var/affects_stat = FALSE
