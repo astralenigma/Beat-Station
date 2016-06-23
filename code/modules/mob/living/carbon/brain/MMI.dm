@@ -17,6 +17,7 @@
 	var/obj/mecha/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 // I'm using this for mechs giving MMIs HUDs now
 	var/clockwork = FALSE //If this is a soul vessel
+	var/braintype = "Cyborg"
 
 
 /obj/item/device/mmi/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
