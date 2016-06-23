@@ -31,7 +31,8 @@
 	var/ert_disabled = 0
 	var/uplink_welcome = "Syndicate Uplink Console:"
 	var/uplink_uses = 10
-
+	var/antag_flag = null //preferences flag such as BE_WIZARD that need to be turned on for players to be antag
+	var/list/datum/mind/antag_candidates = list() // List of possible starting antags goes here
 	var/const/waittime_l = 600  //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 

@@ -16,8 +16,6 @@
 	var/station_captured = 0
 	var/to_nuke_or_not_to_nuke = 0
 	var/apcs = 0 //Adding dis to track how many APCs the AI hacks. --NeoFite
-	var/list/datum/mind/antag_candidates = list() // List of possible starting antags goes here
-
 
 /datum/game_mode/malfunction/announce()
 	to_chat(world, {"<B>The current game mode is - AI Malfunction!</B><br>)
