@@ -13,7 +13,7 @@
 	req_access = list(access_robotics)
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
 	var/silenced = 0 //if set to 1, they can't talk.
-
+	var/braintype = "Android"
 
 /obj/item/device/mmi/posibrain/attack_self(mob/user as mob)
 	if(brainmob && !brainmob.key && searching == 0)
