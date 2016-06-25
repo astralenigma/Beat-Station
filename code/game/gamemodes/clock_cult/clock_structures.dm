@@ -43,7 +43,7 @@
 	return 1
 
 /obj/structure/clockwork/burn()
-	SSobj.burning -= src
+//	SSobj.burning -= src
 	if(takes_damage)
 		playsound(src, 'sound/items/Welder.ogg', 100, 1)
 		visible_message("<span class='warning'>[src] is warped by the heat!</span>")
@@ -149,12 +149,12 @@
 
 /obj/structure/clockwork/cache/New()
 	..()
-	START_PROCESSING(SSobj, src)
+//	START_PROCESSING(SSobj, src)
 	clockwork_caches++
 
 /obj/structure/clockwork/cache/Destroy()
 	clockwork_caches--
-	STOP_PROCESSING(SSobj, src)
+//	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/structure/clockwork/cache/destroyed()
@@ -307,10 +307,10 @@
 
 /obj/structure/clockwork/ocular_warden/New()
 	..()
-	START_PROCESSING(SSfastprocess, src)
+//	START_PROCESSING(SSfastprocess, src)
 
 /obj/structure/clockwork/ocular_warden/Destroy()
-	STOP_PROCESSING(SSfastprocess, src)
+//	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 
 /obj/structure/clockwork/ocular_warden/examine(mob/user)
