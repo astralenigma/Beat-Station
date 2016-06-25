@@ -27,7 +27,7 @@
 	req_access = list(access_syndicate)
 	shuttleId = "steel_rain"
 	possible_destinations = null
-
+	clockwork = TRUE
 /obj/machinery/computer/shuttle/syndicate/drop_pod/Topic(href, href_list)
 	if(href_list["move"])
 		if(z != ZLEVEL_CENTCOMM)

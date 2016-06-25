@@ -264,6 +264,7 @@
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "dorm_available"
 	density = 0
+	clockwork = TRUE
 
 /obj/machinery/computer/shuttle/pod/update_icon()
 	return
