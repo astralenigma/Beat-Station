@@ -369,7 +369,7 @@
 	icon_state = "wraith_specs"
 	item_state = "glasses"
 	vision_flags = SEE_MOBS | SEE_TURFS | SEE_OBJS
-	invis_view = 2
+//	invis_view = 2
 	darkness_view = 3
 
 /obj/item/clothing/glasses/wraith_spectacles/equipped(mob/living/user, slot)
@@ -559,8 +559,8 @@
 	icon_state = "reclaimer"
 	flags = NODROP
 	unacidable = TRUE
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEEARS
-	flags_cover = HEADCOVERSEYES
+	flags_inv = HIDEFACE|HIDEEARS
+//	flags_cover = HEADCOVERSEYES
 
 /obj/item/clothing/suit/armor/clockwork
 	name = "clockwork cuirass"
