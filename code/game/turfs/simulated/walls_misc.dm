@@ -22,7 +22,7 @@
 	icon = 'icons/turf/walls/rusty_reinforced_wall.dmi'
 	icon_state = "rrust"
 	walltype = "rrust"
-	
+
 //Clockwork wall: Causes nearby tinkerer's caches to generate components.
 /turf/closed/wall/clockwork
 	name = "clockwork wall"
@@ -36,11 +36,11 @@
 	..()
 	PoolOrNew(/obj/effect/overlay/temp/ratvar/wall, src)
 	PoolOrNew(/obj/effect/overlay/temp/ratvar/beam, src)
-	SSobj.processing += src
+//	SSobj.processing += src
 	clockwork_construction_value += 5
 
 /turf/closed/wall/clockwork/Destroy()
-	SSobj.processing -= src
+//	SSobj.processing -= src
 	clockwork_construction_value -= 5
 	..()
 
