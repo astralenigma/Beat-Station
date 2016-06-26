@@ -2,6 +2,8 @@
 #define GEAR_UNFASTENED 2
 #define GEAR_LOOSE 3
 
+
+
 //Pinion airlocks: Clockwork doors that only let servants of Ratvar through.
 /obj/machinery/door/airlock/clockwork
 	name = "pinion airlock"
@@ -93,24 +95,6 @@
 			qdel(src)
 		return 1
 	return 0
-
-//Pinion airlocks: Clockwork doors that only let servants of Ratvar through.
-/obj/machinery/door/airlock/clockwork
-	name = "pinion airlock"
-	desc = "A massive cogwheel set into two heavy slabs of brass."
-	icon = 'icons/obj/doors/clockwork/pinion_airlock.dmi'
-	overlays_file = 'icons/obj/doors/clockwork/overlays.dmi'
-	opacity = 1
-	hackProof = TRUE
-	aiControlDisabled = TRUE
-	use_power = FALSE
-	var/construction_state = GEAR_SECURE //Pinion airlocks have custom deconstruction
-
-/obj/machinery/door/airlock/clockwork/New()
-	..()
-	var/turf/T = get_turf(src)
-	PoolOrNew(/obj/effect/overlay/temp/ratvar/door, T)
-	PoolOrNew(/obj/effect/overlay/temp/ratvar/beam/door, T)
 
 /obj/machinery/door/airlock/clockwork/canAIControl(mob/user)
 	return (is_servant_of_ratvar(user) && !isAllPowerCut())
