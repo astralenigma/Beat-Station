@@ -239,3 +239,7 @@
 #define REGION_ENGINEERING	5
 #define REGION_SUPPLY		6
 #define REGION_COMMAND		7
+
+//TG defines
+//Link that allows ghost alice to follow mob bob.
+#define FOLLOW_LINK(alice, bob) "<a href=?src=\ref[alice];follow=\ref[bob]>(F)</a>"
