@@ -29,6 +29,9 @@
 		return 1
 	return 0
 
+/obj/machinery/door/airlock/clockwork/hasPower()
+	return TRUE //yes we do have power
+
 /obj/machinery/door/airlock/clockwork/proc/attempt_construction(obj/item/I, mob/living/user)
 	if(!I || !user || !user.canUseTopic(src))
 		return 0
@@ -85,8 +88,8 @@
 			user.visible_message("<span class='notice'>[user] lifts off [src]'s gear, causing it to fall apart!</span>", "<span class='notice'>You lift off [src]'s gear, causing it to fall \
 			apart!</span>")
 			playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
-			new/obj/item/clockwork/component/replicant_alloy(get_turf(src))
-			new/obj/item/clockwork/component/replicant_alloy/pinion_lock(get_turf(src))
+			new/obj/item/clockwork/component/alloy_shards(get_turf(src))
+			new/obj/item/clockwork/component/vanguard_cogwheel/pinion_lock(get_turf(src))
 			qdel(src)
 		return 1
 	return 0
