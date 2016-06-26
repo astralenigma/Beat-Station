@@ -262,3 +262,7 @@
 // Used by radios to indicate that they have sent a message via something other than subspace
 #define RADIO_CONNECTION_FAIL 0
 #define RADIO_CONNECTION_NON_SUBSPACE 1
+
+//TG defines
+//Link that allows ghost alice to follow mob bob.
+#define FOLLOW_LINK(alice, bob) "<a href=?src=\ref[alice];follow=\ref[bob]>(F)</a>"
