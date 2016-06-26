@@ -44,7 +44,7 @@
 
 #define ismouse(A) (istype(A, /mob/living/simple_animal/mouse))
 
-#define isconstruct(A) (istype(A, /mob/living/simple_animal/hostile/construct))
+#define isconstruct(A) (istype(A, /mob/living/simple_animal/construct))
 
 #define isclockmob(A) (istype(A, /mob/living/simple_animal/hostile/clockwork))
 
