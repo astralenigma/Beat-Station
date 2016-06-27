@@ -1,5 +1,3 @@
-#define ismovableatom(A) istype(A, /atom/movable)
-
 // simple is_type and similar inline helpers
 
 //#define islist(L) (istype(L,/list))
@@ -88,6 +86,9 @@
 
 #define isobj(A) istype(A, /obj) //override the byond proc because it returns true on children of /atom/movable that aren't objs
 
+#define isatom(A) istype(A, /atom)
+
+#define isclient(A) istype(A, /client)
 // ASSEMBLY HELPERS
 
 #define isassembly(O) (istype(O, /obj/item/device/assembly))

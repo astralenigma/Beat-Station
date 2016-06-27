@@ -1255,6 +1255,54 @@
 	else
 		germ_level += n
 
+/mob/living/carbon/human/proc/check_and_regenerate_organs(var/mob/living/carbon/human/H) //Regenerates missing limbs/organs.
+	var/list/types_of_int_organs = list() //This will hold all the types of organs in the mob before rejuvenation.
+	for(var/obj/item/organ/internal/I in H.internal_organs)
+		types_of_int_organs |= I.type //Compiling the list of organ types. It is possible for organs to be missing from this list if they are absent from the mob.
+
+	//Removing stumps.
+	for(var/obj/item/organ/organ in H.contents)
+		if(istype(organ, /obj/item/organ/external/stump)) //Get rid of all stumps.
+			qdel(organ)
+			H.contents -= organ //Making sure the list entry is removed.
+	for(var/obj/item/organ/organ in H.organs)
+		if(istype(organ, /obj/item/organ/external/stump))
+			qdel(organ)
+			H.organs -= organ //Making sure the list entry is removed.
+	for(var/organ_name in H.organs_by_name)
+		var/obj/item/organ/organ = H.organs_by_name[organ_name]
+		if(istype(organ, /obj/item/organ/external/stump) || !organ) //The !organ check is to account for mechanical limb (prostheses) losses, since those are handled in a way that leaves indexed but null list entries instead of stumps.
+			qdel(organ)
+			H.organs_by_name -= organ_name //Making sure the list entry is removed.
+
+	//Replacing lost limbs with the species default.
+	var/mob/living/carbon/human/temp_holder
+	for(var/limb_type in H.species.has_limbs)
+		if(!(limb_type in H.organs_by_name))
+			var/list/organ_data = H.species.has_limbs[limb_type]
+			var/limb_path = organ_data["path"]
+			var/obj/item/organ/external/O = new limb_path(temp_holder)
+			if(H.get_limb_by_name(O.name)) //Check to see if the user already has an limb with the same name as the 'missing limb'. If they do, skip regrowth.
+				continue				   //In an example, this will prevent duplication of the mob's right arm if the mob is a Human and they have a Diona right arm, since,
+										   //while the limb with the name 'right_arm' the mob has may not be listed in their species' bodyparts definition, it is still viable and has the appropriate limb name.
+			else
+				O = new limb_path(H) //Create the limb on the player.
+				O.owner = H
+				H.organs |= H.organs_by_name[O.limb_name]
+
+	//Replacing lost organs with the species default.
+	temp_holder = new /mob/living/carbon/human()
+	for(var/index in H.species.has_organ)
+		var/organ = H.species.has_organ[index]
+		if(!(organ in types_of_int_organs)) //If the mob is missing this particular organ...
+			var/obj/item/organ/internal/I = new organ(temp_holder) //Create the organ inside our holder so we can check it before implantation.
+			if(H.get_organ_slot(I.slot)) //Check to see if the user already has an organ in the slot the 'missing organ' belongs to. If they do, skip implantation.
+				continue				 //In an example, this will prevent duplication of the mob's eyes if the mob is a Human and they have Nucleation eyes, since,
+										 //while the organ in the eyes slot may not be listed in the mob's species' organs definition, it is still viable and fits in the appropriate organ slot.
+			else
+				I = new organ(H) //Create the organ inside the player.
+				I.insert(H)
+
 /mob/living/carbon/human/revive()
 
 	if(species && !(species.flags & NO_BLOOD))
@@ -1262,9 +1310,18 @@
 		vessel.add_reagent(blood_reagent, max_blood-vessel.total_volume)
 		fixblood()
 
-	// Fix up all organs.
-	// This will ignore any prosthetics in the prefs currently.
-	species.create_organs(src)
+	//Fix up all organs and replace lost ones.
+	restore_all_organs() //Rejuvenate and reset all existing organs.
+	check_and_regenerate_organs(src) //Regenerate limbs and organs only if they're really missing.
+	surgeries.Cut() //End all surgeries.
+	update_revive()
+
+	if(species.name != "Skeleton" && (SKELETON in mutations))
+		mutations.Remove(SKELETON)
+	if(NOCLONE in mutations)
+		mutations.Remove(NOCLONE)
+	if(HUSK in mutations)
+		mutations.Remove(HUSK)
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
 		for (var/obj/item/organ/internal/brain/H in world)
@@ -1480,13 +1537,16 @@
 
 	if(species.base_color && default_colour)
 		//Apply colour.
-		r_skin = hex2num(copytext(species.base_color,2,4))
-		g_skin = hex2num(copytext(species.base_color,4,6))
-		b_skin = hex2num(copytext(species.base_color,6,8))
+		r_skin = hex2num(copytext(species.base_color, 2, 4))
+		g_skin = hex2num(copytext(species.base_color, 4, 6))
+		b_skin = hex2num(copytext(species.base_color, 6, 8))
 	else
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
+
+	if(!(species.bodyflags & HAS_SKIN_TONE))
+		s_tone = 0
 
 	species.create_organs(src)
 
@@ -1498,6 +1558,32 @@
 		H.f_style = species.default_fhair
 	if(species.default_headacc)
 		H.ha_style = species.default_headacc
+
+	if(species.default_hair_colour)
+		//Apply colour.
+		H.r_hair = hex2num(copytext(species.default_hair_colour, 2, 4))
+		H.g_hair = hex2num(copytext(species.default_hair_colour, 4, 6))
+		H.b_hair = hex2num(copytext(species.default_hair_colour, 6, 8))
+	else
+		H.r_hair = 0
+		H.g_hair = 0
+		H.b_hair = 0
+	if(species.default_fhair_colour)
+		H.r_facial = hex2num(copytext(species.default_fhair_colour, 2, 4))
+		H.g_facial = hex2num(copytext(species.default_fhair_colour, 4, 6))
+		H.b_facial = hex2num(copytext(species.default_fhair_colour, 6, 8))
+	else
+		H.r_facial = 0
+		H.g_facial = 0
+		H.b_facial = 0
+	if(species.default_headacc_colour)
+		H.r_headacc = hex2num(copytext(species.default_headacc_colour, 2, 4))
+		H.g_headacc = hex2num(copytext(species.default_headacc_colour, 4, 6))
+		H.b_headacc = hex2num(copytext(species.default_headacc_colour, 6, 8))
+	else
+		H.r_headacc = 0
+		H.g_headacc = 0
+		H.b_headacc = 0
 
 	if(!dna)
 		dna = new /datum/dna(null)
@@ -1926,3 +2012,20 @@
 
 /mob/living/carbon/human/is_mechanical()
 	return ..() || (species.flags & ALL_RPARTS) != 0
+
+/mob/living/carbon/human/can_use_guns(var/obj/item/weapon/gun/G)
+	. = ..()
+
+	if(G.trigger_guard == TRIGGER_GUARD_NORMAL)
+		if(HULK in mutations)
+			to_chat(src, "<span class='warning'>Your meaty finger is much too large for the trigger guard!</span>")
+			return 0
+		if(species.flags & NOGUNS)
+			to_chat(src, "<span class='warning'>Your fingers don't fit in the trigger guard!</span>")
+			return 0
+
+	if(martial_art && martial_art.name == "The Sleeping Carp") //great dishonor to famiry
+		to_chat(src, "<span class='warning'>Use of ranged weaponry would bring dishonor to the clan.</span>")
+		return 0
+
+	return .
