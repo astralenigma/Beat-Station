@@ -30,7 +30,7 @@
 	universal_speak = 0
 	can_hide = 1
 	holder_type = /obj/item/weapon/holder/mouse
-	can_collar = 1
+	can_collar = 0
 	gold_core_spawnable = CHEM_MOB_SPAWN_FRIENDLY
 
 /mob/living/simple_animal/mouse/handle_automated_speech()
@@ -71,7 +71,7 @@
 	src.health = 0
 	src.stat = DEAD
 	src.icon_dead = "mouse_[mouse_color]_splat"
-	src.icon_state = "mouse_[mouse_color]_splat"
+	src.icon_state = src.icon_dead
 	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
@@ -138,7 +138,6 @@
 	mouse_color = "brown"
 	icon_state = "mouse_brown"
 
-//TOM IS ALIVE! SQUEEEEEEEE~K :)
 /mob/living/simple_animal/mouse/brown/Tom
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
@@ -146,3 +145,40 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "splats"
 	gold_core_spawnable = CHEM_MOB_SPAWN_INVALID
+
+/mob/living/simple_animal/mouse/Charlie
+	name = "Charlie"
+	desc = "A cuddly mouse, apparently he's trying to drop a few squeaks."
+	mouse_color = "mime"
+	response_help = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "splats"
+	gold_core_spawnable = CHEM_MOB_SPAWN_INVALID
+	speak = list()
+	speak_emote = list()
+	emote_hear = list()
+	emote_see = list("runs in a circle", "shakes", "scritches at something")
+	speak_chance = 0
+	small = 0
+
+/mob/living/simple_animal/mouse/New()
+	..()
+	desc = "A cuddly mouse, apparently he's trying to drop a few squeaks."
+
+/mob/living/simple_animal/mouse/Charlie/splat()
+	src.health = 0
+	src.stat = DEAD
+	src.icon_dead = "mouse_[mouse_color]_dead"
+	src.icon_state = "mouse_[mouse_color]_dead"
+	layer = MOB_LAYER
+	if(client)
+		client.time_died_as_mouse = world.time
+
+/mob/living/simple_animal/mouse/Charlie/Crossed(AM as mob|obj)
+	return
+
+/mob/living/simple_animal/mouse/Charlie/death()
+	desc = "A minute of silence please."
+	..()
+/mob/living/simple_animal/mouse/Charlie/say_verb(message as text)
+	return
