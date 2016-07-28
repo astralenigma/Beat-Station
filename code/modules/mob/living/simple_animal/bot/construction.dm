@@ -339,7 +339,6 @@
 	user.unEquip(src, 1)
 	qdel(src)
 
-
 /obj/item/weapon/firstaid_arm_assembly/attackby(obj/item/weapon/W, mob/user, params)
 	..()
 	if(istype(W, /obj/item/weapon/pen))
@@ -478,3 +477,81 @@
 			new /obj/item/robot_parts/l_arm(get_turf(src))
 			to_chat(user, "<span class='notice'>You remove the robot arm from [src].</span>")
 			build_step--
+
+
+//Farmbot Assembly
+/obj/item/weapon/farmbot_arm_assembly
+	name = "water tank/robot arm assembly"
+	desc = "A water tank with a robot arm permanently grafted to it."
+	icon = 'icons/obj/aibots.dmi'
+	icon_state = "water_arm"
+	var/build_step = 0
+	var/created_name = "Farmbot"
+	w_class = 3.0
+
+	New()
+		..()
+		spawn(4) // If an admin spawned it, it won't have a watertank it, so lets make one for em!
+			var tank = locate(/obj/structure/reagent_dispensers/watertank) in contents
+			if(!tank)
+				new /obj/structure/reagent_dispensers/watertank(src)
+
+/obj/structure/reagent_dispensers/watertank/attackby(var/obj/item/robot_parts/S, mob/user as mob)
+	if ((!istype(S, /obj/item/robot_parts/l_arm)) && (!istype(S, /obj/item/robot_parts/r_arm)))
+		..()
+		return
+
+	var/obj/item/weapon/farmbot_arm_assembly/A = new /obj/item/weapon/farmbot_arm_assembly(loc)
+
+	to_chat(user,"You add the robot arm to [src].")
+	loc = A //Place the water tank into the assembly, it will be needed for the finished bot
+	user.drop_from_inventory(S)
+	qdel(S)
+
+/obj/item/weapon/farmbot_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if((istype(W, /obj/item/device/analyzer/plant_analyzer)) && (build_step == 0))
+		build_step++
+		to_chat(user, "You add the plant analyzer to [src].")
+		name = "farmbot assembly"
+		user.remove_from_mob(W)
+		qdel(W)
+
+	else if((istype(W, /obj/item/weapon/reagent_containers/glass/bucket)) && (build_step == 1))
+		build_step++
+		to_chat(user, "You add a bucket to [src].")
+		name = "farmbot assembly with bucket"
+		user.remove_from_mob(W)
+		qdel(W)
+
+	else if((istype(W, /obj/item/weapon/minihoe)) && (build_step == 2))
+		build_step++
+		to_chat(user, "You add a minihoe to [src].")
+		name = "farmbot assembly with bucket and minihoe"
+		user.remove_from_mob(W)
+		qdel(W)
+
+	else if((isprox(W)) && (build_step == 3))
+		build_step++
+		to_chat(user, "You complete the Farmbot! Beep boop.")
+		var/mob/living/bot/farmbot/S = new /mob/living/bot/farmbot(get_turf(src))
+		for(var/obj/structure/reagent_dispensers/watertank/wTank in contents)
+			wTank.loc = S
+			S.tank = wTank
+		S.name = created_name
+		user.remove_from_mob(W)
+		qdel(W)
+		qdel(src)
+
+	else if(istype(W, /obj/item/weapon/pen))
+		var/t = input(user, "Enter new robot name", name, created_name) as text
+		t = sanitize(t, MAX_NAME_LEN)
+		if(!t)
+			return
+		if(!in_range(src, usr) && loc != usr)
+			return
+
+		created_name = t
+
+/obj/item/weapon/farmbot_arm_assembly/attack_hand(mob/user as mob)
+	return //it's a converted watertank, no you cannot pick it up and put it in your backpack
