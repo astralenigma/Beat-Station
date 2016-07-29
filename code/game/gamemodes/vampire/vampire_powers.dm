@@ -423,7 +423,7 @@
 		flick("liquify", animation)
 		usr.forceMove(holder)
 		usr.client.eye = holder
-		var/datum/effect/system/steam_spread/steam = new /datum/effect/system/steam_spread()
+		var/datum/effect_system/steam_spread/steam = new /datum/effect_system/steam_spread()
 		steam.set_up(10, 0, originalloc)
 		steam.start()
 		sleep(jaunt_duration)
