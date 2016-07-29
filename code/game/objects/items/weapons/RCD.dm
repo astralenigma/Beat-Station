@@ -20,7 +20,7 @@ RCD
 	w_class = 3.0
 	materials = list(MAT_METAL=100000)
 	origin_tech = "engineering=4;materials=2"
-	var/datum/effect/system/spark_spread/spark_system
+	var/datum/effect_system/spark_spread/spark_system
 	var/max_matter = 100
 	var/matter = 0
 	var/working = 0
@@ -46,7 +46,7 @@ RCD
 
 /obj/item/weapon/rcd/New()
 	desc = "A RCD. It currently holds [matter]/[max_matter] matter-units."
-	spark_system = new /datum/effect/system/spark_spread
+	spark_system = new /datum/effect_system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 	rcd_list += src
@@ -91,13 +91,13 @@ RCD
 	data["max_matter"] = max_matter
 	data["one_access"] = one_access
 	data["locked"] = locked
-	
+
 	if(menu == 2)
 		var/list/door_types_list = list()
 		for(var/type in allowed_door_types)
 			door_types_list[++door_types_list.len] = list("name" = allowed_door_types[type], "type" = type)
 		data["allowed_door_types"] = door_types_list
-		
+
 		data["door_accesses"] = door_accesses_list
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -110,14 +110,14 @@ RCD
 /obj/item/weapon/rcd/Topic(href, href_list, nowindow, state)
 	if(..())
 		return 1
-	
+
 	if(prob(20))
 		spark_system.start()
-	
+
 	if(href_list["mode"])
 		mode = text2num(href_list["mode"])
 		. = 1
-	
+
 	if(href_list["door_type"])
 		var/new_door_type = text2path(href_list["door_type"])
 		if(!(new_door_type in allowed_door_types))
@@ -125,11 +125,11 @@ RCD
 			return
 		door_type = new_door_type
 		. = 1
-	
+
 	if(href_list["menu"])
 		menu = text2num(href_list["menu"])
 		. = 1
-	
+
 	if (href_list["login"])
 		if(istype(usr,/mob/living/silicon))
 			locked = 0
@@ -142,15 +142,15 @@ RCD
 			if (istype(ID) && ID && check_access(ID))
 				locked = 0
 		. = 1
-	
+
 	if (href_list["logout"])
 		locked = 1
 		. = 1
-	
+
 	if(href_list["toggle_one_access"] && !locked)
 		one_access = !one_access
 		. = 1
-	
+
 	if(href_list["toggle_access"] && !locked)
 		var/href_access = text2num(href_list["toggle_access"])
 		if(href_access in door_accesses)
@@ -251,10 +251,10 @@ RCD
 						qdel(A)
 						return 1
 				return	0
-				
+
 			if(istype(A, /obj/structure/window)) // You mean the grille of course, do you?
 				A = locate(/obj/structure/grille) in A.loc
-			
+
 			if(istype(A, /obj/structure/grille))
 				if(!checkResource(2, user))
 					return 0
@@ -326,7 +326,7 @@ RCD
 		else
 			to_chat(user, "ERROR: RCD in MODE: [mode] attempted use by [user]. Send this text #coderbus or an admin.")
 			return 0
-	
+
 	nanomanager.update_uis(src)
 
 /obj/item/weapon/rcd/proc/useResource(var/amount, var/mob/user)
