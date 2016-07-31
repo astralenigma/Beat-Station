@@ -174,10 +174,26 @@
 		if(!gene.block)
 			continue
 		if(gene.is_active(src))
-		/*	if (prob(10) && prob(gene.instability))
-				adjustCloneLoss(1) */
 			speech_problem_flag = 1
 			gene.OnMobLife(src)
+
+	if(gene_stability < 85)
+		var/instability = DEFAULT_GENE_STABILITY - gene_stability
+		if(prob(instability / 10))
+			adjustFireLoss(min(6, instability / 12))
+			to_chat(src, "<span class='danger'>You feel like your skin is burning and bubbling off!</span>")
+		if(gene_stability < 70)
+			if(prob(instability / 12))
+				adjustCloneLoss(min(5, instability / 15))
+				to_chat(src, "<span class='danger'>You feel as if your body is warping.</span>")
+			if(prob(instability / 10))
+				adjustToxLoss(min(6, instability / 12))
+				to_chat(src, "<span class='danger'>You feel weak and nauseous.</span>")
+			if(gene_stability < 40 && prob(1))
+				to_chat(src, "<span class='biggerdanger'>You feel incredibly sick... Something isn't right!</span>")
+				spawn(300)
+					if(gene_stability < 40)
+						gib()
 
 	if(!(species.flags & RADIMMUNE))
 		if (radiation)
@@ -781,12 +797,12 @@
 				adjustToxLoss(0.1)
 		else //stuff only for synthetics
 			if(alcohol_strength >= spark_start && prob(25))
-				var/datum/effect/system/spark_spread/s = new /datum/effect/system/spark_spread
+				var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 				s.set_up(3, 1, src)
 				s.start()
 			if(alcohol_strength >= collapse_start && prob(10))
 				emote("collapse")
-				var/datum/effect/system/spark_spread/s = new /datum/effect/system/spark_spread
+				var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 				s.set_up(3, 1, src)
 				s.start()
 			if(alcohol_strength >= braindamage_start && prob(10))
@@ -1050,7 +1066,8 @@
 
 	var/temp = PULSE_NORM
 
-	if(round(vessel.get_reagent_amount("blood")) <= BLOOD_VOLUME_BAD)	//how much blood do we have
+	var/blood_type = get_blood_name()
+	if(round(vessel.get_reagent_amount(blood_type)) <= BLOOD_VOLUME_BAD)	//how much blood do we have
 		temp = PULSE_THREADY	//not enough :(
 
 	if(status_flags & FAKEDEATH)

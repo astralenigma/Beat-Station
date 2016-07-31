@@ -226,16 +226,20 @@ REAGENT SCANNER
 			for(var/datum/wound/W in e.wounds) if(W.internal)
 				user.show_message(text("\red Internal bleeding detected. Advanced scanner required for location."), 1)
 				break
-		if(M:vessel)
-			var/blood_volume = round(M:vessel.get_reagent_amount("blood"))
-			var/blood_percent =  blood_volume / 560
+		if(H.vessel)
+			var/blood_type = H.get_blood_name()
+			var/blood_volume = round(H.vessel.get_reagent_amount(blood_type))
+			var/blood_percent =  blood_volume / BLOOD_VOLUME_NORMAL
 			blood_percent *= 100
 			if(blood_volume <= 500)
-				user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl")
+				user.show_message("<span class='warning'>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl</span>")
 			else if(blood_volume <= 336)
-				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl")
+				user.show_message("<span class='warning'>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl</span>")
 			else
-				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl")
+				user.show_message("<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl</span>")
+			if(H.species.exotic_blood)
+				user.show_message("<span class='warning'>Subject possesses exotic blood.</span>")
+				user.show_message("<span class='warning'>Exotic blood type: [blood_type].</span>")
 		if(H.heart_attack && H.stat != DEAD)
 			user.show_message("<span class='userdanger'>Subject suffering from heart attack: Apply defibrillator immediately.</span>")
 		user.show_message("\blue Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font>")
@@ -246,6 +250,14 @@ REAGENT SCANNER
 		if(implant_detect)
 			user.show_message("<span class='notice'>Detected cybernetic modifications:</span>")
 			user.show_message("<span class='notice'>[implant_detect]</span>")
+		if(H.gene_stability < 40)
+			user.show_message("<span class='userdanger'>Subject's genes are quickly breaking down!</span>")
+		else if(H.gene_stability < 70)
+			user.show_message("<span class='danger'>Subject's genes are showing signs of spontenous breakdown.</span>")
+		else if(H.gene_stability < 85)
+			user.show_message("<span class='warning'>Subject's genes are showing minor signs of instability.</span>")
+		else
+			user.show_message("<span class='notice'>Subject's genes are stable.</span>")
 
 	src.add_fingerprint(user)
 	return

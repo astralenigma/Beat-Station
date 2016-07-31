@@ -362,6 +362,7 @@ Class Procs:
 	return ..()
 
 /obj/machinery/CheckParts()
+	..()
 	RefreshParts()
 	return
 
@@ -544,7 +545,7 @@ Class Procs:
 		return 0
 	if(!prob(prb))
 		return 0
-	var/datum/effect/system/spark_spread/s = new /datum/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
 	if (electrocute_mob(user, get_area(src), src, 0.7))

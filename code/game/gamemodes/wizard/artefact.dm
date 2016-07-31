@@ -53,7 +53,7 @@
 			var/list/candidates = pollCandidates("Do you want to play as the wizard apprentice of [H.real_name]?", ROLE_WIZARD, 1)
 			if(candidates.len)
 				var/mob/C = pick(candidates)
-				new /obj/effect/effect/harmless_smoke(H.loc)
+				new /obj/effect/particle_effect/smoke(H.loc)
 				var/mob/living/carbon/human/M = new/mob/living/carbon/human(H.loc)
 				M.key = C.key
 				to_chat(M, "<B>You are the [H.real_name]'s apprentice! You are bound by magic contract to follow their orders and help them in accomplishing their goals.")
@@ -868,3 +868,9 @@ var/global/list/multiverse = list()
 		target.IgniteMob()
 		GiveHint(target,1)
 	return ..()
+
+/obj/item/organ/internal/heart/cursed/wizard
+	pump_delay = 60
+	heal_brute = 25
+	heal_burn = 25
+	heal_oxy = 25

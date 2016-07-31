@@ -70,6 +70,14 @@
 	src.dir = turn(src.dir, 90)
 	return 1
 
+/obj/machinery/power/emitter/AltClick(mob/user)
+	if(user.incapacitated())
+		to_chat(user, "<span class='warning'>You can't do that right now!</span>")
+		return
+	if(!Adjacent(user))
+		return
+	rotate()
+
 /obj/machinery/power/emitter/initialize()
 	..()
 	if(state == 2 && anchored)
@@ -196,7 +204,7 @@
 		A.dir = src.dir
 		playsound(get_turf(src), 'sound/weapons/emitter.ogg', 25, 1)
 		if(prob(35))
-			var/datum/effect/system/spark_spread/s = new /datum/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(5, 1, src)
 			s.start()
 

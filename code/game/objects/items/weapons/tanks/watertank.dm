@@ -301,7 +301,7 @@
 		if(!Adj|| !istype(target, /turf))
 			return
 		if(metal_synthesis_cooldown < 5)
-			var/obj/effect/effect/foam/F = new /obj/effect/effect/foam(get_turf(target), 1)
+			var/obj/effect/particle_effect/foam/metal/F = new /obj/effect/particle_effect/foam/metal(get_turf(target), 1)
 			F.amount = 0
 			metal_synthesis_cooldown++
 			spawn(100)
@@ -320,14 +320,14 @@
 	pass_flags = PASSTABLE
 
 /obj/effect/nanofrost_container/proc/Smoke()
-	new /obj/effect/effect/freezing_smoke(src.loc, 6, 1)
+	new /obj/effect/particle_effect/smoke/freezing(src.loc, 6, 1)
 	var/obj/effect/decal/cleanable/flour/F = new /obj/effect/decal/cleanable/flour(src.loc)
 	F.color = "#B2FFFF"
 	F.name = "nanofrost residue"
 	F.desc = "Residue left behind from a nanofrost detonation. Perhaps there was a fire here?"
 	playsound(src,'sound/effects/bamf.ogg',100,1)
 	qdel(src)
-
+/*
 /obj/effect/effect/freezing_smoke
 	name = "nanofrost smoke"
 	icon_state = "smoke"
@@ -398,7 +398,7 @@
 				if(smoke)
 					fadeOut(smoke)
 					smoke.delete()
-
+*/
 #undef EXTINGUISHER
 #undef NANOFROST
 #undef METAL_FOAM
