@@ -48,7 +48,9 @@
 	ranged = 1
 
 /mob/living/simple_animal/hostile/hivebot/death(gibbed)
-	var/datum/effect/system/spark_spread/s = new /datum/effect/system/spark_spread
+	..()
+	visible_message("<b>[src]</b> blows apart!")
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	..()
@@ -75,7 +77,7 @@
 
 /mob/living/simple_animal/hostile/hivebot/tele/New()
 	..()
-	var/datum/effect/system/harmless_smoke_spread/smoke = new /datum/effect/system/harmless_smoke_spread()
+	var/datum/effect_system/smoke_spread/smoke = new /datum/effect_system/smoke_spread()
 	smoke.set_up(5, 0, src.loc)
 	smoke.start()
 	visible_message("\red <B>The [src] warps in!</B>")
