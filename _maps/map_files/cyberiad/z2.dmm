@@ -1151,7 +1151,7 @@
 "wg" = (/obj/structure/table,/obj/random/tool,/obj/item/clothing/gloves/color/yellow,/obj/item/weapon/pinpointer/advpinpointer,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/admin)
 "wh" = (/obj/structure/table,/obj/item/weapon/grenade/syndieminibomb{pixel_x = 4; pixel_y = 2; pixel_z = 0},/obj/item/weapon/grenade/syndieminibomb{pixel_x = -1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/admin)
 "wi" = (/obj/structure/table,/obj/machinery/recharger{pixel_y = 0},/obj/item/toy/cards/deck/syndicate/black,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/admin)
-"wj" = (/obj/structure/table,/obj/item/weapon/surgicaldrill,/obj/item/stack/medical/advanced/bruise_pack,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/admin)
+"wj" = (/obj/structure/table,/obj/item/weapon/surgicaldrill,/obj/item/stack/medical/bruise_pack/advanced,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/admin)
 "wk" = (/obj/structure/table,/obj/item/weapon/hemostat,/obj/item/weapon/circular_saw,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/admin)
 "wl" = (/obj/machinery/door/poddoor{density = 0; icon_state = "pdoor0"; id_tag = "ADMINCHEMLOCKDOWN"; name = "Security Doors"; opacity = 0},/obj/machinery/door/airlock/hatch{desc = "Uh oh."; name = "Operating Theater"; req_access_txt = "0"},/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/admin)
 "wm" = (/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/turf/unsimulated/wall{dir = 4; icon = 'icons/turf/shuttle.dmi'; icon_state = "diagonalWall3"},/area/admin)
