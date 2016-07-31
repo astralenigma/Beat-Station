@@ -157,7 +157,7 @@
 		current_type = "mend"
 		var/tool_name = "\the [tool]"
 		if(istype(tool, /obj/item/stack/medical/bruise_pack))
-  			tool_name = "the bandaid"
+			tool_name = "the bandaid"
 		if(istype(tool, /obj/item/stack/medical/bruise_pack/advanced))
 			tool_name = "regenerative membrane"
 		else if (istype(tool, /obj/item/stack/nanopaste))
