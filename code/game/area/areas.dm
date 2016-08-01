@@ -38,6 +38,8 @@
 //	spawn(15)
 	power_change()		// all machines set to current power level, also updates lighting icon
 
+	blend_mode = BLEND_MULTIPLY
+
 /area/proc/get_cameras()
 	var/list/cameras = list()
 	for (var/obj/machinery/camera/C in src)
@@ -182,29 +184,25 @@
 /area/proc/updateicon()
 	if(radalert) // always show the radiation alert, regardless of power
 		icon_state = "radiation"
-		blend_mode = BLEND_MULTIPLY
+		invisibility = INVISIBILITY_LIGHTING
 	else if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !radalert && !eject && !party)
 			icon_state = "red"
-			blend_mode = BLEND_MULTIPLY
-		/*else if(atmosalm && !fire && !eject && !party)
-			icon_state = "bluenew"*/
 		else if(!fire && eject && !party)
 			icon_state = "red"
-			blend_mode = BLEND_MULTIPLY
 		else if(party && !fire && !eject)
 			icon_state = "party"
-			blend_mode = BLEND_MULTIPLY
 		else
 			icon_state = "blue-red"
-			blend_mode = BLEND_MULTIPLY
+		invisibility = INVISIBILITY_LIGHTING
 	else
 	//	new lighting behaviour with obj lights
 		icon_state = null
-		blend_mode = BLEND_DEFAULT
+		invisibility = INVISIBILITY_LIGHTING
 
 /area/space/updateicon()
 	icon_state = null
+	invisibility = INVISIBILITY_LIGHTING
 
 
 /*
@@ -237,8 +235,7 @@
 /area/proc/power_change()
 	for(var/obj/machinery/M in src)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
-	if (fire || eject || party)
-		updateicon()
+	updateicon()
 
 /area/proc/usage(var/chan)
 	var/used = 0
