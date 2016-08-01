@@ -24,8 +24,8 @@ var/list/ricochet = list('sound/weapons/effects/ric1.ogg', 'sound/weapons/effect
 	var/frequency = pitch
 	var/turf/turf_source = get_turf(source)
 
- 	// Looping through the player list has the added bonus of working for mobs inside containers
- 	var/sound/S = sound(soundin)
+	// Looping through the player list has the added bonus of working for mobs inside containers
+	var/sound/S = sound(soundin)
 	var/maxdistance = (world.view + extrarange) * 3
 	for (var/P in player_list)
 		var/mob/M = P
