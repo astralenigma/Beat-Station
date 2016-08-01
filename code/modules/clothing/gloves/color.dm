@@ -46,8 +46,8 @@
 	permeability_coefficient = 0.05
 	item_color="yellow"
 
-	New()
-		siemens_coefficient = pick(0,0.5,0.5,0.5,0.5,0.75,1.5)
+/obj/item/clothing/gloves/color/fyellow/New()
+	siemens_coefficient = pick(0,0.5,0.5,0.5,0.5,0.75,1.5)
 
 /obj/item/clothing/gloves/color/black
 	desc = "These gloves are fire-resistant."
@@ -59,16 +59,29 @@
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
+	var/can_be_cut = 1
 
 
-	hos
+/obj/item/clothing/gloves/color/black/hos
 		item_color = "hosred"		//Exists for washing machines. Is not different from black gloves in any way.
 
-	ce
+/obj/item/clothing/gloves/color/black/ce
 		item_color = "chief"			//Exists for washing machines. Is not different from black gloves in any way.
 
-	thief
+/obj/item/clothing/gloves/color/black/thief
 		pickpocket = 1
+
+/obj/item/clothing/gloves/color/black/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/wirecutters))
+		if(can_be_cut && icon_state == initial(icon_state))//only if not dyed
+			to_chat(user, "<span class='notice'>You snip the fingertips off of [src].</span>")
+			playsound(user.loc,'sound/items/Wirecutter.ogg', rand(10,50), 1)
+			var/obj/item/clothing/gloves/fingerless/F = new/obj/item/clothing/gloves/fingerless(user.loc)
+			if(pickpocket)
+				F.pickpocket = 1
+			qdel(src)
+			return
+	..()
 
 /obj/item/clothing/gloves/color/orange
 	name = "orange gloves"

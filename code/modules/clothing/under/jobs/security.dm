@@ -131,6 +131,7 @@
 	item_state = "gy_suit"
 	item_color = "security_formal"
 
+//Warden
 /obj/item/clothing/under/rank/warden/formal
 	name = "warden's suit"
 	desc = "A formal security suit for the warden with blue desginations and '/Warden/' stiched into the shoulders."
@@ -138,6 +139,7 @@
 	item_state = "gy_suit"
 	item_color = "warden_formal"
 
+//Head of Security
 /obj/item/clothing/under/rank/head_of_security/formal
 	name = "head of security's suit"
 	desc = "A security suit decorated for those few with the dedication to achieve the position of Head of Security."
@@ -156,3 +158,12 @@
 	permeability_coefficient = 0.50
 	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = ONESIZEFITSALL
+
+
+//Pod Pilot
+/obj/item/clothing/under/rank/security/pod_pilot
+	desc = "Suit for your regular pod pilot."
+	name = "pod pilot's jumpsuit"
+	icon_state = "pod_pilot"
+	item_state = "pod_pilot"
+	item_color = "pod_pilot"
