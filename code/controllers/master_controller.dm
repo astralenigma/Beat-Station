@@ -17,14 +17,14 @@ var/global/pipe_processing_killed = 0
 
 /datum/controller/proc/recover() // If we are replacing an existing controller (due to a crash) we attempt to preserve as much as we can.
 
-datum/controller/game_controller
+/datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
 
-datum/controller/game_controller/New()
+/datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
 	if(master_controller != src)
 		if(istype(master_controller))
-			del(master_controller)
+			qdel(master_controller)
 		master_controller = src
 
 	var/watch=0
@@ -38,7 +38,11 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 
-datum/controller/game_controller/proc/setup()
+/datum/controller/game_controller/Destroy()
+	..()
+	return QDEL_HINT_HARDDEL_NOW
+
+/datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
 
 	preloadTemplates()
@@ -55,7 +59,7 @@ datum/controller/game_controller/proc/setup()
 
 	populate_spawn_points()
 
-datum/controller/game_controller/proc/setup_objects()
+/datum/controller/game_controller/proc/setup_objects()
 	var/watch = start_watch()
 	var/count = 0
 	var/overwatch = start_watch() // Overall.

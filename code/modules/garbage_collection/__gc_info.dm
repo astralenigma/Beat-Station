@@ -1,7 +1,7 @@
 /*
 
 ===============================================================================
-                         How Garbage Collection Works                          
+                         How Garbage Collection Works
 ===============================================================================
 
 In BYOND, there are exactly two ways anything gets deleted:
@@ -32,7 +32,7 @@ that can't be. There are two main procs involved in this process:
   This is, effectively, a replacement for del that tells an object to prepare itself to be soft deleted by calling its
   Destroy() proc. Depending on the qdel hint returned by Destroy(), qdel will queue the object in the garbage collector
   (to be hard deleted if it isn't soft deleted), directly delete the object, pool the object, or ignore the object and
-  assume it will handle deleting itself. An object passed into qdel will have its gcDestroyed var set, so 
+  assume it will handle deleting itself. An object passed into qdel will have its gcDestroyed var set, so
   isnull(gcDestroyed) will be true if an object is not being destroyed, and false if it is (which means you should get
   rid of the reference you have to it).
 
@@ -43,9 +43,9 @@ that can't be. There are two main procs involved in this process:
 
 /datum/proc/Destroy()
   This is, effectively, a replacement for Del() (with some exceptions) which is also responsible for nulling out
-  references to or on the object it is called on. Like Del, the Destroy proc will always be called, even if the object
-  is getting destroyed by a direct del instead of qdel; in that case, isnull(gcDestroyed) will be true, and some
-  references can safely be ignored.
+  references to or on the object it is called on. Unlike Del, the Destroy proc will only be called by qdel; generally,
+  this should only happen to datums that are no longer referenced by anything, which shouldn't be an issue.
+
 
   The exceptions where Destroy cannot replace Del are for the same non-datum types mentioned under qdel, above. Those
   should use a Del proc for any necessary cleanup, as a Destroy proc on them will not automatically get called.
