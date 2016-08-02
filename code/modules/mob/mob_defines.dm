@@ -2,14 +2,10 @@
 	density = 1
 	layer = 4.0
 	animate_movement = 2
-//	flags = NOREACT
 	pressure_resistance = 8
 	var/datum/mind/mind
 
-	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
-
-	//Not in use yet
-	var/obj/effect/organstructure/organStructure = null
+	var/stat = 0			//Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
@@ -33,30 +29,27 @@
 	var/obj/screen/gun/move/gun_mode = null
 	var/obj/screen/gun/move/gun_radio = null
 
-	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
+	var/use_me = 1			//Allows all mobs to use the me verb by default, will have to manually specify they cannot
 	var/damageoverlaytemp = 0
 	var/computer_id = null
 	var/lastattacker = null
 	var/lastattacked = null
 	var/attack_log = list( )
-	var/already_placed = 0.0
 	var/obj/machinery/machine = null
 	var/other_mobs = null
 	var/memory = ""
-	var/poll_answer = 0.0
-	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
 	var/next_move = null
 	var/notransform = null	//Carbon
 	var/other = 0.0
 	var/hand = null
-	var/eye_blind = null	//Carbon
-	var/eye_blurry = null	//Carbon
-	var/ear_deaf = null		//Carbon
-	var/ear_damage = null	//Carbon
-	var/stuttering = null	//Carbon
-	var/slurring = null		//Carbon
+	var/eye_blind = 0		//Carbon
+	var/eye_blurry = 0		//Carbon
+	var/ear_deaf = 0		//Carbon
+	var/ear_damage = 0		//Carbon
+	var/stuttering = 0		//Carbon
+	var/slurring = 0		//Carbon
 	var/real_name = null
 	var/flavor_text = ""
 	var/med_record = ""
@@ -68,8 +61,6 @@
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
 	var/drunk = 0
-	var/antitoxs = null
-	var/plasma = null
 	var/sleeping = 0		//Carbon
 	var/resting = 0			//Carbon
 	var/lying = 0
@@ -92,34 +83,34 @@
 
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/drowsyness = 0.0//Carbon
-	var/dizziness = 0//Carbon
-	var/jitteriness = 0//Carbon
+	var/drowsyness = 0.0	//Carbon
+	var/dizziness = 0		//Carbon
+	var/jitteriness = 0		//Carbon
 	var/flying = 0
 	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/nutrition = 400.0	//Carbon
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
-	var/paralysis = 0.0
-	var/stunned = 0.0
-	var/weakened = 0.0
+	var/paralysis = 0
+	var/stunned = 0
+	var/weakened = 0
 	var/slowed = 0
-	var/losebreath = 0.0//Carbon
-	var/intent = null//Living
+	var/losebreath = 0		//Carbon
+	var/intent = null		//Living
 	var/shakecamera = 0
-	var/a_intent = I_HELP//Living
-	var/m_int = null//Living
-	var/m_intent = "run"//Living
+	var/a_intent = I_HELP	//Living
+	var/m_int = null		//Living
+	var/m_intent = "run"	//Living
 	var/lastKnownIP = null
-	var/atom/movable/buckled = null//Living
-	var/obj/item/l_hand = null//Living
-	var/obj/item/r_hand = null//Living
-	var/obj/item/weapon/back = null//Human/Monkey
-	var/obj/item/weapon/tank/internal = null//Human/Monkey
-	var/obj/item/weapon/storage/s_active = null//Carbon
-	var/obj/item/clothing/mask/wear_mask = null//Carbon
+	var/atom/movable/buckled = null				//Living
+	var/obj/item/l_hand = null					//Living
+	var/obj/item/r_hand = null					//Living
+	var/obj/item/weapon/back = null				//Human/Monkey
+	var/obj/item/weapon/tank/internal = null	//Human/Monkey
+	var/obj/item/weapon/storage/s_active = null	//Carbon
+	var/obj/item/clothing/mask/wear_mask = null	//Carbon
 
-	var/seer = 0 //for cult//Carbon, probably Human
+	var/seer = 0 								//for cult   //Carbon, probably Human
 	var/see_override = 0
 
 	var/datum/hud/hud_used = null
@@ -128,8 +119,8 @@
 
 	var/research_scanner = 0 //For research scanner equipped mobs. Enable to show research data when examining.
 
-	var/list/grabbed_by = list(  )
-	var/list/requests = list(  )
+	var/list/grabbed_by = list()
+	var/list/requests = list()
 
 	var/list/mapobjs = list()
 
@@ -139,19 +130,12 @@
 
 	var/emote_cd = 0		// Used to supress emote spamming. 1 if on CD, 2 if disabled by admin (manually set), else 0
 
-	var/music_lastplayed = "null"
-
 	var/job = null//Living
 
-	var/const/blindness = 1//Carbon
-	var/const/deafness = 2//Carbon
-	var/const/muteness = 4//Carbon
+	var/datum/dna/dna = null		//Carbon
+	var/radiation = 0				//Carbon
 
-
-	var/datum/dna/dna = null//Carbon
-	var/radiation = 0.0//Carbon
-
-	var/list/mutations = list() //Carbon -- Doohl
+	var/list/mutations = list() 	//Carbon
 	//see: setup.dm for list of mutations
 
 	var/voice_name = "unidentifiable voice"
@@ -162,24 +146,24 @@
 
 	var/has_enabled_antagHUD = 0
 	var/antagHUD = 0
-//Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
-	var/proc_holder_list[] = list()//Right now unused.
-	//Also unlike the spell list, this would only store the object in contents, not an object in itself.
 
-	/* Add this line to whatever stat module you need in order to use the proc holder list.
+//Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
+	var/proc_holder_list[] = list()
+	/* //Also unlike the spell list, this would only store the object in contents, not an object in itself.
+
+	Add this line to whatever stat module you need in order to use the proc holder list.
 	Unlike the object spell system, it's also possible to attach verb procs from these objects to right-click menus.
 	This requires creating a verb for the object proc holder.
 
 	if (proc_holder_list.len)//Generic list for proc_holder objects.
 		for(var/obj/effect/proc_holder/P in proc_holder_list)
-			statpanel("[P.panel]","",P)
-	*/
+			statpanel("[P.panel]","",P)*/
 
 //The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
 
 //Wizard mode, but can be used in other modes thanks to the brand new "Give Spell" badmin button
-	var/obj/effect/proc_holder/spell/list/spell_list = list()
+	var/list/mob_spell_list = list() //construct spells and mime spells. Spells that do not transfer from one mob to another and can not be lost in mindswap.
 
 //Changlings, but can be used in other modes
 //	var/obj/effect/proc_holder/changpower/list/power_list = list()
@@ -199,9 +183,6 @@
 	var/weakeyes = 0 //Are they vulnerable to flashes?
 
 	var/has_unlimited_silicon_privilege = 0 // Can they interact with station electronics
-
-	var/list/radar_blips = list() // list of screen objects, radar blips
-	var/radar_open = 0 	// nonzero is radar is open
 
 	var/atom/movable/remote_control //Calls relaymove() to whatever it is
 
@@ -224,11 +205,11 @@
 	var/turf/listed_turf = null  //the current turf being examined in the stat panel
 	var/list/shouldnt_see = list(/atom/movable/lighting_overlay)	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
-	var/kills=0
+	var/kills = 0
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 
-	var/list/active_genes=list()
+	var/list/active_genes = list()
 
 	var/last_movement = -100 // Last world.time the mob actually moved of its own accord.
 

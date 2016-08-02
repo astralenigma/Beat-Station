@@ -161,7 +161,7 @@
 		wizard_mob.verbs += /client/proc/jaunt
 		wizard_mob.mind.special_verbs += /client/proc/jaunt
 	else
-		wizard_mob.spell_list += new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt(usr)
+		wizard_mob.mob_spell_list += new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt(usr)
 */
 
 /datum/game_mode/proc/equip_wizard(mob/living/carbon/human/wizard_mob)
@@ -289,20 +289,19 @@
 
 //OTHER PROCS
 
-//To batch-remove wizard spells. Linked to mind.dm.
+//To batch-remove wizard spells. Linked to mind.dm
 /mob/proc/spellremove(mob/M)
 	if(!mind)
 		return
-	for(var/obj/effect/proc_holder/spell/spell_to_remove in src.mind.spell_list)
+	for(var/obj/effect/proc_holder/spell/spell_to_remove in mind.spell_list)
 		qdel(spell_to_remove)
 		mind.spell_list -= spell_to_remove
 
-/datum/mind/proc/remove_spell(var/obj/effect/proc_holder/spell/spell) //To remove a specific spell from a mind
-	if(!spell) return
-	for(var/obj/effect/proc_holder/spell/S in spell_list)
-		if(istype(S, spell))
-			qdel(S)
-			spell_list -= S
+//To batch-remove mob spells.
+/mob/proc/mobspellremove(mob/M)
+	for(var/obj/effect/proc_holder/spell/spell_to_remove in mob_spell_list)
+		qdel(spell_to_remove)
+		mob_spell_list -= spell_to_remove
 
 /*Checks if the wizard can cast spells.
 Made a proc so this is not repeated 14 (or more) times.*/

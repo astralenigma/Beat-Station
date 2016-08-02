@@ -2,7 +2,7 @@
 	name = "Genetic"
 	desc = "This spell inflicts a set of mutations and disabilities upon the target."
 
-	var/sdisabilities = 0 //bits
+	var/disabilities = 0 //bits
 	var/list/mutations = list() //mutation strings
 	var/duration = 100 //deciseconds
 	/*
@@ -22,11 +22,11 @@
 			target.mutations.Add(x)
 		/*	if(x == HULK && ishuman(target))
 				target:hulk_time=world.time + duration */
-		target.sdisabilities |= sdisabilities
+		target.disabilities |= disabilities
 		target.update_mutations()	//update target's mutation overlays
 		spawn(duration)
 			target.mutations.Remove(mutations)
-			target.sdisabilities &= ~sdisabilities
+			target.disabilities &= ~disabilities
 			target.update_mutations()
 
 	return

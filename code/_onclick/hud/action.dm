@@ -279,9 +279,9 @@
 
 /datum/action/spell_action/CheckRemoval()
 	if(owner.mind)
-		if(target in owner.mind.spell_list)
+		if(target in owner.mind.mob_spell_list)
 			return 0
-	return !(target in owner.spell_list)
+	return !(target in owner.mob_spell_list)
 
 	//Action button controlling a mob's research examine ability.
 /datum/action/scan_mode

@@ -17,9 +17,7 @@
 	SetStunned(min(stunned, 30))
 	SetParalysis(min(paralysis, 30))
 	SetWeakened(min(weakened, 20))
-	sleeping = 0
-	ear_deaf = 0
-
+	SetSleeping(0)
 
 /mob/living/silicon/robot/proc/use_power()
 	if (stat == DEAD)

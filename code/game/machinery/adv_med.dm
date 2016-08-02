@@ -444,7 +444,7 @@
 
 			occupantData["intOrgan"] = intOrganData
 
-			occupantData["blind"] = (H.sdisabilities & BLIND)
+			occupantData["blind"] = (H.disabilities & BLIND)
 			occupantData["nearsighted"] = (H.disabilities & NEARSIGHTED)
 
 		data["occupant"] = occupantData
@@ -635,7 +635,7 @@
 				dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
 				dat += "</tr>"
 			dat += "</table>"
-			if(occupant.sdisabilities & BLIND)
+			if(occupant.disabilities & BLIND)
 				dat += "<font color='red'>Cataracts detected.</font><BR>"
 			if(occupant.disabilities & NEARSIGHTED)
 				dat += "<font color='red'>Retinal misalignment detected.</font><BR>"

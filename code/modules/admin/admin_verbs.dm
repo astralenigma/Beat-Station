@@ -576,14 +576,14 @@ var/list/admin_verbs_snpc = list(
 	if(!check_rights(R_EVENT))
 		return
 
-	var/list/spell_list = list()
+	var/list/mob_spell_list = list()
 	var/type_length = length("/obj/effect/proc_holder/spell") + 2
 	for(var/A in spells)
-		spell_list[copytext("[A]", type_length)] = A
-	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spell_list
+		mob_spell_list[copytext("[A]", type_length)] = A
+	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in mob_spell_list
 	if(!S)
 		return
-	S = spell_list[S]
+	S = mob_spell_list[S]
 	if(T.mind)
 		T.mind.AddSpell(new S)
 	else
