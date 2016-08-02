@@ -24,7 +24,8 @@
 /obj/item/stack/Destroy()
 	if (usr && usr.machine==src)
 		usr << browse(null, "window=stack")
-	return ..()
+	..()
+	return QDEL_HINT_HARDDEL_NOW // because qdel'd stacks act strange for cyborgs
 
 /obj/item/stack/examine(mob/user)
 	if(..(user, 1))
@@ -107,7 +108,8 @@
 		list_recipes(usr, text2num(href_list["sublist"]))
 
 	if (href_list["make"])
-		if (src.amount < 1) del(src) //Never should happen
+		if (src.amount < 1)
+			adel(src) //Never should happen
 
 		var/list/recipes_list = recipes
 		if (href_list["sublist"])
@@ -145,14 +147,14 @@
 			var/oldsrc = src
 			src = null //dont kill proc after del()
 			usr.unEquip(oldsrc, 1)
-			del(oldsrc) // Not qdel, because qdel'd stacks act strange for cyborgs
+			adel(oldsrc)
 			if (istype(O,/obj/item))
 				usr.put_in_hands(O)
 		O.add_fingerprint(usr)
 		//BubbleWrap - so newly formed boxes are empty
 		if ( istype(O, /obj/item/weapon/storage) )
 			for (var/obj/item/I in O)
-				del(I)
+				qdel(I)
 		//BubbleWrap END
 	if (src && usr.machine==src) //do not reopen closed window
 		spawn( 0 )
@@ -168,7 +170,7 @@
 		if(usr)
 			usr.unEquip(src, 1)
 		spawn()
-			del(src) // Not qdel, because qdel'd stacks act strange for cyborgs
+			qdel(src)
 	update_icon()
 	return 1
 
