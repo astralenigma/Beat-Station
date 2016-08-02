@@ -10,7 +10,7 @@
 	#include "map_files\RandomZLevels\spacehotel.dmm"
 	#include "map_files\RandomZLevels\stationCollision.dmm"
 	#include "map_files\RandomZLevels\wildwest.dmm"
-	
+
 	#include "map_files\RandomZLevels\evil_santa.dmm"
 
 	#define MAP_FILE "beach.dmm"

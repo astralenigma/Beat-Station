@@ -9,7 +9,9 @@ var/global/list/cached_icons = list()
 	icon_state = "paint_neutral"
 	item_state = "paintcan"
 	materials = list(MAT_METAL=200)
-	w_class = 3.0
+	w_class = 3
+	burn_state = FLAMMABLE
+	burntime = 5
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(10,20,30,50,70)
 	volume = 70

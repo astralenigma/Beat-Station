@@ -41,6 +41,7 @@
 	icon_state = "buckler"
 	item_state = "buckler"
 	materials = list()
+	burn_state = FLAMMABLE
 
 /obj/item/weapon/shield/riot/buckler/IsShield()
 	if(prob(60))

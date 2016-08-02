@@ -13,6 +13,8 @@
 	icon_state = "bed"
 	can_buckle = 1
 	buckle_lying = 1
+	burn_state = FLAMMABLE
+	burntime = 30
 	var/movable = 0 // For mobility checks
 
 /obj/structure/stool/bed/MouseDrop(atom/over_object)
@@ -47,6 +49,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
+	burn_state = FIRE_PROOF
 
 /obj/structure/stool/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/roller_holder))

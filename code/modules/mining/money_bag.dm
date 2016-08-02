@@ -5,9 +5,11 @@
 	name = "Money bag"
 	icon_state = "moneybag"
 	flags = CONDUCT
-	force = 10.0
+	force = 10
 	throwforce = 0
-	w_class = 4.0
+	burn_state = FLAMMABLE
+	burntime = 20
+	w_class = 4
 
 /obj/item/weapon/moneybag/attack_hand(user as mob)
 	var/amt_gold = 0

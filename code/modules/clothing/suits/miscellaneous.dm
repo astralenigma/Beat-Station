@@ -16,6 +16,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/laser/bluetag)
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armour"
@@ -25,6 +26,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/laser/redtag)
+	burn_state = FIRE_PROOF
 
 /*
  * Costume
@@ -116,6 +118,7 @@
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
 	w_class = 3
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/toy)
+	burn_state = FIRE_PROOF
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
 
@@ -305,6 +308,7 @@
 	desc = "A long, thick black leather coat."
 	icon_state = "leathercoat"
 	item_state = "leathercoat"
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/browncoat
 	name = "brown leather coat"
@@ -498,6 +502,7 @@
 	ignore_suitadjust = 1
 	actions_types = list()
 	adjust_flavour = null
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/officercoat
 	name = "Clown Officer's Coat"

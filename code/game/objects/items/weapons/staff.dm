@@ -11,6 +11,7 @@
 	flags = NOSHIELD
 	armour_penetration = 100
 	attack_verb = list("bludgeoned", "whacked", "disciplined")
+	burn_state = FLAMMABLE
 
 /obj/item/weapon/twohanded/staff/broom
 	name = "broom"

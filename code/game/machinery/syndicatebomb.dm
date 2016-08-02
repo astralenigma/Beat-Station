@@ -183,6 +183,7 @@
 	w_class = 3.0
 	origin_tech = "syndicate=6;combat=5"
 	var/adminlog = null
+	burn_state = FLAMMABLE //Burnable (but the casing isn't)
 
 /obj/item/weapon/bombcore/ex_act(severity) //Little boom can chain a big boom
 	src.detonate()

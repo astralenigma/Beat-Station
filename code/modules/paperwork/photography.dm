@@ -15,7 +15,8 @@
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state = "film"
 	item_state = "electropack"
-	w_class = 1.0
+	w_class = 1
+	burn_state = FLAMMABLE
 
 
 /********
@@ -26,7 +27,9 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
-	w_class = 2.0
+	w_class = 2
+	burn_state = FLAMMABLE
+	burntime = 5
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
 	var/icon/tiny
@@ -106,7 +109,8 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
-	can_hold = list("/obj/item/weapon/photo",)
+	can_hold = list("/obj/item/weapon/photo")
+	burn_state = FLAMMABLE
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 

@@ -41,6 +41,9 @@
 		mytape = null
 		update_icon()
 
+/obj/item/device/taperecorder/fire_act()
+	mytape.ruin() //Fires destroy the tape
+	return ..()
 
 /obj/item/device/taperecorder/attack_hand(mob/user)
 	if(loc == user)
@@ -300,6 +303,8 @@
 			return
 		name = "tape - [title]"
 
+/obj/item/device/tape/fire_act()
+	ruin()
 
 //Random colour tapes
 /obj/item/device/tape/random/New()

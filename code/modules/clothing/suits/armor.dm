@@ -1,4 +1,3 @@
-
 /obj/item/clothing/suit/armor
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/device/flashlight/seclite,/obj/item/weapon/melee/classic_baton/telescopic,/obj/item/weapon/kitchen/knife/combat)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -8,6 +7,7 @@
 	max_heat_protection_temperature = ARMOR_MAX_TEMP_PROTECT
 	strip_delay = 60
 	put_on_delay = 40
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/armor/vest
 	name = "armor"
@@ -126,6 +126,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|HANDS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|HANDS
+	burn_state = FLAMMABLE
 	strip_delay = 70
 
 /obj/item/clothing/suit/armor/vest/warden/alt
@@ -213,7 +214,7 @@
 	blood_overlay_type = "armor"
 	flags = ONESIZEFITSALL
 	allowed = list(/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/device/flashlight,/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/lighter,/obj/item/device/detective_scanner,/obj/item/device/taperecorder)
-
+	burn_state = FLAMMABLE
 
 //Reactive armor
 //When the wearer gets hit, this armor will teleport the user a short distance away (to safety or to more danger, no one knows. That's the fun of it!)
