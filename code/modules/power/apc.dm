@@ -961,8 +961,8 @@
 		return 0
 
 	else if (href_list["overload"])
-		if(istype(usr, /mob/living/silicon) && !aidisabled)
-			src.overload_lighting()
+		if(issilicon(usr) && !aidisabled)
+			overload_lighting()
 
 	else if (href_list["malfhack"])
 		var/mob/living/silicon/ai/malfai = usr
@@ -975,7 +975,7 @@
 			malfai.malfhacking = 1
 			sleep(600)
 			if(src)
-				if (!src.aidisabled)
+				if (!aidisabled)
 					malfai.malfhack = null
 					malfai.malfhacking = 0
 					locked = 1
@@ -983,9 +983,9 @@
 						if ((src.z in config.station_levels)) //if (is_type_in_list(get_area(src), the_station_areas))
 							ticker.mode:apcs++
 					if(usr:parent)
-						src.malfai = usr:parent
+						malfai = usr:parent
 					else
-						src.malfai = usr
+						malfai = usr
 					to_chat(malfai, "Hack complete. The APC is now under your exclusive control.")
 					update_icon()
 
@@ -1362,17 +1362,16 @@
 
 // overload all the lights in this APC area
 
-/obj/machinery/power/apc/proc/overload_lighting(var/chance = 100)
-	if(/* !get_connection() || */ !operating || shorted)
+/obj/machinery/power/apc/proc/overload_lighting(chance = 100)
+	if(!operating || shorted)
 		return
-	if( cell && cell.charge>=20)
-		cell.use(20);
+	if(cell && cell.charge >= 20)
+		cell.use(20)
 		spawn(0)
 			for(var/obj/machinery/light/L in area)
 				if(prob(chance))
 					L.on = 1
 					L.broken()
-				sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
 	if(cell && cell.charge > 0)
