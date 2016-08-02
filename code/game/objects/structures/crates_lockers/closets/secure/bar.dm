@@ -11,7 +11,7 @@
 	burntime = 20
 
 
-/obj/structure/closet/secure_closet/bar/new()
+/obj/structure/closet/secure_closet/bar/New()
 	..()
 	new /obj/item/weapon/reagent_containers/food/drinks/cans/beer( src )
 	new /obj/item/weapon/reagent_containers/food/drinks/cans/beer( src )
