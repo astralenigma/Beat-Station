@@ -160,6 +160,7 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_blueprint_data = blueprint_data
 	var/old_corners = corners
+	var/old_obscured = obscured
 
 	if(!lighting_corners_initialised && global.lighting_corners_initialised)
 		for(var/i = 1 to 4)
@@ -193,12 +194,15 @@
 		else
 			lighting_clear_overlay()
 
+	obscured = old_obscured
+
 	W.levelupdate()
 	W.CalculateAdjacentTurfs()
 
 	if(!can_have_cabling())
 		for(var/obj/structure/cable/C in contents)
 			qdel(C)
+
 	return W
 
 //////Assimilate Air//////
