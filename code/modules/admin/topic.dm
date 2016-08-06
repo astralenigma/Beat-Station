@@ -1858,6 +1858,7 @@
 
 			var/input = input(src.owner, "Please enter a reason for denying [key_name(H)]'s ERT request.","Outgoing message from CentComm", "")
 			if(!input)	return
+
 			ert_request_answered = 1
 			to_chat(src.owner, "You sent [input] to [H] via a secure channel.")
 			log_admin("[src.owner] denied [key_name(H)]'s ERT request with the message [input].")
