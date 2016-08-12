@@ -20,7 +20,7 @@
 			console.render_verdict( user )
 			playsound(get_turf( src ), 'sound/items/gavel.ogg', 50, 1)
 		else
-			user << "<span class='alert'>There is no active trial!</span>"
+			to_chat(user, "<span class='alert'>There is no active trial!</span>")
 		return
 
 	..()
