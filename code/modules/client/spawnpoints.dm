@@ -2,7 +2,7 @@ var/list/spawntypes = list()
 
 /proc/populate_spawn_points()
 	spawntypes = list()
-	for(var/type in subtypesof(/datum/spawnpoint))
+	for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
 		var/datum/spawnpoint/S = new type()
 		spawntypes[S.display_name] = S
 
@@ -29,14 +29,6 @@ var/list/spawntypes = list()
 /datum/spawnpoint/arrivals/New()
 	..()
 	turfs = latejoin
-
-/datum/spawnpoint/gateway
-	display_name = "Gateway"
-	msg = "has completed translation from offsite gateway"
-
-/datum/spawnpoint/gateway/New()
-	..()
-	turfs = latejoin_gateway
 
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
