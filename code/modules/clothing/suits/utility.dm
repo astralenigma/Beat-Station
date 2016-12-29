@@ -28,6 +28,7 @@
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	strip_delay = 60
 	put_on_delay = 60
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/fire/firefighter
 	icon_state = "firesuit"
@@ -65,6 +66,7 @@
 	max_heat_protection_temperature = HELMET_MAX_TEMP_PROTECT
 	strip_delay = 70
 	put_on_delay = 70
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
@@ -85,6 +87,7 @@
 	min_cold_protection_temperature = ARMOR_MIN_TEMP_PROTECT
 	strip_delay = 70
 	put_on_delay = 70
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/head/bomb_hood/security
 	icon_state = "bombsuitsec"
@@ -107,6 +110,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 60, rad = 100)
 	strip_delay = 60
 	put_on_delay = 60
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/suit/radiation
 	name = "Radiation suit"
@@ -124,3 +128,4 @@
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
 	strip_delay = 60
 	put_on_delay = 60
+	burn_state = FIRE_PROOF

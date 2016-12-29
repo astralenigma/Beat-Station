@@ -490,22 +490,22 @@
 		return
 	if(RESIST_HEAT in mutations)
 		return
-	var/thermal_protection = 0 //Simple check to estimate how protected we are against multiple temperatures
-	if(wear_suit)
-		if(wear_suit.max_heat_protection_temperature >= FIRE_SUIT_MAX_TEMP_PROTECT)
-			thermal_protection += (wear_suit.max_heat_protection_temperature*0.7)
-	if(head)
-		if(head.max_heat_protection_temperature >= FIRE_HELM_MAX_TEMP_PROTECT)
-			thermal_protection += (head.max_heat_protection_temperature*THERMAL_PROTECTION_HEAD)
-	thermal_protection = round(thermal_protection)
-	if(thermal_protection >= FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT)
-		return
-	if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT)
-		bodytemperature += 11
-		return
-	else
-		bodytemperature += BODYTEMP_HEATING_MAX
-	return
+	if(on_fire)
+		var/thermal_protection = get_thermal_protection()
+		if(wear_suit)
+			if(wear_suit.max_heat_protection_temperature >= FIRE_SUIT_MAX_TEMP_PROTECT)
+				thermal_protection += (wear_suit.max_heat_protection_temperature*0.7)
+		if(head)
+			if(head.max_heat_protection_temperature >= FIRE_HELM_MAX_TEMP_PROTECT)
+				thermal_protection += (head.max_heat_protection_temperature*THERMAL_PROTECTION_HEAD)
+		thermal_protection = round(thermal_protection)
+		if(thermal_protection >= FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT)
+			return
+		if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT)
+			bodytemperature += 11
+			return
+		else
+			bodytemperature += BODYTEMP_HEATING_MAX
 //END FIRE CODE
 
 	/*

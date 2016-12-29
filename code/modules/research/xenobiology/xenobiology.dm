@@ -342,7 +342,8 @@
 	C.color = "#000080"
 	C.max_heat_protection_temperature = FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT
 	C.heat_protection = C.body_parts_covered
-	uses --
+	C.burn_state = FIRE_PROOF
+	uses--
 	if(!uses)
 		qdel(src)
 
