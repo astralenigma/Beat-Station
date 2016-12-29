@@ -374,7 +374,7 @@
 		for(var/mob/living/L in T)
 			L.ExtinguishMob()
 		for(var/obj/item/Item in T)
- 			Item.extinguish()
+			Item.extinguish()
 
 /datum/effect/system/freezing_smoke_spread
 
