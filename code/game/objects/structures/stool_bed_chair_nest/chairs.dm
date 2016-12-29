@@ -70,6 +70,8 @@
 	if(user.incapacitated())
 		to_chat(user, "<span class='warning'>You can't do that right now!</span>")
 		return
+	if(!isliving(user))
+		return
 	if(!Adjacent(user))
 		return
 	rotate()
