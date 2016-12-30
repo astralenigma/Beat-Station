@@ -38,7 +38,7 @@
 			selectableAreas += typesof(areapath)
 
 	var/datum/tlv/plasma_check = new/datum/tlv(-1.0, -1.0, 0.2, 0.5)
-	for(var/area/imp_area in areas)
+	for(var/area/imp_area in selectableAreas)
 		for(var/obj/machinery/portable_atmospherics/canister/can in imp_area)
 			if(istype(can.loc, /turf/simulated))
 				var/GET_PP = R_IDEAL_GAS_EQUATION*selectedCanister.air_contents.temperature/selectedCanister.air_contents.volume
