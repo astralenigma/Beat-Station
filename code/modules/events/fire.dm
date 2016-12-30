@@ -109,12 +109,11 @@
 
 /datum/event/fire/wood/proc/findObject()
 	if(!selectableAreas)
-		for(var/area/areapath in list(/area/bridge/meeting_room, /area/crew_quarters, /area/medical/psych, /area/library, /area/chapel/main, /area/chapel/office, /area/ntrep, /area/blueshield, /area/civilian/pet_store, /area/security/vacant_office, /area/clownoffice, /area/mimeoffice, /area/magistrateoffice, /area/security/detectives_office))
+		for(var/area/areapath in list(/area/bridge/meeting_room, /area/crew_quarters, /area/medical/psych, /area/library, /area/chapel/main, /area/chapel/office, /area/ntrep, /area/blueshield, /area/civilian/pet_store, /area/security/vacantoffice, /area/clownoffice, /area/mimeoffice, /area/magistrateoffice, /area/security/detectives_office))
 			selectableAreas += typesof(areapath)
 
-	var/datum/tlv/plasma_check = new/datum/tlv(-1.0, -1.0, 0.2, 0.5)
 	for(var/area/imp_area in selectableAreas)
-		for(var/obj/O in areas)
+		for(var/obj/O in imp_area)
 			if(O.burn_state == FLAMMABLE)
 				selectedObj = O
 				return
