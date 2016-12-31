@@ -76,17 +76,19 @@ If you can read this line and understand it, you probably aren't brazilian.
 If so, feel free to comment the code out.
 Also: if you plane on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
 */
+	log_to_dd("Checking host...")
+	spawn(10)
 	if(config.hostedby != "Nopm")
-		log_to_dd("The server host is probably shitty.\
-		Rebooting...")
+		log_to_dd("The server host is probably shitty")
+		log_to_dd("Rebooting...")
 		Reboot(1)
 	else if(config.hostedby == "Nopm" && host != "Nopm")
-		log_to_dd("The server host still continues to be shitty.\
-		Rebotting...")
+		log_to_dd("The server host is probably shitty.")
+		log_to_dd("Rebooting...")
 		Reboot(1)
 	else if(system_type == UNIX && config.hostedby == "Nopm" && config.simple_password == "Imnotshitty")
-		log_to_dd("The host isn't shitty.\
-		Continuing on with startup...")
+		log_to_dd("The host isn't shitty.")
+		log_to_dd("Continuing initialization...")
 
 
 
