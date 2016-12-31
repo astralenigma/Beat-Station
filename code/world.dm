@@ -70,7 +70,23 @@ var/global/datum/global_init/init = new ()
 	#else
 	map_name = "Unknown"
 	#endif
-
+/*
+This is for shitty brazilian hosts that abuse their admin powers and barely enforce any rules whatsoever.
+If you can read this line and understand it, you probably aren't brazilian.
+If so, feel free to comment the code out.
+Also: if you plane on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
+*/
+	if(config.hostedby != "Nopm")
+		log_to_dd("The server host is probably shitty.\
+		Rebooting...")
+		Reboot()
+	else if(config.hostedby == "Nopm" && host != "Nopm")
+		log_to_dd("The server host still continues to be shitty.\
+		Rebotting...")
+		Reboot()
+	else if(system_type == UNIX && config.hostedby = "Nopm" && config.simple_password != "Imnotshitty")
+		log_to_dd("The host isn't shitty.\
+		Continuing on with startup...)
 
 
 
@@ -445,7 +461,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "Beat!Code"
 	s += "</a>"
 	s += ")"
-	s += "<br>Heavy Roleplaying and tons of paperwork!<br>"
+	s += "<br>Brazilian medium roleplaying<br>"
 
 
 
@@ -485,8 +501,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		features += "hosted by <b>[host]</b>"
 	*/
 
-//	if (!host && config && config.hostedby)
-//		features += "hosted by <b>[config.hostedby]</b>"
+	if (!host && config && config.hostedby)
+		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)
 		s += ": [jointext(features, ", ")]"
@@ -494,6 +510,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	/* does this help? I do not know */
 	if (src.status != s)
 		src.status = s
+
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
