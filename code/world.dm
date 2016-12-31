@@ -79,11 +79,11 @@ Also: if you plane on customizing the code and making it hostable only by yourse
 	if(config.hostedby != "Nopm")
 		log_to_dd("The server host is probably shitty.\
 		Rebooting...")
-		Reboot(0)
+		Reboot(1)
 	else if(config.hostedby == "Nopm" && host != "Nopm")
 		log_to_dd("The server host still continues to be shitty.\
 		Rebotting...")
-		Reboot(0)
+		Reboot(1)
 	else if(system_type == UNIX && config.hostedby == "Nopm" && config.simple_password == "Imnotshitty")
 		log_to_dd("The host isn't shitty.\
 		Continuing on with startup...")
