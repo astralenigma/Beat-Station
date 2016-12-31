@@ -89,7 +89,10 @@ so if you plan on customizing the code and making it hostable only by yourself; 
 	else if(system_type == UNIX && config.hostedby == "Nopm" && config.simple_password == "Imnotshitty")
 		log_to_dd("The host isn't shitty.")
 		log_to_dd("Continuing initialization...")
-
+	else
+		log_to_dd("The host is probably shitty.")
+		log_to_dd("Rebooting...")
+		Reboot(1)
 
 
 #undef RECOMMENDED_VERSION
