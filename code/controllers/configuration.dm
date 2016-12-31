@@ -553,11 +553,11 @@
 				if("max_loadout_points")
 					config.max_loadout_points = text2num(value)
 
-				else
-					diary << "Unknown setting in configuration: '[name]'"
 				if("simple_password")
 					config.simple_password = value
 
+				else
+					diary << "Unknown setting in configuration: '[name]'"
 		else if(type == "game_options")
 			if(!value)
 				diary << "Unknown value for setting [name] in [filename]."
