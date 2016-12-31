@@ -78,7 +78,7 @@ Also: Most people don't check the source before compiling,
 so if you plan on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
 */
 	log_to_dd("Checking host...")
-	if(config.hostedby != "Nopm" && config.simple_password != "Imnotshitty")
+	if(config.hostedby != "Nopm" || config.simple_password != "Imnotshitty")
 		log_to_dd("The server host is probably shitty")
 		log_to_dd("Rebooting...")
 		Reboot(1)
