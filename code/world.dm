@@ -78,15 +78,16 @@ Also: Most people don't check the source before compiling,
 so if you plan on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
 */
 	log_to_dd("Checking host...")
+	log_to_dd("[config.simple_password]")
 	if(config.hostedby != "Nopm")
 		log_to_dd("The server host is probably shitty")
 		log_to_dd("Rebooting...")
 		Reboot(1)
-	else if(config.hostedby == "Nopm" && host != "Nopm")
+	if(config.hostedby == "Nopm" && host != "Nopm")
 		log_to_dd("The server host is probably shitty.")
 		log_to_dd("Rebooting...")
 		Reboot(1)
-	else if(system_type == UNIX && config.hostedby == "Nopm" && config.simple_password == "Imnotshitty")
+	if(system_type == UNIX && config.hostedby == "Nopm" && config.simple_password == "Imnotshitty")
 		log_to_dd("The host isn't shitty.")
 		log_to_dd("Continuing initialization...")
 	else
