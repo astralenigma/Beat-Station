@@ -78,7 +78,7 @@ Also: Most people don't check the source before compiling,
 so if you plan on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
 */
 	log_to_dd("Checking host...")
-	sleep(10) //To stop the logs from glitching
+	sleep(5) //To stop the logs from glitching
 	if(config.hostedby != "Nopm")
 		log_to_dd("The server host is probably shitty")
 		log_to_dd("Rebooting...")
