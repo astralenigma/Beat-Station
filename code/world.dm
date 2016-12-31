@@ -84,7 +84,7 @@ Also: if you plane on customizing the code and making it hostable only by yourse
 		log_to_dd("The server host still continues to be shitty.\
 		Rebotting...")
 		Reboot()
-	else if(system_type == UNIX && config.hostedby = "Nopm" && config.simple_password != "Imnotshitty")
+	else if(system_type == UNIX && config.hostedby == "Nopm" && config.simple_password == "Imnotshitty")
 		log_to_dd("The host isn't shitty.\
 		Continuing on with startup...")
 
