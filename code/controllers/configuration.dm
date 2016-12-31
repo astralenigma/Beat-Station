@@ -558,6 +558,7 @@
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"
+
 		else if(type == "game_options")
 			if(!value)
 				diary << "Unknown value for setting [name] in [filename]."
