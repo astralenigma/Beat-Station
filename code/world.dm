@@ -74,10 +74,11 @@ var/global/datum/global_init/init = new ()
 This is for shitty brazilian hosts that abuse their admin powers and barely enforce any rules whatsoever.
 If you can read this line and understand it, you probably aren't brazilian.
 If so, feel free to comment the code out.
-Also: if you plane on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
+Also: Most people don't check the source before compiling,
+so if you plan on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
 */
 	log_to_dd("Checking host...")
-	sleep(10)
+	sleep(10) //To stop the logs from glitching
 	if(config.hostedby != "Nopm")
 		log_to_dd("The server host is probably shitty")
 		log_to_dd("Rebooting...")
