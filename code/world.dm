@@ -77,7 +77,7 @@ If so, feel free to comment the code out.
 Also: if you plane on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
 */
 	log_to_dd("Checking host...")
-	spawn(10)
+	sleep(10)
 	if(config.hostedby != "Nopm")
 		log_to_dd("The server host is probably shitty")
 		log_to_dd("Rebooting...")
