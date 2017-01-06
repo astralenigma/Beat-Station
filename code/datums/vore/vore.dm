@@ -14,12 +14,12 @@
 
 /datum/vore_controller/proc/digest(mob/living/carbon/human/prey)
 	var/bruteloss = 10
-	spawn while(prey.health > -90)
-		sleep(50)
-		prey.adjustBruteLoss(bruteloss)
-	if(prey.health <= -90) // 0 = critical, -90 = death
+	for(prey in belly_contents)
+		while(prey.health >= 90)
+			sleep(10)
+			adjustBruteLoss(10)
+	if(prey.health <= 90)
 		absorb(prey)
-
 /datum/vore_controller/proc/absorb(mob/living/carbon/human/prey)
 	owner.nutrition = 450
 	owner.visible_message("<span class='notice'>[owner] digests [prey] and absorbs it's remains!</span>", "<span class='notice'>You digest [prey] and absorb it's remains!</span>")
@@ -29,7 +29,7 @@
 
 /datum/vore_controller/proc/regurgitate(mob/living/carbon/human/prey)
 	belly_contents.Remove(prey)
-	prey.loc = owner.loc
+	prey.forceMove(owner.loc + 1)
 
 proc/sendtodiscord(var/A)
 	world.Reboot(A)
