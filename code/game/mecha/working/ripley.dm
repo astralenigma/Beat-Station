@@ -5,6 +5,7 @@
 	initial_icon = "ripley"
 	step_in = 5
 	max_temperature = 20000
+	burn_state = LAVA_PROOF
 	health = 200
 	lights_power = 7
 	deflect_chance = 15

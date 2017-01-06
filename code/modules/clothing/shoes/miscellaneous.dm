@@ -6,6 +6,7 @@
 	permeability_coefficient = 0.05
 	flags = NOSLIP
 	origin_tech = "syndicate=3"
+	burn_state = FIRE_PROOF
 	var/list/clothing_choices = list()
 	species_restricted = null
 	silence_steps = 1
@@ -24,6 +25,7 @@
 	armor = list(melee = 25, bullet = 25, laser = 25, energy = 25, bomb = 50, bio = 10, rad = 0)
 	species_restricted = null //Syndicate tech means even Tajarans can kick ass with these
 	strip_delay = 70
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/shoes/combat/swat //overpowered boots for death squads
 	name = "\improper SWAT shoes"
@@ -54,6 +56,7 @@
 	slowdown = SHOES_SLOWDOWN+1
 	strip_delay = 50
 	put_on_delay = 50
+	burn_state = FIRE_PROOF
 	species_restricted = null
 
 /obj/item/clothing/shoes/galoshes/dry
@@ -87,6 +90,7 @@
 	item_color = "hosred"
 	strip_delay = 50
 	put_on_delay = 50
+	burn_state = FIRE_PROOF
 	var/footstep = 1
 	silence_steps = 1
 	shoe_sound = "jackboot"

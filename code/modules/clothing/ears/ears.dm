@@ -6,6 +6,7 @@
 	flags = EARBANGPROTECT
 	strip_delay = 15
 	put_on_delay = 25
+	burn_state = FLAMMABLE
 
 /obj/item/clothing/ears/headphones
 	name = "headphones"

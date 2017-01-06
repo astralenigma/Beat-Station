@@ -1,5 +1,6 @@
 /obj/item/clothing
 	name = "clothing"
+	burn_state = FLAMMABLE
 	var/list/species_restricted = null //Only these species can wear this kit.
 	var/rig_restrict_helmet = 0 // Stops the user from equipping a rig helmet without attaching it to the suit first.
 	var/scan_reagents = 0 //Can the wearer see reagents while it's equipped?
@@ -82,6 +83,7 @@
 //Ears: currently only used for headsets and earmuffs
 /obj/item/clothing/ears
 	name = "ears"
+	burn_state = FIRE_PROOF
 	w_class = 1.0
 	throwforce = 2
 	slot_flags = SLOT_EARS
@@ -141,6 +143,7 @@
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	w_class = 2.0
+	burn_state = FIRE_PROOF
 	flags = GLASSESCOVERSEYES
 	slot_flags = SLOT_EYES
 	materials = list(MAT_GLASS = 250)
@@ -506,6 +509,7 @@ BLIND     // can't see anything
 	name = "Space helmet"
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
+	burn_state = FIRE_PROOF
 	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
 	item_state = "s_helmet"
 	permeability_coefficient = 0.01
@@ -540,6 +544,7 @@ BLIND     // can't see anything
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
 	strip_delay = 80
 	put_on_delay = 80
+	burn_state = FIRE_PROOF
 	species_restricted = list("exclude","Diona","Vox","Wryn")
 
 //Under clothing

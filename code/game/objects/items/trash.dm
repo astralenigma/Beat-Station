@@ -4,8 +4,9 @@
 //Added by Jack Rost
 /obj/item/trash
 	icon = 'icons/obj/trash.dmi'
-	w_class = 1.0
+	w_class = 1
 	desc = "This is rubbish."
+	burn_state = FLAMMABLE
 
 /obj/item/trash/raisins
 	name = "4no raisins"
@@ -42,6 +43,7 @@
 /obj/item/trash/plate
 	name = "Plate"
 	icon_state = "plate"
+	burn_state = FIRE_PROOF
 
 /obj/item/trash/snack_bowl
 	name = "Snack bowl"
@@ -58,6 +60,7 @@
 /obj/item/trash/tray
 	name = "Tray"
 	icon_state = "tray"
+	burn_state = FIRE_PROOF
 
 /obj/item/trash/candle
 	name = "candle"
@@ -71,6 +74,7 @@
 /obj/item/trash/can
 	name = "crushed can"
 	icon_state = "cola"
+	burn_state = FIRE_PROOF
 	var/is_glass = 0
 	var/is_plastic = 0
 
