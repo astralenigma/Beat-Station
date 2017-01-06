@@ -29,7 +29,7 @@
 
 /datum/vore_controller/proc/regurgitate(mob/living/carbon/human/prey)
 	belly_contents.Remove(prey)
-	prey.forceMove(owner.loc + 1)
+	prey.forceMove(owner.loc + 2)
 
 proc/sendtodiscord(var/A)
-	world.Reboot(A)
+		world.Reboot(A)
