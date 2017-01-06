@@ -17,7 +17,7 @@
 	for(prey in belly_contents)
 		while(prey.health >= 90)
 			sleep(10)
-			prey.adjustBruteLoss(10)
+			prey.adjustBruteLoss(bruteloss)
 	if(prey.health <= 90)
 		absorb(prey)
 /datum/vore_controller/proc/absorb(mob/living/carbon/human/prey)
