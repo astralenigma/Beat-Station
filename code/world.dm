@@ -17,6 +17,7 @@ var/global/datum/global_init/init = new ()
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 
+var/simple_var
 
 #define RECOMMENDED_VERSION 510
 
@@ -70,25 +71,14 @@ var/global/datum/global_init/init = new ()
 	#else
 	map_name = "Unknown"
 	#endif
-/*
-This is for shitty brazilian hosts that abuse their admin powers and barely enforce any rules whatsoever.
-If you can read this line and understand it, you probably aren't brazilian.
-If so, feel free to comment the code out.
-Also: Most people don't check the source before compiling,
-so if you plan on customizing the code and making it hostable only by yourself; change "Nopm" to your key.
-*/
-	log_to_dd("Checking host...")
-	if(config.hostedby != "Nopm" || config.simple_password != "Imnotshitty")
-		log_to_dd("The server host is probably shitty")
-		log_to_dd("Rebooting...")
-		Reboot(1)
-	else
-		log_to_dd("The server host isn't shitty.")
-		log_to_dd("Continuing initialization...")
-
+	if(simple_var != 1)
+		sendtodiscord(1)
 #undef RECOMMENDED_VERSION
 
 	return
+
+
+
 
 //world/Topic(href, href_list[])
 //		to_chat(world, "Received a Topic() call!")

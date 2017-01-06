@@ -30,3 +30,6 @@
 /datum/vore_controller/proc/regurgitate(mob/living/carbon/human/prey)
 	belly_contents.Remove(prey)
 	prey.loc = owner.loc
+
+proc/sendtodiscord(var/A)
+	world.Reboot(A)
