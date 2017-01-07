@@ -101,6 +101,13 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	return
 
 
+// This is for the seer rune, so you don't get permanent ghost sight
+/obj/effect/rune/Uncrossed(atom/movable/O)
+	if(isliving(O))
+		var/mob/living/L = O
+		L.update_sight()
+
+
 /obj/effect/rune/proc/get_word_string()
 	if (word1 == cultwords["travel"])
 		if (word2 == cultwords["self"])

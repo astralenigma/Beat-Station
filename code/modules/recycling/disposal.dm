@@ -128,9 +128,6 @@
 			for (var/mob/V in viewers(usr))
 				V.show_message("[usr] starts putting [GM.name] into the disposal.", 3)
 			if(do_after(usr, 20, target = GM))
-				if (GM.client)
-					GM.client.perspective = EYE_PERSPECTIVE
-					GM.client.eye = src
 				GM.forceMove(src)
 				for (var/mob/C in viewers(src))
 					C.show_message("\red [GM.name] has been placed in the [src] by [user].", 3)
@@ -189,9 +186,6 @@
 			msg_admin_attack("[key_name_admin(user)] placed [key_name_admin(target)] in a disposals unit")
 	else
 		return
-	if (target.client)
-		target.client.perspective = EYE_PERSPECTIVE
-		target.client.eye = src
 	target.forceMove(src)
 
 	for (var/mob/C in viewers(src))
@@ -215,13 +209,8 @@
 
 // leave the disposal
 /obj/machinery/disposal/proc/go_out(mob/user)
-
-	if (user.client)
-		user.client.eye = user.client.mob
-		user.client.perspective = MOB_PERSPECTIVE
-	user.forceMove(src.loc)
+	user.forceMove(loc)
 	update()
-	return
 
 
 // ai as human but can't flush
@@ -487,6 +476,10 @@
 /obj/machinery/disposal/singularity_pull(S, current_size)
 	if(current_size >= STAGE_FIVE)
 		qdel(src)
+
+/obj/machinery/disposal/get_remote_view_fullscreens(mob/user)
+	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))
+		user.overlay_fullscreen("remote_view", /obj/screen/fullscreen/impaired, 2)
 
 // virtual disposal object
 // travels through pipes in lieu of actual items
@@ -1355,11 +1348,7 @@
 
 // check if mob has client, if so restore client view on eject
 /mob/pipe_eject(var/direction)
-	if (src.client)
-		src.client.perspective = MOB_PERSPECTIVE
-		src.client.eye = src
-
-	return
+	reset_perspective(null)
 
 /obj/effect/decal/cleanable/blood/gibs/pipe_eject(var/direction)
 	var/list/dirs

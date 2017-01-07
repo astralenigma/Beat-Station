@@ -1208,11 +1208,7 @@
 
 /obj/mecha/proc/moved_inside(var/mob/living/carbon/human/H as mob)
 	if(H && H.client && H in range(1))
-		H.reset_view(src)
-		/*
-		H.client.perspective = EYE_PERSPECTIVE
-		H.client.eye = src
-		*/
+		H.reset_perspective(src)
 		H.stop_pulling()
 		H.forceMove(src)
 		src.occupant = H
@@ -1271,7 +1267,7 @@
 			to_chat(user, "<span class='notice'>\the [mmi_as_oc] is stuck to your hand, you cannot put it in \the [src]</span>")
 			return 0
 		var/mob/brainmob = mmi_as_oc.brainmob
-		brainmob.reset_view(src)
+		brainmob.reset_perspective(src)
 	/*
 		brainmob.client.eye = src
 		brainmob.client.perspective = EYE_PERSPECTIVE
@@ -1374,7 +1370,7 @@
 			to_chat(occupant, "You were blown out of the mech!")
 	*/
 		src.log_message("[mob_container] moved out.")
-		occupant.reset_view()
+		occupant.reset_perspective(null)
 		/*
 		if(src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
