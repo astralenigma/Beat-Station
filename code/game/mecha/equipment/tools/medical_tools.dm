@@ -63,7 +63,7 @@
 				return
 			target.forceMove(src)
 			occupant = target
-			target.reset_view(src)
+			target.reset_perspective(src)
 			/*
 			if(target.client)
 				target.client.perspective = EYE_PERSPECTIVE
@@ -82,7 +82,7 @@
 		occupant.forceMove(get_turf(src))
 		occupant_message("[occupant] ejected. Life support functions disabled.")
 		log_message("[occupant] ejected. Life support functions disabled.")
-		occupant.reset_view()
+		occupant.reset_perspective()
 		/*
 		if(occupant.client)
 			occupant.client.eye = occupant.client.mob
