@@ -52,7 +52,13 @@
 	return P.on_hit(src, armor, def_zone)
 
 /mob/living/proc/electrocute_act(shock_damage, obj/source, siemens_coeff = 1, safety = 0, tesla_shock = 0)
-	  return 0 //only carbon liveforms have this proc
+	adjustFireLoss(shock_damage)
+	visible_message(
+		"<span class='danger'>[src] was shocked by \the [source]!</span>", \
+		"<span class='userdanger'>You feel a powerful shock coursing through your body!</span>", \
+		"<span class='italics'>You hear a heavy electrical crack.</span>" \
+	)
+	return shock_damage
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_contents()
@@ -61,7 +67,7 @@
 	..()
 
 //this proc handles being hit by a thrown atom
-/mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
+/mob/living/hitby(atom/movable/AM, var/speed = 5)//Standardization and logging -Sieve
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		var/zone = ran_zone("chest", 65)//Hits a random part of the body, geared towards the chest
@@ -76,7 +82,7 @@
 
 		var/throw_damage = I.throwforce*(speed/5)
 
-		src.visible_message("\red [src] has been hit by [I].")
+		visible_message("<span class='danger'>[src] has been hit by [I].</span>")
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].", I.armour_penetration)
 
 		apply_damage(throw_damage, dtype, zone, armor, is_sharp(I), has_edge(I), I)
