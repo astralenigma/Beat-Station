@@ -104,8 +104,8 @@
 			if(M.zone_sel && M.zone_sel.selecting == "groin" && is_nude())
 				ass_storage(M)
 				return 1
-			if(M.zone_sel && M.zone_sel.selecting == "upper body" && src = user && M.swallow_controller.belly_contents.len > 0)
-				M.swallow_controller.regurgitate(M.swallow_controller.belly_contents[1])
+			if(H.zone_sel && H.zone_sel.selecting == "upper body" && src = H && H.swallow_controller.belly_contents.len > 0)
+				swallow_controller.regurgitate(swallow_controller.belly_contents[1])
 				return 1
 			if(attacker_style && attacker_style.grab_act(H, src))
 				return 1
