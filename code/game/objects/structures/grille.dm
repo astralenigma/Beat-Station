@@ -261,9 +261,9 @@
 			healthcheck()
 	..()
 
-/obj/structure/grille/hitby(AM as mob|obj)
+/obj/structure/grille/hitby(atom/AM)
 	if(isobj(AM))
-		if(prob(50) && anchored && !broken)
+		if(prob(50) && anchored && !destroyed)
 			var/turf/T = get_turf(src)
 			var/obj/structure/cable/C = T.get_cable_node()
 			if(C)
