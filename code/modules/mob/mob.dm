@@ -507,19 +507,46 @@ var/list/slot_equipment_priority = list( \
 		return 0 //Unsupported slot
 		//END HUMAN
 
-/mob/proc/reset_view(atom/A)
-	if (client)
-		if (istype(A, /atom/movable))
+// If you're looking for `reset_perspective`, that's a synonym for this proc.
+/mob/proc/reset_perspective(atom/A)
+	if(client)
+		if(istype(A, /atom/movable))
 			client.perspective = EYE_PERSPECTIVE
 			client.eye = A
 		else
-			if (isturf(loc))
+			if(isturf(loc))
 				client.eye = client.mob
 				client.perspective = MOB_PERSPECTIVE
 			else
 				client.perspective = EYE_PERSPECTIVE
 				client.eye = loc
-	return
+		return 1
+
+/mob/living/reset_perspective(atom/A)
+	. = ..()
+	if(.)
+		// Above check means the mob has a client
+		update_sight()
+		if(client.eye != src)
+			var/atom/AT = client.eye
+			AT.get_remote_view_fullscreens(src)
+		else
+			clear_fullscreen("remote_view", 0)
+		update_pipe_vision()
+
+/mob/dead/reset_perspective(atom/A)
+	if(client)
+		if(ismob(client.eye) && (client.eye != src))
+			// Note to self: Use `client.eye` for ghost following in place
+			// of periodic ghost updates
+			var/mob/target = client.eye
+			target.following_mobs -= src
+	. = ..()
+	if(.)
+		// Allows sharing HUDs with ghosts
+		if(hud_used)
+			client.screen = list()
+			hud_used.show_hud(hud_used.hud_version)
 
 
 /mob/proc/show_inv(mob/user)
@@ -813,7 +840,7 @@ var/list/slot_equipment_priority = list( \
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
 	set category = "OOC"
-	reset_view(null)
+	reset_perspective(null)
 	unset_machine()
 	if(istype(src, /mob/living))
 		if(src:cameraFollow)

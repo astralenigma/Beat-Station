@@ -434,7 +434,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!current)
 		return null
-	user.reset_view(current)
+	user.reset_perspective(current)
 	return 1
 
 /mob/living/silicon/ai/blob_act()
@@ -613,7 +613,7 @@ var/list/ai_verbs_default = list(
 		adjustBruteLoss(damage)
 		updatehealth()
 
-/mob/living/silicon/ai/reset_view(atom/A)
+/mob/living/silicon/ai/reset_perspective(atom/A)
 	if(current)
 		current.set_light(0)
 	if(istype(A,/obj/machinery/camera))
@@ -1084,3 +1084,11 @@ var/list/ai_verbs_default = list(
 		playsound(get_turf(src), 'sound/machines/ding.ogg', 50, 1)
 		to_chat(src, "Hack complete. [apc] is now under your exclusive control.")
 		apc.update_icon()
+
+/mob/living/silicon/ai/reset_perspective(atom/A)
+
+	if(camera_light_on)
+		light_cameras()
+	if(istype(A, /obj/machinery/camera))
+		current = A
+	. = ..()

@@ -318,3 +318,6 @@ Pipelines + Other Objects -> Pipe network
 /obj/machinery/atmospherics/singularity_pull(S, current_size)
 	if(current_size >= STAGE_FIVE)
 		Deconstruct()
+
+/obj/machinery/atmospherics/update_remote_sight(mob/user)
+	user.sight |= (SEE_TURFS|BLIND)
