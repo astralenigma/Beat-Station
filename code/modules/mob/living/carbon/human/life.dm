@@ -43,6 +43,7 @@
 		handle_lust()
 		species.handle_life(src)
 		swallow_controller.digest()
+
 		if(!client)
 			species.handle_npc(src)
 
