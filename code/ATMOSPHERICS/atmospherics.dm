@@ -42,7 +42,7 @@ Pipelines + Other Objects -> Pipe network
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
 
-
+	..()
 
 /obj/machinery/atmospherics/initialize()
 	..()
