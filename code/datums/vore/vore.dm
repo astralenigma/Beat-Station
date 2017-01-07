@@ -2,6 +2,8 @@
 	var/mob/living/carbon/human/owner
 	var/list/belly_contents = list()
 
+	var/digestCD = list()
+
 /datum/vore_controller/New(mob/living/carbon/human/own)
 	if(!istype(own))
 		return
@@ -12,13 +14,13 @@
 	belly_contents.Add(prey)
 	digest(prey)
 
-/datum/vore_controller/proc/digest(mob/living/carbon/human/prey)
-	var/bruteloss = 10
+/datum/vore_controller/proc/digest()
 	for(var/mob/living/carbon/prey in belly_contents)
-		sleep(10)
-		adjustBruteLoss(bruteloss)
-	if(prey.health <= 90)
-		absorb(prey)
+		if(world.time > digestCD[prey])
+			digestCD[prey] = world.time + 100
+			prey.adjustBruteLoss(10)
+			if(prey.health <= 90)
+				absorb(prey)
 
 /datum/vore_controller/proc/absorb(mob/living/carbon/human/prey)
 	owner.nutrition = 450
