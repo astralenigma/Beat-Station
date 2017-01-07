@@ -279,23 +279,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if ("adminwho" in input)
 		return list2params(admins)
 
-/proc/do_topic_spam_protection(var/addr, var/key)
-	if (!config.comms_password || config.comms_password == "")
-		return "No comms password configured, aborting."
-
-	if (key == config.comms_password)
-		return 0
-	else
-		if (world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-			spawn(50)
-				world_topic_spam_protect_time = world.time
-				return "Bad Key (Throttled)"
-
-		world_topic_spam_protect_time = world.time
-		world_topic_spam_protect_ip = addr
-
-		return "Bad Key"
 
 /proc/keySpamProtect(var/addr)
 	if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
