@@ -3,7 +3,9 @@
  * FIRE!
  *
  */
+
 /datum/event/fire
+
 
 /*
  *
@@ -19,6 +21,7 @@
 	if(safety_loop > 25)
 		kill()
 		end()
+		return
 
 	findCanister()
 
@@ -37,13 +40,10 @@
 		for(var/area/areapath in list(/area/toxins/storage, /area/atmos))
 			selectableAreas += typesof(areapath)
 
-	var/datum/tlv/plasma_check = new/datum/tlv(-1.0, -1.0, 0.2, 0.5)
 	for(var/area/imp_area in selectableAreas)
 		for(var/obj/machinery/portable_atmospherics/canister/can in imp_area)
 			if(istype(can.loc, /turf/simulated))
-				var/GET_PP = R_IDEAL_GAS_EQUATION*selectedCanister.air_contents.temperature/selectedCanister.air_contents.volume
-				var/plasma_dangerlevel = plasma_check.get_danger_level(selectedCanister.air_contents.toxins*GET_PP)
-				if(plasma_dangerlevel)
+				if(can.air_contents.toxins)
 					selectedCanister = can
 					return
 		selectableAreas -= imp_area
@@ -62,6 +62,7 @@
 	if(safety_loop > 25)
 		kill()
 		end()
+		return
 
 	findCable()
 
@@ -98,6 +99,7 @@
 	if(safety_loop > 25)
 		kill()
 		end()
+		return
 
 	findObject()
 
