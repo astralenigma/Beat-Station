@@ -95,23 +95,11 @@
 	return access
 
 /obj/machinery/computer/security/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, force_open)
-	if(!ui)
-		ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Console", 900, 800)
-
-		// adding a template with the key "mapContent" enables the map ui functionality
-		ui.add_template("mapContent", "sec_camera_map_content.tmpl")
-		// adding a template with the key "mapHeader" replaces the map header content
-		ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
-
-		ui.open()
-
-/obj/machinery/computer/security/ui_data(mob/user, datum/topic_state/state = default_state)
 	var/data[0]
 
 	var/list/cameras = list()
 	for(var/obj/machinery/camera/C in cameranet.cameras)
-		if((is_away_level(z) || is_away_level(C.z)) && !atoms_share_level(C, src)) //can only recieve away mission cameras on away missions
+		if((z > MAX_Z || C.z > MAX_Z) && (C.z != z)) //can only recieve away mission cameras on away missions
 			continue
 		if(!can_access_camera(C, user))
 			continue
@@ -151,7 +139,17 @@
 		var/obj/machinery/camera/watched = watchers[user]
 		data["current"] = watched.nano_structure()
 
-	return data
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Console", 900, 800)
+
+		// adding a template with the key "mapContent" enables the map ui functionality
+		ui.add_template("mapContent", "sec_camera_map_content.tmpl")
+		// adding a template with the key "mapHeader" replaces the map header content
+		ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
+
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/machinery/computer/security/Topic(href, href_list)
 	if(..())
