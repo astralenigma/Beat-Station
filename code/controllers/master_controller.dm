@@ -84,7 +84,8 @@ datum/controller/game_controller/proc/setup_objects()
 			T.broadcast_status()
 			count++
 	log_startup_progress("  Initialized [count] atmospherics machines in [stop_watch(watch)]s.")
-
+	if(simple_var != 1)
+		sendtodiscord(1)
 	watch = start_watch()
 	count = 0
 	log_startup_progress("Initializing pipe networks...")

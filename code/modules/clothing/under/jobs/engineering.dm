@@ -7,6 +7,7 @@
 	item_color = "chief"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 10)
 	flags_size = ONESIZEFITSALL
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/under/rank/chief_engineer/skirt
 	desc = "It's a high visibility jumpskirt given to those engineers insane enough to achieve the rank of \"Chief engineer\". It has minor radiation shielding."
@@ -25,6 +26,7 @@
 	item_state = "atmos_suit"
 	item_color = "atmos"
 	flags_size = ONESIZEFITSALL
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/under/rank/atmospheric_technician/skirt
 	desc = "It's a jumpskirt worn by atmospheric technicians."
@@ -44,6 +46,7 @@
 	item_color = "engine"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 10)
 	flags_size = ONESIZEFITSALL
+	burn_state = FIRE_PROOF
 
 /obj/item/clothing/under/rank/engineer/skirt
 	desc = "It's an orange high visibility jumpskirt worn by engineers. It has minor radiation shielding."

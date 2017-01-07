@@ -251,7 +251,7 @@ update_flag
 		return 1
 
 	if (src.health <= 10)
-		var/atom/location = src.loc
+		var/atom/location = loc
 		location.assume_air(air_contents)
 		air_update_turf()
 
@@ -545,7 +545,7 @@ update_flag
 
 	canister_color["prim"] = "orange"
 	decals["plasma"] = 1
-	src.air_contents.toxins = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.toxins = (maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
 	src.update_icon()
 	return 1
@@ -554,9 +554,9 @@ update_flag
 	..()
 
 	canister_color["prim"] = "blue"
-	src.air_contents.oxygen = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.oxygen = (maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent/New()
@@ -565,9 +565,9 @@ update_flag
 	canister_color["prim"] = "redws"
 	var/datum/gas/sleeping_agent/trace_gas = new
 	air_contents.trace_gases += trace_gas
-	trace_gas.moles = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	trace_gas.moles = (maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
-	src.update_icon()
+	update_icon()
 	return 1
 
 
@@ -577,8 +577,8 @@ update_flag
 	var/datum/gas/sleeping_agent/trace_gas = air_contents.trace_gases[1]
 	trace_gas.moles = 9*4000
 	spawn(100)
-		var/turf/simulated/location = src.loc
-		if (istype(src.loc))
+		var/turf/simulated/location = loc
+		if(istype(loc))
 			while (!location.air)
 				sleep(1000)
 			location.assume_air(air_contents)
@@ -590,18 +590,18 @@ update_flag
 	..()
 
 	canister_color["prim"] = "red"
-	src.air_contents.nitrogen = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.nitrogen = (maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
 	..()
 
 	canister_color["prim"] = "black"
-	src.air_contents.carbon_dioxide = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.carbon_dioxide = (maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
-	src.update_icon()
+	update_icon()
 	return 1
 
 
@@ -609,17 +609,17 @@ update_flag
 	..()
 
 	canister_color["prim"] = "grey"
-	src.air_contents.oxygen = (O2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-	src.air_contents.nitrogen = (N2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.oxygen = (O2STANDARD*maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.nitrogen = (N2STANDARD*maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/custom_mix/New()
 	..()
 
 	canister_color["prim"] = "whiters"
-	src.update_icon() // Otherwise new canisters do not have their icon updated with the pressure light, likely want to add this to the canister class constructor, avoiding at current time to refrain from screwing up code for other canisters. --DZD
+	update_icon() // Otherwise new canisters do not have their icon updated with the pressure light, likely want to add this to the canister class constructor, avoiding at current time to refrain from screwing up code for other canisters. --DZD
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)

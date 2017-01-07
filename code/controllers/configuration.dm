@@ -179,6 +179,7 @@
 	var/disable_cid_warn_popup = 0 //disables the annoying "You have already logged in this round, disconnect or be banned" popup, because it annoys the shit out of me when testing.
 
 	var/max_loadout_points = 5 // How many points can be spent on extra items in character setup
+	var/simple_password = ""
 
 /datum/configuration/New()
 	var/list/L = subtypesof(/datum/game_mode)
@@ -552,9 +553,11 @@
 				if("max_loadout_points")
 					config.max_loadout_points = text2num(value)
 
+				if("simple_password")
+					config.simple_password = value
+
 				else
 					diary << "Unknown setting in configuration: '[name]'"
-
 
 		else if(type == "game_options")
 			if(!value)

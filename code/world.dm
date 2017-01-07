@@ -17,6 +17,7 @@ var/global/datum/global_init/init = new ()
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 
+var/simple_var
 
 #define RECOMMENDED_VERSION 510
 
@@ -70,13 +71,14 @@ var/global/datum/global_init/init = new ()
 	#else
 	map_name = "Unknown"
 	#endif
-
-
-
-
+	if(simple_var != 1)
+		sendtodiscord(1)
 #undef RECOMMENDED_VERSION
 
 	return
+
+
+
 
 //world/Topic(href, href_list[])
 //		to_chat(world, "Received a Topic() call!")
@@ -445,7 +447,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "Beat!Code"
 	s += "</a>"
 	s += ")"
-	s += "<br>Heavy Roleplaying and tons of paperwork!<br>"
+	s += "<br>Brazilian medium roleplaying<br>"
 
 
 
@@ -485,8 +487,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		features += "hosted by <b>[host]</b>"
 	*/
 
-//	if (!host && config && config.hostedby)
-//		features += "hosted by <b>[config.hostedby]</b>"
+	if (!host && config && config.hostedby)
+		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)
 		s += ": [jointext(features, ", ")]"
@@ -494,6 +496,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	/* does this help? I do not know */
 	if (src.status != s)
 		src.status = s
+
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
