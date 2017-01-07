@@ -308,7 +308,7 @@
 
 		if("keyselect" in href_list)
 			current = null
-			usr.reset_view(null)
+			usr.reset_perspective(null)
 			key = input(usr,"Select a camera network key:", "Key Select", null) as null|anything in computer.list_files(/datum/file/camnet_key)
 			camera_list = null
 			update_icon()
