@@ -149,7 +149,7 @@
 	if(!user || !user.client) return
 	var/param = "null"
 	if(ref)
-		param = "[UID()]"
+		param = "\ref[ref]"
 
 	winset(user, windowid, "on-close=\".windowclose [param]\"")
 
