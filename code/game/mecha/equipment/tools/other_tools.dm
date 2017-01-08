@@ -13,7 +13,7 @@
 	range = RANGED
 
 /obj/item/mecha_parts/mecha_equipment/teleporter/action(atom/target)
-	if(!action_checks(target) || !is_teleport_allowed(loc.z))
+	if(!action_checks(target) || (loc.z in config.admin_levels))
 		return
 	var/turf/T = get_turf(target)
 	if(T)
@@ -34,7 +34,7 @@
 	range = RANGED
 
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator/action(atom/target)
-	if(!action_checks(target) || !is_teleport_allowed(loc.z))
+	if(!action_checks(target) || (loc.z in config.admin_levels))
 		return
 	var/list/theareas = get_areas_in_range(100, chassis)
 	if(!theareas.len)
