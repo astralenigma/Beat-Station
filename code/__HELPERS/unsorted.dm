@@ -1298,7 +1298,7 @@ Standard way to write links -Sayu
 /proc/topic_link(var/datum/D, var/arglist, var/content)
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
-	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
+	return "<a href='?src=[D.UID()];[arglist]'>[content]</a>"
 
 
 
@@ -1745,7 +1745,7 @@ var/global/list/g_fancy_list_of_types = null
 			sleep(world.tick_lag*4)
 			//you might be thinking of adding more steps to this, or making it use a loop and a counter var
 			//	not worth it.
-			
+
 
 /proc/simpleparsepapercode(var/t) //Ripped Off from Apollo
 	t = replacetext(t, "\[center\]", "<center>")
