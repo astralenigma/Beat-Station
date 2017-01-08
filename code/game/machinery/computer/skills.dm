@@ -48,7 +48,7 @@
 	if (temp)
 		dat = "<TT>[temp]</TT><BR><BR><A href='?src=[UID()];choice=Clear Screen'>Clear Screen</A>"
 	else
-		dat = "Confirm Identity: <A href='?src=[UID()];choice=Confirm Identity'>[scan ? scan.name : "----------")]</A><HR>"
+		dat = "Confirm Identity: <A href='?src=[UID()];choice=Confirm Identity'>[scan ? scan.name : "----------"]</A><HR>"
 		if (authenticated)
 			switch(screen)
 				if(1.0)

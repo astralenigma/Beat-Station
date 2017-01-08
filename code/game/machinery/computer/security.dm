@@ -82,7 +82,7 @@
 	if (temp)
 		dat = "<TT>[temp]</TT><BR><BR><A href='?src=[UID()];choice=Clear Screen'>Clear Screen</A>"
 	else
-		dat = "Confirm Identity: <A href='?src=[UID()];choice=Confirm Identity'>[scan ? scan.name : "----------")]</A><HR>"
+		dat = "Confirm Identity: <A href='?src=[UID()];choice=Confirm Identity'>[scan ? scan.name : "----------"]</A><HR>"
 		if (authenticated)
 			switch(screen)
 				if(1.0)
@@ -160,7 +160,7 @@
 					dat += "<BR><A href='?src=[UID()];choice=Delete All Records'>Delete All Records</A><BR><BR><A href='?src=[UID()];choice=Return'>Back</A>"
 				if(3.0)
 					dat += "<CENTER><B>Security Record</B></CENTER><BR>"
-					if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
+					if(istype(active1, /datum/data/record) && data_core.general.Find(active1))
 						var/icon/front = new(active1.fields["photo"], dir = SOUTH)
 						var/icon/side = new(active1.fields["photo"], dir = WEST)
 						user << browse_rsc(front, "front.png")
@@ -184,7 +184,7 @@
 							</td></tr></table>"}
 					else
 						dat += "<B>General Record Lost!</B><BR>"
-					if ((istype(active2, /datum/data/record) && data_core.security.Find(active2)))
+					if(istype(active2, /datum/data/record) && data_core.security.Find(active2))
 						dat += {"<BR>\n<CENTER><B>Security Data</B></CENTER>
 						<BR>\nCriminal Status: <A href='?src=[UID()];choice=Edit Field;field=criminal'>[active2.fields["criminal"]]</A>
 						<BR>\n<BR>\nMinor Crimes: <A href='?src=[UID()];choice=Edit Field;field=mi_crim'>[active2.fields["mi_crim"]]</A>
