@@ -281,6 +281,26 @@
 
 // attack with item - insert light (if right type), otherwise try to break the light
 
+/obj/machinery/light/proc/drop_light_tube(mob/user)
+	var/obj/item/weapon/light/L = new light_type()
+	L.status = status
+	L.rigged = rigged
+	L.brightness_range = brightness_range
+	L.brightness_power = brightness_power
+	L.brightness_color = brightness_color
+
+	// light item inherits the switchcount, then zero it
+	L.switchcount = switchcount
+	switchcount = 0
+
+	L.update()
+	L.add_fingerprint(user)
+
+	user.put_in_active_hand(L)	//puts it in our active hand
+
+	status = LIGHT_EMPTY
+	update()
+
 /obj/machinery/light/attackby(obj/item/W, mob/living/user, params)
 	user.changeNext_move(CLICK_CD_MELEE) //does not call parent requires manual definition
 	//Light replacer code
@@ -293,15 +313,21 @@
 
 	// attempt to insert light
 	if(istype(W, /obj/item/weapon/light))
-		if(status != LIGHT_EMPTY)
+		if(status == LIGHT_OK)
 			to_chat(user, "There is a [fitting] already inserted.")
 			return
 		else
-			src.add_fingerprint(user)
+			add_fingerprint(user)
 			var/obj/item/weapon/light/L = W
 			if(istype(L, light_type))
+				if(status != LIGHT_EMPTY)
+					drop_light_tube(user)
+					user << "<span class='notice'>You replace [L].</span>"
+				else
+					user << "<span class='notice'>You insert [L].</span>"
+
 				status = L.status
-				to_chat(user, "You insert the [L.name].")
+
 				switchcount = L.switchcount
 				rigged = L.rigged
 				brightness_range = L.brightness_range
@@ -360,11 +386,11 @@
 				if("bulb")
 					newlight = new /obj/machinery/light_construct/small(src.loc)
 					newlight.icon_state = "bulb-construct-stage2"
-			newlight.dir = src.dir
+			newlight.dir = dir
 			newlight.stage = 2
-			newlight.fingerprints = src.fingerprints
-			newlight.fingerprintshidden = src.fingerprintshidden
-			newlight.fingerprintslast = src.fingerprintslast
+			newlight.fingerprints = fingerprints
+			newlight.fingerprintshidden = fingerprintshidden
+			newlight.fingerprintslast = fingerprintslast
 			qdel(src)
 			return
 
@@ -468,24 +494,7 @@
 
 
 	// create a light tube/bulb item and put it in the user's hand
-	var/obj/item/weapon/light/L = new light_type()
-	L.status = status
-	L.rigged = rigged
-	L.brightness_range = brightness_range
-	L.brightness_power = brightness_power
-	L.brightness_color = brightness_color
-
-	// light item inherits the switchcount, then zero it
-	L.switchcount = switchcount
-	switchcount = 0
-
-	L.update()
-	L.add_fingerprint(user)
-
-	user.put_in_active_hand(L)	//puts it in our active hand
-
-	status = LIGHT_EMPTY
-	update()
+	drop_light_tube()
 
 // break the light and make sparks if was on
 
@@ -496,23 +505,7 @@
 
 	to_chat(user, "You telekinetically remove the light [fitting].")
 	// create a light tube/bulb item and put it in the user's hand
-	var/obj/item/weapon/light/L = new light_type()
-	L.status = status
-	L.rigged = rigged
-	L.brightness_range = brightness_range
-	L.brightness_power = brightness_power
-	L.brightness_color = brightness_color
-
-	// light item inherits the switchcount, then zero it
-	L.switchcount = switchcount
-	switchcount = 0
-
-	L.update()
-	L.add_fingerprint(user)
-	L.loc = loc
-
-	status = LIGHT_EMPTY
-	update()
+	drop_light_tube()
 
 /obj/machinery/light/proc/broken(skip_sound_and_sparks = 0)
 	if(status == LIGHT_EMPTY)
