@@ -67,7 +67,7 @@
 	else
 		return ..()
 
-/obj/structure/divine/attacked_by(obj/item/I, mob/living/user)
+/obj/structure/divine/attackby(obj/item/I, mob/living/user)
 	..()
 	take_damage(I.force, I.damtype, 1)
 

@@ -569,7 +569,7 @@ Class Procs:
 		ex_act(1)
 
 ////////////////////////////
-/obj/machinery/attacked_by(obj/item/I, mob/living/user)
+/obj/machinery/attackby(obj/item/I, mob/living/user)
 	..()
 	take_damage(I.force, I.damtype, 1)
 
