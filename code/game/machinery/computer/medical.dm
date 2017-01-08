@@ -30,7 +30,7 @@
 	if (src.temp)
 		dat = "<TT>[src.temp]</TT><BR><BR><A href='?src=[UID()];temp=1'>Clear Screen</A>"
 	else
-		dat = "Confirm Identity: <A href='?src=[UID()];scan=1'>[scan ? scan.name : "----------")]</A><HR>"
+		dat = "Confirm Identity: <A href='?src=[UID()];scan=1'>[scan ? scan.name : "----------"]</A><HR>"
 		if (authenticated)
 			switch(src.screen)
 				if(1.0)
@@ -60,14 +60,14 @@
 					user << browse_rsc(side, "side.png")
 					dat += "<CENTER><B>Medical Record</B></CENTER><BR>"
 					if ((istype(src.active1, /datum/data/record) && data_core.general.Find(src.active1)))
-						dat += "<table><tr><td>Name: [active1.fields["name"]] \
-								ID: [active1.fields["id"]]<BR>\n	\
-								Sex: <A href='?src=[UID()];field=sex'>[active1.fields["sex"]]</A><BR>\n	\
-								Age: <A href='?src=[UID()];field=age'>[active1.fields["age"]]</A><BR>\n	\
-								Fingerprint: <A href='?src=[UID()];field=fingerprint'>[active1.fields["fingerprint"]]</A><BR>\n	\
-								Physical Status: <A href='?src=[UID()];field=p_stat'>[active1.fields["p_stat"]]</A><BR>\n	\
-								Mental Status: <A href='?src=[UID()];field=m_stat'>[active1.fields["m_stat"]]</A><BR></td><td align = center valign = top> \
-								Photo:<br><img src=front.png height=64 width=64 border=5><img src=side.png height=64 width=64 border=5></td></tr></table>"
+						dat += {"<table><tr><td>Name: [active1.fields["name"]]
+								ID: [active1.fields["id"]]<BR>\n
+								Sex: <A href='?src=[UID()];field=sex'>[active1.fields["sex"]]</A><BR>\n
+								Age: <A href='?src=[UID()];field=age'>[active1.fields["age"]]</A><BR>\n
+								Fingerprint: <A href='?src=[UID()];field=fingerprint'>[active1.fields["fingerprint"]]</A><BR>\n
+								Physical Status: <A href='?src=[UID()];field=p_stat'>[active1.fields["p_stat"]]</A><BR>\n
+								Mental Status: <A href='?src=[UID()];field=m_stat'>[active1.fields["m_stat"]]</A><BR></td><td align = center valign = top>
+								Photo:<br><img src=front.png height=64 width=64 border=5><img src=side.png height=64 width=64 border=5></td></tr></table>"}
 					else
 						dat += "<B>General Record Lost!</B><BR>"
 					if ((istype(src.active2, /datum/data/record) && data_core.medical.Find(src.active2)))
