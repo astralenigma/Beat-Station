@@ -270,7 +270,7 @@
 			user << browse_rsc(I,"hog_structure-[img_component].png")
 			dat += "<center><img src='hog_structure-[img_component].png' height=64 width=64></center>"
 			dat += "Description: [initial(apath.desc)]<BR>"
-			dat += "<center><a href='?src=\ref[src];create_structure=[apath]'>Construct [capitalize(t)]</a></center><BR><BR>"
+			dat += "<center><a href='[UID()];create_structure=[apath]'>Construct [capitalize(t)]</a></center><BR><BR>"
 
 	var/datum/browser/popup = new(src, "structures","Construct Structure",350,500)
 	popup.set_content(dat)
@@ -288,7 +288,7 @@
 			user << browse_rsc(I,"hog_trap-[img_component].png")
 			dat += "<center><img src='hog_trap-[img_component].png' height=64 width=64></center>"
 			dat += "Description: [initial(T.desc)]<BR>"
-			dat += "<center><a href='?src=\ref[src];place_trap=[T]'>Place [capitalize(t)]</a></center><BR><BR>"
+			dat += "<center><a href='[UID()];place_trap=[T]'>Place [capitalize(t)]</a></center><BR><BR>"
 
 	var/datum/browser/popup = new(src, "traps", "Place Trap",350,500)
 	popup.set_content(dat)

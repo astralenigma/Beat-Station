@@ -44,7 +44,7 @@
 	update_icon()
 	investigate_log("was closed by [usr ? key_name(usr) : "a remote signal"]", "atmos")
 	return
-	
+
 /obj/machinery/atmospherics/binary/valve/attack_ai(mob/user as mob)
 	return
 
@@ -56,7 +56,7 @@
 		close()
 		return
 	open()
-				
+
 /obj/machinery/atmospherics/binary/valve/digital		// can be controlled by AI
 	name = "digital valve"
 	desc = "A digitally controlled valve."
@@ -139,7 +139,7 @@
 /obj/machinery/atmospherics/binary/valve/digital/multitool_menu(var/mob/user,var/obj/item/device/multitool/P)
 	return {"
 		<ul>
-			<li><b>Frequency:</b> <a href="?src=\ref[src];set_freq=-1">[format_frequency(frequency)] GHz</a> (<a href="?src=\ref[src];set_freq=[1439]">Reset</a>)</li>
+			<li><b>Frequency:</b> <a href="?src=[UID()];set_freq=-1">[format_frequency(frequency)] GHz</a> (<a href="?src=[UID()];set_freq=[1439]">Reset</a>)</li>
 			<li>[format_tag("ID Tag","id_tag","set_id")]</a></li>
 		</ul>
 		"}

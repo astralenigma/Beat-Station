@@ -20,7 +20,7 @@
 <body onload='selectTextField();updateSearch();'>
 <div id='main'><table id='searchable' cellspacing='0'>
 <tr class='title'>
-<th style='width:125px;text-align:right;'>CKEY <a class='small' href='?src=\ref[src];editrights=add'>\[+\]</a></th>
+<th style='width:125px;text-align:right;'>CKEY <a class='small' href='?src=[UID()];editrights=add'>\[+\]</a></th>
 <th style='width:125px;'>RANK</th><th style='width:100%;'>PERMISSIONS</th>
 </tr>
 "}
@@ -32,15 +32,15 @@
 		var/rights = rights2text(D.rights," ")
 		if(!rights)	rights = "*none*"
 		output += {"<tr>
-<td style='text-align:right;'>[adm_ckey] <a class='small' href='?src=\ref[src];editrights=remove;ckey=[adm_ckey]'>\[-\]</a></td>
-<td><a href='?src=\ref[src];editrights=rank;ckey=[adm_ckey]'>[rank]</a></td>
-<td><a class='small' href='?src=\ref[src];editrights=permissions;ckey=[adm_ckey]'>[rights]</a></font></td>
+<td style='text-align:right;'>[adm_ckey] <a class='small' href='?src=[UID()];editrights=remove;ckey=[adm_ckey]'>\[-\]</a></td>
+<td><a href='?src=[UID()];editrights=rank;ckey=[adm_ckey]'>[rank]</a></td>
+<td><a class='small' href='?src=[UID()];editrights=permissions;ckey=[adm_ckey]'>[rights]</a></font></td>
 </tr>"}
 
 		/*output += "<tr>"
-		output += "<td style='text-align:right;'>[adm_ckey] <a class='small' href='?src=\ref[src];editrights=remove;ckey=[adm_ckey]'>\[-\]</a></td>"
-		output += "<td><a href='?src=\ref[src];editrights=rank;ckey=[adm_ckey]'>[rank]</a></td>"
-		output += "<td><a class='small' href='?src=\ref[src];editrights=permissions;ckey=[adm_ckey]'>[rights]</a></font></td>"
+		output += "<td style='text-align:right;'>[adm_ckey] <a class='small' href='?src=[UID()];editrights=remove;ckey=[adm_ckey]'>\[-\]</a></td>"
+		output += "<td><a href='?src=[UID()];editrights=rank;ckey=[adm_ckey]'>[rank]</a></td>"
+		output += "<td><a class='small' href='?src=[UID()];editrights=permissions;ckey=[adm_ckey]'>[rights]</a></font></td>"
 		output += "</tr>"*/
 
 	output += {"
@@ -101,7 +101,7 @@
 			to_chat(usr, "\blue Admin rank changed.")
 
 /datum/admins/proc/log_admin_permission_modification(var/adm_ckey, var/new_permission)
-	if(config.admin_legacy_system)	
+	if(config.admin_legacy_system)
 		return
 
 	if(!usr.client)
@@ -153,7 +153,7 @@
 		var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.[format_table_name("admin_log")] (`id` ,`datetime` ,`adminckey` ,`adminip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Added permission [rights2text(new_permission)] (flag = [new_permission]) to admin [adm_ckey]')")
 		log_query.Execute()
 		to_chat(usr, "\blue Permission added.")
-		
+
 /datum/admins/proc/updateranktodb(ckey,newrank)
 	establish_db_connection()
 	if (!dbcon.IsConnected())
