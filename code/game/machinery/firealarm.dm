@@ -369,7 +369,7 @@ Just a object used in constructing fire alarms
 			d2 = "<A href='?src=[UID()];time=1'>[stars("Initiate Time Lock")]</A>"
 		var/second = time % 60
 		var/minute = (time - second) / 60
-		var/dat = text("<HTML><HEAD></HEAD><BODY><TT><B>[stars("Party Button")]</B> [d1]\n<HR>\nTimer System: [d2]<BR>\nTime Left: [(minute ? "[minute]:" : null)][second] <A href='?src=[UID()];tp=-30'>-</A> <A href='?src=[UID()];tp=-1'>-</A> <A href='?src=[UID()];tp=1'>+</A> <A href='?src=[UID()];tp=30'>+</A>\n</TT></BODY></HTML>"
+		var/dat = "<HTML><HEAD></HEAD><BODY><TT><B>[stars("Party Button")]</B> [d1]\n<HR>\nTimer System: [d2]<BR>\nTime Left: [(minute ? "[minute]:" : null)][second] <A href='?src=[UID()];tp=-30'>-</A> <A href='?src=[UID()];tp=-1'>-</A> <A href='?src=[UID()];tp=1'>+</A> <A href='?src=[UID()];tp=30'>+</A>\n</TT></BODY></HTML>"
 		user << browse(dat, "window=partyalarm")
 		onclose(user, "partyalarm")
 	return
