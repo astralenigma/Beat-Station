@@ -87,7 +87,7 @@
 
 						var/counter = 1
 						while(src.active2.fields["com_[counter]"])
-							dat += ("[active2.fields["com_[counter]"]]<BR><A href='?src=[UID()];del_c=[counter]'>Delete Entry</A><BR><BR>"
+							dat += "[active2.fields["com_[counter]"]]<BR><A href='?src=[UID()];del_c=[counter]'>Delete Entry</A><BR><BR>"
 							counter++
 						dat += "<A href='?src=[UID()];add_c=1'>Add Entry</A><BR><BR>"
 						dat += "<A href='?src=[UID()];del_r=1'>Delete Record (Medical Only)</A><BR><BR>"
