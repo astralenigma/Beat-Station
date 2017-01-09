@@ -285,43 +285,32 @@
 
 
 // Items
-/obj/item/clothing/gloves/cqc
+/obj/item/clothing/gloves/color/black/cqc
 	name = "fingerless gloves"
 	desc = "Something oddly tactical about these gloves..."
 	icon_state = "fingerless"
 	item_state = "fingerless"
-	item_color = null	//So they don't wash.
-	transfer_prints = TRUE
-	permeability_coefficient = 0.05
-	strip_delay = 80
-	put_on_delay = 20
-	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
-	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
-	burn_state = -1 //Won't burn in fires
 	var/datum/martial_art/cqc/style = new
 
-/obj/item/clothing/gloves/cqc/holo
+/obj/item/clothing/gloves/color/black/cqc/holo
 	name = "CQC VR Training Module"
 	desc = "Gloves that let you train in the arts of CQC."
 	style = new /datum/martial_art/cqc/stamina
 
-/obj/item/clothing/gloves/cqc/equipped(mob/user, slot)
+/obj/item/clothing/gloves/color/black/cqc/equipped(mob/user, slot)
 	if(!ishuman(user))
 		return
 	if(slot == slot_gloves)
 		var/mob/living/carbon/human/H = user
 		style.teach(H, 1)
-	return
 
-obj/item/clothing/gloves/cqc/dropped(mob/user)
+/obj/item/clothing/gloves/color/black/cqc/dropped(mob/user)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
 	if(H.get_item_by_slot(slot_gloves) == src)
 		style.remove(H)
-	return
+
 
 /obj/item/weapon/the_basics_of_cqc
 	name = "the basics of cqc"
