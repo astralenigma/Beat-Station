@@ -134,7 +134,7 @@ log transactions
 	user.set_machine(src)
 
 	var/data[0]
-	data["src"] = "\ref[src]"
+	data["src"] = UID()
 	data["view_screen"] = view_screen
 	data["machine_id"] = machine_id
 	data["held_card_name"] = held_card ? held_card.name : "------"
