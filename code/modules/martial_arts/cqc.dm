@@ -130,9 +130,8 @@
 	var/msg = pick("punches", "strikes", "chops", "hits", "kicks")
 	D.visible_message("<span class='danger'>[A] [msg] [D]!</span>", \
 					  "<span class='userdanger'>[A] [msg] you!</span>")
-	var/obj/item/organ/limb/L = D.get_organ(ran_zone(A.zone_sel.selecting))
-	var/armor_block = D.run_armor_check(L, "melee")
-	D.apply_damage(rand(1,4), damtype, L, armor_block) //Low as fuck brute to compensate for combo potential
+
+	D.apply_damage(rand(1,4), damtype)
 	playsound(get_turf(D), get_sfx("punch"), 50, 1, -2)
 	A.changeNext_move(4) //Can attack quickly
 	return 1
@@ -223,9 +222,7 @@
 				playsound(get_turf(A), 'sound/weapons/judoslam.ogg', 50, 1, -1)
 				shake_camera(D, 3, 1)
 				add_logs(A, D, "legsweeped", addition="(CQC)")
-				var/obj/item/organ/limb/L = D.get_organ("head")
-				var/armor_block = D.run_armor_check(L, "melee")
-				D.apply_damage(11, damtype, L, armor_block) //Slightly higher damage applied to head
+				D.apply_damage(11, damtype)
 				D.Weaken(3) //Weaken them for 3 ticks. Advantage is it bypasses armor for weaken.
 				A.changeNext_move(20) //2 seconds delay before next move
 				spawn(0) //Fancy animation
@@ -239,10 +236,8 @@
 				playsound(get_turf(A), pick("swing_hit"), 50, 1, -1)
 				shake_camera(D, 3, 1)
 				add_logs(A, D, "face-slammed", addition="(CQC)")
-				var/obj/item/organ/limb/L = D.get_organ("head")
-				var/armor_block = D.run_armor_check(L, "melee")
-				D.apply_damage(9, damtype, L, armor_block) //Low as fuck brute to compensate for combo potential
-				D.apply_effect(10, PARALYZE, armor_block) //Will be decreased based on head armor, too
+				D.apply_damage(9, damtype)
+				D.Weaken(10)
 				A.do_bounce_anim_dir(SOUTH, 2, 2, easeout = BOUNCE_EASING)
 				A.set_dir(EAST) //face the victim
 				D.set_dir(SOUTH) //face up
@@ -269,13 +264,13 @@
 	A.update_canmove()
 	playsound(A, get_sfx("punch"), 50, 1, -2)
 	D.visible_message("<span class='danger'>[A] roundhouse kicks [D] unconscious!</span>", \
-					  "<span class='userdanger'>[A] roundhouse kicks you unconscious!</span>")
-	var/obj/item/organ/limb/L = D.get_organ("head")
-	var/armor_block = D.run_armor_check(L, "melee")
+					"<span class='userdanger'>[A] roundhouse kicks you unconscious!</span>")
+
 	var/atom/throw_target = get_edge_target_turf(D, get_dir(A, get_step_away(D, A)))
 	D.throw_at(throw_target, pick(2,4), 2)	//Throws the target away
-	D.apply_damage(9, damtype, L, armor_block) //Low as fuck brute to compensate for combo potential
-	D.apply_effect(8, PARALYZE, armor_block) //Will be decreased based on head armor, too
+	D.apply_damage(9, damtype)
+	D.Weaken(8)
+
 	A.do_attack_animation(D)
 	shake_camera(D, 3, 1)
 	playsound(D, pick("swing_hit"), 50, 1, -1)
