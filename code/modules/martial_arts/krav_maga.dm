@@ -157,7 +157,7 @@ datum/martial_art/krav_maga/grab_act(var/mob/living/carbon/human/A, var/mob/livi
 		return
 	if(slot == slot_gloves)
 		var/mob/living/carbon/human/H = user
-		style.teach(H,1)
+		style.teach(H, 1)
 
 /obj/item/clothing/gloves/color/black/krav_maga/dropped(mob/user)
 	if(!ishuman(user))
