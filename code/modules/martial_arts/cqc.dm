@@ -192,17 +192,17 @@
 	switch(A.a_intent)
 		if("disarm")
 			if(G.state < GRAB_NECK)
-				A << "<span class='warning'>You require a better grab to do a chop.</span>"
+				to_chat(A ,"<span class='warning'>You require a better grab to do a chop.</span>")
 				return 1
 			if(D.lying || D.stat)
-				A << "<span class='warning'>Target must be standing up to do a chop.</span>"
+				to_chat(A ,"<span class='warning'>Target must be standing up to do a chop.</span>")
 				return 1
 			if(D.buckled)
-				A << "<span class='warning'>Target mustn't be buckled to do a chop.</span>"
+				to_chat(A ,"<span class='warning'>Target mustn't be buckled to do a chop.</span>")
 				return 1
 			D.visible_message("<span class='danger'>[A] karate-chops [D]!</span>", \
 							  "<span class='userdanger'>[A] karate-chops you!</span>")
-			D << "<span class='warning'>You feel confused...</span>"
+			to_chat(D ,"<span class='warning'>You feel confused...</span>")
 			D.confused += 3 //Fucks with your movement
 			D.adjustStaminaLoss(20)
 			A.changeNext_move(20)
@@ -210,10 +210,10 @@
 			playsound(get_turf(A), 'sound/effects/hit_punch.ogg', 30, 1, -2)
 		if("harm")
 			if(D.lying || D.stat)
-				A << "<span class='warning'>Target must be standing up to do this.</span>"
+				to_chat(A ,"<span class='warning'>Target must be standing up to do this.</span>")
 				return 1
 			if(D.buckled)
-				A << "<span class='warning'>Target mustn't be buckled to do this.</span>"
+				to_chat(A ,"<span class='warning'>Target mustn't be buckled to do this.</span>")
 				return 1
 
 			if(G.state == GRAB_AGGRESSIVE)
@@ -247,7 +247,7 @@
 				// A.Stun(3) //Sort of long stun
 				qdel(G)
 			else
-				A << "<span class='warning'>You require a better grab to do this.</span>"
+				to_chat(A ,"<span class='warning'>You require a better grab to do this.</span>")
 			return 1
 		else
 			return 0
@@ -316,10 +316,10 @@
 /obj/item/weapon/the_basics_of_cqc/attack_self(mob/living/carbon/human/user)
 	if(!istype(user) || !user)
 		return
-	user << "<span class='notice'>You begin to read the scroll...</span>"
-	user << "<span class='sciradio'><i>And all at once the secrets of the CQC fill your mind. This basic form of close quarters combat has been imbued into this scroll. As you read through it, \
+	to_chat(user ,"<span class='notice'>You begin to read the scroll...</span>"
+	to_chat(user ,"<span class='sciradio'><i>And all at once the secrets of the CQC fill your mind. This basic form of close quarters combat has been imbued into this scroll. As you read through it, \
  	these secrets flood into your mind and body.<br>You now know the martial techniques of the The Boss. Your hand-to-hand combat has become much more effective, and you may now perform powerful \
- 	combination attacks.</i></span>"
+ 	combination attacks.</i></span>")
 	var/datum/martial_art/cqc/D = new
 	D.teach(user)
 	user.drop_item()
