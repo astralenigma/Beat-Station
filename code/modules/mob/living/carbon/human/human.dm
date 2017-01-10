@@ -589,7 +589,7 @@
 		else
 			dat += "<tr><td><B>Gloves:</B></td><td><A href='?src=[UID()];item=[slot_gloves]'>[(gloves && !(gloves.flags&ABSTRACT))		? gloves	: "<font color=grey>Empty</font>"]</A></td></tr>"
 
-		if((w_uniform && !(w_uniform.flags & SHOWUNDERWEAR)) || slot_w_uniform in obscured)
+		if(slot_underpants in obscured)
 			dat += "<tr><td><font color=grey><B>Underpants:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 			dat += "<tr><td><font color=grey><B>Undershirt:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 		else
@@ -1257,6 +1257,8 @@
 			obscured |= slot_gloves
 		if(wear_suit.flags_inv & HIDEJUMPSUIT)
 			obscured |= slot_w_uniform
+			obscured |= slot_underpants
+			obscured |= slot_undershirt
 		if(wear_suit.flags_inv & HIDESHOES)
 			obscured |= slot_shoes
 
@@ -1268,6 +1270,10 @@
 		if(head.flags_inv & HIDEEARS)
 			obscured |= slot_r_ear
 			obscured |= slot_l_ear
+
+	if(w_uniform && !(w_uniform.flags & SHOWUNDERWEAR))
+		obscured |= slot_underpants
+		obscured |= slot_undershirt
 
 	if(obscured.len > 0)
 		return obscured
