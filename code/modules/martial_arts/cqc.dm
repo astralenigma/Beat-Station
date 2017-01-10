@@ -316,7 +316,7 @@
 /obj/item/weapon/the_basics_of_cqc/attack_self(mob/living/carbon/human/user)
 	if(!istype(user) || !user)
 		return
-	to_chat(user ,"<span class='notice'>You begin to read the scroll...</span>"
+	to_chat(user ,"<span class='notice'>You begin to read the scroll...</span>")
 	to_chat(user ,"<span class='sciradio'><i>And all at once the secrets of the CQC fill your mind. This basic form of close quarters combat has been imbued into this scroll. As you read through it, \
  	these secrets flood into your mind and body.<br>You now know the martial techniques of the The Boss. Your hand-to-hand combat has become much more effective, and you may now perform powerful \
  	combination attacks.</i></span>")
