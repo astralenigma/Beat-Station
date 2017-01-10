@@ -44,7 +44,7 @@
 			to_chat(usr, "<span class='notice'>You begin deconstructing [src].</span>")
 			if(!do_after(usr, 30, target = src))
 				return
-			new /obj/item/stack/sheet/metal(loc), sheets_refunded)
+			new /obj/item/stack/sheet/metal(loc, sheets_refunded)
 			user.visible_message("<span class='notice'>[user] deconstructs [src].</span>", \
 				"<span class='notice'>You deconstruct [src].</span>", "You hear a noise.")
 			playsound(loc, 'sound/items/Deconstruct.ogg', 75, 1)
