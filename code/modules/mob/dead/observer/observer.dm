@@ -210,6 +210,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	statpanel("Status")
 	if (client.statpanel == "Status")
 		show_stat_station_time()
+		stat(null, "Respawnability: [(src in respawnable_list) ? "Yes" : "No"]")
 		if(ticker)
 			if(ticker.mode)
 //				to_chat(world, "DEBUG: ticker not null")
