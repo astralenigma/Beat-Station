@@ -296,7 +296,7 @@
 		//meh
 		switch(mode)
 			if(0)
-				if (istype(target, /turf/simulated/wall))
+				if(istype(target, /turf/simulated/wall))
 					if(istype(target, /turf/simulated/wall/r_wall) && !canRwall)
 						return 0
 					occupant_message("Deconstructing [target]...")
@@ -306,7 +306,7 @@
 						target:ChangeTurf(/turf/simulated/floor/plating)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
-				else if (istype(target, /turf/simulated/floor))
+				else if(istype(target, /turf/simulated/floor))
 					occupant_message("Deconstructing [target]...")
 					set_ready_state(0)
 					if(do_after_cooldown(target))
@@ -314,7 +314,7 @@
 						target:ChangeTurf(/turf/space)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
-				else if (istype(target, /obj/machinery/door/airlock))
+				else if(istype(target, /obj/machinery/door/airlock))
 					occupant_message("Deconstructing [target]...")
 					set_ready_state(0)
 					if(do_after_cooldown(target))
@@ -367,7 +367,7 @@
 		return
 
 	get_equip_info()
-		return "[..()] \[<a href='?src=\ref[src];mode=0'>D</a>|<a href='?src=\ref[src];mode=1'>C</a>|<a href='?src=\ref[src];mode=2'>A</a>\]"
+		return "[..()] \[<a href='?src=[UID()];mode=0'>D</a>|<a href='?src=[UID()];mode=1'>C</a>|<a href='?src=[UID()];mode=2'>A</a>\]"
 
 
 
@@ -382,7 +382,7 @@
 	range = RANGED
 
 	action(atom/target)
-		if(!action_checks(target) || (src.loc.z in config.admin_levels)) return
+		if(!action_checks(target) || !is_teleport_allowed(src.loc.z)) return
 		var/turf/T = get_turf(target)
 		if(T)
 			set_ready_state(0)
@@ -403,7 +403,7 @@
 
 
 	action(atom/target)
-		if(!action_checks(target) || (src.loc.z in config.admin_levels)) return
+		if(!action_checks(target) || !is_teleport_allowed(src.loc.z)) return
 		var/list/theareas = list()
 		for(var/area/AR in orange(100, chassis))
 			if(AR in theareas) continue
@@ -498,7 +498,7 @@
 		return
 
 	get_equip_info()
-		return "[..()] [mode==1?"([locked||"Nothing"])":null] \[<a href='?src=\ref[src];mode=1'>S</a>|<a href='?src=\ref[src];mode=2'>P</a>\]"
+		return "[..()] [mode==1?"([locked||"Nothing"])":null] \[<a href='?src=[UID()];mode=1'>S</a>|<a href='?src=[UID()];mode=2'>P</a>\]"
 
 	Topic(href, href_list)
 		..()
@@ -666,7 +666,7 @@
 
 	get_equip_info()
 		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_repairs=1'>[pr_repair_droid.active()?"Dea":"A"]ctivate</a>"
+		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=[UID()];toggle_repairs=1'>[pr_repair_droid.active()?"Dea":"A"]ctivate</a>"
 
 
 	Topic(href, href_list)
@@ -788,7 +788,7 @@
 
 	get_equip_info()
 		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
+		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=[UID()];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
 
 /*	proc/dynusepower(amount)
 		if(!equip_ready) //enabled
@@ -878,7 +878,7 @@
 	get_equip_info()
 		var/output = ..()
 		if(output)
-			return "[output] \[[fuel_name]: [round(fuel_amount,0.1)] cm<sup>3</sup>\] - <a href='?src=\ref[src];toggle=1'>[pr_mech_generator.active()?"Dea":"A"]ctivate</a>"
+			return "[output] \[[fuel_name]: [round(fuel_amount,0.1)] cm<sup>3</sup>\] - <a href='?src=[UID()];toggle=1'>[pr_mech_generator.active()?"Dea":"A"]ctivate</a>"
 		return
 
 	action(target)

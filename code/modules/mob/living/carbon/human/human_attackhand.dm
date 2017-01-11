@@ -102,16 +102,16 @@
 
 		if(I_GRAB)
 			if(M.zone_sel && M.zone_sel.selecting == "groin" && is_nude())
-				src.ass_storage(M)
+				ass_storage(M)
+				return 1
+			if(src == H && zone_sel && zone_sel.selecting == "upper body" && swallow_controller.belly_contents.len > 0)
+				swallow_controller.regurgitate(swallow_controller.belly_contents[1])
 				return 1
 			if(attacker_style && attacker_style.grab_act(H, src))
 				return 1
 			else
 				src.grabbedby(M)
 				return 1
-			if(M.zone_sel && M.zone_sel.selecting == "upper body" && M.swallow_controller.belly_contents.len > 0)
-				M.swallow_controller.regurgitate(M.swallow_controller.belly_contents[1])
-				return
 		if(I_HARM)
 			if(attacker_style && attacker_style.harm_act(H, src))
 				return 1

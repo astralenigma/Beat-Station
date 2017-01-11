@@ -10,6 +10,7 @@
 
 	New()
 		..()
+		new /obj/item/clothing/accessory/storage/brown_vest(src)
 		new /obj/item/weapon/storage/backpack/science(src)
 		new /obj/item/weapon/storage/backpack/satchel_tox(src)
 		new /obj/item/clothing/under/rank/scientist(src)
@@ -36,6 +37,7 @@
 
 	New()
 		..()
+		new /obj/item/clothing/accessory/storage/brown_vest(src)
 		new /obj/item/clothing/suit/bio_suit/scientist(src)
 		new /obj/item/clothing/head/bio_hood/scientist(src)
 		new /obj/item/clothing/under/rank/research_director(src)

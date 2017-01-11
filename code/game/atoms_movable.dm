@@ -140,6 +140,18 @@
 
 	return 1
 
+/mob/living/forceMove(atom/destination)
+	stop_pulling()
+	if(buckled)
+		buckled.unbuckle_mob(src,force=1)
+	// in lieu of "unbuckle_all_mobs"
+	if(buckled_mob)
+		unbuckle_mob(buckled_mob,force=1)
+	. = ..()
+	if(client)
+		reset_perspective(destination)
+	update_canmove() //if the mob was asleep inside a container and then got forceMoved out we need to make them fall.
+
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/speed)
 	if(istype(hit_atom,/mob/living))
@@ -342,3 +354,54 @@
 //Say code
 /atom/movable/proc/get_spans()
 	return list()
+
+
+/atom/movable/proc/get_spacemove_backup()
+	var/atom/movable/dense_object_backup
+	for(var/A in orange(1, get_turf(src)))
+		if(isarea(A))
+			continue
+		else if(isturf(A))
+			var/turf/turf = A
+			if(!turf.density)
+				continue
+			return turf
+		else
+			var/atom/movable/AM = A
+			if(!AM.CanPass(src) || AM.density)
+				if(AM.anchored)
+					return AM
+				dense_object_backup = AM
+				break
+	. = dense_object_backup
+
+/atom/movable/proc/do_bounce_anim_dir(direction, wait, strength=8, easein=0, easeout=0, end_pixel_y)
+	var/pixel_x_diff = 0
+	var/pixel_y_diff = 0
+	var/final_pixel_y = initial(pixel_y)
+	if(end_pixel_y)
+		final_pixel_y = end_pixel_y
+	switch(direction)
+		if(NORTH)
+			pixel_y_diff = 8
+		if(SOUTH)
+			pixel_y_diff = -8
+		if(EAST)
+			pixel_x_diff = 8
+		if(WEST)
+			pixel_x_diff = -8
+		if(NORTHEAST)
+			pixel_x_diff = 8
+			pixel_y_diff = 8
+		if(NORTHWEST)
+			pixel_x_diff = -8
+			pixel_y_diff = 8
+		if(SOUTHEAST)
+			pixel_x_diff = 8
+			pixel_y_diff = -8
+		if(SOUTHWEST)
+			pixel_x_diff = -8
+			pixel_y_diff = -8
+
+	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = wait, easing = easein)
+	animate(pixel_x = initial(pixel_x), pixel_y = final_pixel_y, time = wait, easing = easeout)

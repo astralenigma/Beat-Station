@@ -106,6 +106,13 @@
 		assailant.client.screen -= hud
 		assailant.client.screen += hud
 
+	if(ishuman(affecting) && ishuman(assailant))
+		var/mob/living/carbon/human/A = assailant //Attacker
+		var/mob/living/carbon/human/D = affecting //Defender
+		var/datum/martial_art/attacker_style = A.martial_art
+		if(attacker_style && attacker_style.grab_process(src, A, D))
+			return 0
+
 	var/hit_zone = assailant.zone_sel.selecting
 	last_hit_zone = hit_zone
 
@@ -241,6 +248,12 @@
 	if(!assailant.canmove || assailant.lying)
 		qdel(src)
 		return
+	if(ishuman(affecting) && ishuman(assailant))
+		var/mob/living/carbon/human/A = assailant //Attacker
+		var/mob/living/carbon/human/D = affecting //Defender
+		var/datum/martial_art/attacker_style = A.martial_art
+		if(attacker_style && attacker_style.grab_reinforce_act(src,A,D))
+			return
 
 	last_upgrade = world.time
 
@@ -315,6 +328,10 @@
 		if(ishuman(M) && ishuman(assailant))
 			var/mob/living/carbon/human/affected = affecting
 			var/mob/living/carbon/human/attacker = assailant
+			var/datum/martial_art/attacker_style = attacker.martial_art
+			if(attacker_style && attacker_style.grab_attack_act(src, attacker, affected))
+				return 0
+
 			switch(assailant.a_intent)
 				if(I_HELP)
 					/*if(force_down)
@@ -419,9 +436,6 @@
 						qdel(src)
 					else
 						attacker.visible_message("<span class='notice'>[affecting] escapes from [attacker]'s grip!</span>", "<span class='notice'>[affecting] escapes from your grip!</span>")
-		if(a_intent == I_GRAB && M.zone_sel && M.zone_sel.selecting == "upper body" && src = user)
-		var/mob/living/carbon/attacker = user
-		attacker.swallow_controller.regurgitate(prey)
 		return
 /obj/item/weapon/grab/proc/checkvalid(var/mob/attacker, var/mob/prey) //does all the checking for the attack proc to see if a mob can eat another with the grab
 	if(ishuman(attacker) && (/datum/dna/gene/basic/grant_spell/mattereater in attacker.active_genes)) // MATTER EATER CARES NOT OF YOUR FORM

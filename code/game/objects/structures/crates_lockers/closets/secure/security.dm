@@ -14,6 +14,7 @@
 			new /obj/item/weapon/storage/backpack/captain(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_cap(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		new /obj/item/clothing/head/crown/fancy(src)
 		new /obj/item/weapon/storage/backpack/duffel/captain(src)
 		new /obj/item/clothing/suit/captunic(src)
@@ -48,6 +49,7 @@
 		..()
 		new /obj/item/clothing/glasses/sunglasses(src)
 		new /obj/item/clothing/head/hopcap(src)
+		new /obj/item/clothing/accessory/storage/brown_vest(src)
 		new /obj/item/weapon/cartridge/hop(src)
 		new /obj/item/device/radio/headset/heads/hop(src)
 		new /obj/item/weapon/storage/box/ids(src)
@@ -102,6 +104,8 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
+		new /obj/item/clothing/accessory/holster(src)
 		new /obj/item/weapon/cartridge/hos(src)
 		new /obj/item/device/radio/headset/heads/hos/alt(src)
 		new /obj/item/clothing/under/rank/head_of_security(src)
@@ -142,6 +146,8 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
+		new /obj/item/clothing/accessory/holster(src)
 		new /obj/item/device/radio/headset/headset_sec/alt(src)
 		new /obj/item/clothing/suit/armor/vest/warden(src)
 		new /obj/item/clothing/head/warden(src)
@@ -181,6 +187,7 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		new /obj/item/clothing/suit/armor/vest/security(src)
 		new /obj/item/device/radio/headset/headset_sec/alt(src)
 		new /obj/item/clothing/head/soft/sec(src)
@@ -236,7 +243,7 @@
 	New()
 		..()
 		new /obj/item/weapon/storage/briefcase(src)
-		new	/obj/item/weapon/storage/firstaid/adv(src)
+		new /obj/item/weapon/storage/firstaid/adv(src)
 		new /obj/item/weapon/storage/belt/security/sec(src)
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/device/flash(src)
@@ -322,6 +329,7 @@
 	New()
 		..()
 		new /obj/item/clothing/under/det(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		new /obj/item/clothing/suit/storage/det_suit(src)
 		new /obj/item/clothing/suit/storage/det_suit/forensics/blue(src)
 		new /obj/item/clothing/suit/storage/det_suit/forensics/red(src)

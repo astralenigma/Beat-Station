@@ -102,7 +102,7 @@
 	return text
 
 /obj/machinery/computer/attack_ghost(user as mob)
-	return src.attack_hand(user)
+	return attack_hand(user)
 
 /obj/machinery/computer/attack_hand(user as mob)
 	/* Observers can view computers, but not actually use them via Topic*/
@@ -111,15 +111,15 @@
 
 /obj/machinery/computer/attackby(I as obj, user as mob, params)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20, target = src))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
+			var/obj/structure/computerframe/A = new /obj/structure/computerframe(loc)
 			var/obj/item/weapon/circuitboard/M = new circuit( A )
 			A.circuit = M
 			A.anchored = 1
 			for (var/obj/C in src)
-				C.loc = src.loc
-			if (src.stat & BROKEN)
+				C.loc = loc
+			if (stat & BROKEN)
 				to_chat(user, "\blue The broken glass falls out.")
 				new /obj/item/weapon/shard(loc)
 				A.state = 3
@@ -130,7 +130,7 @@
 				A.icon_state = "4"
 			qdel(src)
 	else
-		src.attack_hand(user)
+		attack_hand(user)
 	return
 
 /obj/machinery/computer/attack_alien(mob/living/user)

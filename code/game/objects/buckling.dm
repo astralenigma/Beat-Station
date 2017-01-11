@@ -29,6 +29,11 @@
 	. = ..()
 	unbuckle_mob()
 
+/atom/movable/proc/has_buckled_mobs()
+	if(buckled_mob)
+		return TRUE
+	return FALSE
+
 //procs that handle the actual buckling and unbuckling
 /atom/movable/proc/buckle_mob(mob/living/M)
 	if(!can_buckle || !istype(M) || (M.loc != loc) || M.buckled || M.buckled_mob || buckled_mob || (buckle_requires_restraints && !M.restrained()) || M == src)
@@ -56,8 +61,8 @@
 			M.adjust_fire_stacks(1)
 			M.IgniteMob()
 
-/atom/movable/proc/unbuckle_mob()
-	if(buckled_mob && buckled_mob.buckled == src && buckled_mob.can_unbuckle(usr))
+/atom/movable/proc/unbuckle_mob(force = FALSE)
+	if(buckled_mob && buckled_mob.buckled == src && (buckled_mob.can_unbuckle(usr) || force))
 		. = buckled_mob
 		buckled_mob.buckled = null
 		buckled_mob.anchored = initial(buckled_mob.anchored)

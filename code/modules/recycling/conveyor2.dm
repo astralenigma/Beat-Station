@@ -17,6 +17,7 @@
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
 	var/verted = 1		// set to -1 to have the conveyour belt be inverted, so you can use the other corner icons
+	speed_process = 1
 
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
@@ -202,6 +203,7 @@
 
 	var/list/conveyors		// the list of converyors that are controlled by this switch
 	anchored = 1
+	speed_process = 1
 
 /obj/machinery/conveyor_switch/New(newloc, newid)
 	..(newloc)
@@ -293,7 +295,7 @@
 /obj/machinery/conveyor_switch/multitool_menu(mob/user, obj/item/device/multitool/P)
 	return {"
 	<ul>
-	<li><b>One direction only:</b> <a href='?src=\ref[src];toggle_logic=1'>[convdir ? "On" : "Off"]</a></li>
+	<li><b>One direction only:</b> <a href='?src=[UID()];toggle_logic=1'>[convdir ? "On" : "Off"]</a></li>
 	</ul>"}
 
 

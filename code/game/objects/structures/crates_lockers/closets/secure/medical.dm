@@ -64,6 +64,7 @@
 			new /obj/item/weapon/storage/backpack/medic(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_med(src)
+		new /obj/item/clothing/accessory/storage/brown_vest(src)
 		new /obj/item/weapon/storage/backpack/duffel/medical(src)
 		new /obj/item/clothing/under/rank/medical(src)
 		new /obj/item/clothing/suit/storage/labcoat(src)

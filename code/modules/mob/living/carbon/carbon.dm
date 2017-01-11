@@ -590,27 +590,27 @@ var/list/ventcrawl_machinery = list(/obj/machinery/atmospherics/unary/vent_pump,
 	user.set_machine(src)
 
 	var/dat = {"<table>
-	<tr><td><B>Left Hand:</B></td><td><A href='?src=\ref[src];item=[slot_l_hand]'>[(l_hand && !(l_hand.flags&ABSTRACT)) ? l_hand : "<font color=grey>Empty</font>"]</A></td></tr>
-	<tr><td><B>Right Hand:</B></td><td><A href='?src=\ref[src];item=[slot_r_hand]'>[(r_hand && !(r_hand.flags&ABSTRACT)) ? r_hand : "<font color=grey>Empty</font>"]</A></td></tr>
+	<tr><td><B>Left Hand:</B></td><td><A href='?src=[UID()];item=[slot_l_hand]'>[(l_hand && !(l_hand.flags&ABSTRACT)) ? l_hand : "<font color=grey>Empty</font>"]</A></td></tr>
+	<tr><td><B>Right Hand:</B></td><td><A href='?src=[UID()];item=[slot_r_hand]'>[(r_hand && !(r_hand.flags&ABSTRACT)) ? r_hand : "<font color=grey>Empty</font>"]</A></td></tr>
 	<tr><td>&nbsp;</td></tr>"}
 
-	dat += "<tr><td><B>Back:</B></td><td><A href='?src=\ref[src];item=[slot_back]'>[(back && !(back.flags&ABSTRACT)) ? back : "<font color=grey>Empty</font>"]</A>"
+	dat += "<tr><td><B>Back:</B></td><td><A href='?src=[UID()];item=[slot_back]'>[(back && !(back.flags&ABSTRACT)) ? back : "<font color=grey>Empty</font>"]</A>"
 	if(istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank))
-		dat += "&nbsp;<A href='?src=\ref[src];internal=[slot_back]'>[internal ? "Disable Internals" : "Set Internals"]</A>"
+		dat += "&nbsp;<A href='?src=[UID()];internal=[slot_back]'>[internal ? "Disable Internals" : "Set Internals"]</A>"
 
 	dat += "</td></tr><tr><td>&nbsp;</td></tr>"
 
-	dat += "<tr><td><B>Head:</B></td><td><A href='?src=\ref[src];item=[slot_head]'>[(head && !(head.flags&ABSTRACT)) ? head : "<font color=grey>Empty</font>"]</A></td></tr>"
+	dat += "<tr><td><B>Head:</B></td><td><A href='?src=[UID()];item=[slot_head]'>[(head && !(head.flags&ABSTRACT)) ? head : "<font color=grey>Empty</font>"]</A></td></tr>"
 
-	dat += "<tr><td><B>Mask:</B></td><td><A href='?src=\ref[src];item=[slot_wear_mask]'>[(wear_mask && !(wear_mask.flags&ABSTRACT)) ? wear_mask : "<font color=grey>Empty</font>"]</A></td></tr>"
+	dat += "<tr><td><B>Mask:</B></td><td><A href='?src=[UID()];item=[slot_wear_mask]'>[(wear_mask && !(wear_mask.flags&ABSTRACT)) ? wear_mask : "<font color=grey>Empty</font>"]</A></td></tr>"
 
 	if(handcuffed)
-		dat += "<tr><td><B>Handcuffed:</B> <A href='?src=\ref[src];item=[slot_handcuffed]'>Remove</A></td></tr>"
+		dat += "<tr><td><B>Handcuffed:</B> <A href='?src=[UID()];item=[slot_handcuffed]'>Remove</A></td></tr>"
 	if(legcuffed)
-		dat += "<tr><td><A href='?src=\ref[src];item=[slot_legcuffed]'>Legcuffed</A></td></tr>"
+		dat += "<tr><td><A href='?src=[UID()];item=[slot_legcuffed]'>Legcuffed</A></td></tr>"
 
 	dat += {"</table>
-	<A href='?src=\ref[user];mach_close=mob\ref[src]'>Close</A>
+	<A href='?src=[user.UID()];mach_close=mob\ref[src]'>Close</A>
 	"}
 
 	var/datum/browser/popup = new(user, "mob\ref[src]", "[src]", 440, 500)
@@ -1037,3 +1037,49 @@ so that different stomachs can handle things in different ways VB*/
 /mob/living/carbon/proc/update_internals_hud_icon(internal_state = 0)
 	if(hud_used && hud_used.internals)
 		hud_used.internals.icon_state = "internal[internal_state]"
+
+//to recalculate and update the mob's total tint from tinted equipment it's wearing.
+/mob/living/carbon/proc/update_tint()
+	if(!tinted_weldhelh)
+		return
+	var/tinttotal = get_total_tint()
+	if(tinttotal >= TINT_BLIND)
+		overlay_fullscreen("tint", /obj/screen/fullscreen/blind)
+	else if(tinttotal >= TINT_IMPAIR)
+		overlay_fullscreen("tint", /obj/screen/fullscreen/impaired, 2)
+	else
+		clear_fullscreen("tint", 0)
+
+/mob/living/carbon/proc/get_total_tint()
+	. = 0
+	if(istype(head, /obj/item/clothing/head))
+		var/obj/item/clothing/head/HT = head
+		. += HT.tint
+	if(wear_mask)
+		. += wear_mask.tint
+
+/mob/living/carbon/human/get_total_tint()
+	. = ..()
+	if(glasses)
+		var/obj/item/clothing/glasses/G = glasses
+		. += G.tint
+
+
+//handle stuff to update when a mob equips/unequips a mask.
+/mob/living/proc/wear_mask_update(obj/item/clothing/C, toggle_off = 1)
+	update_inv_wear_mask()
+
+/mob/living/carbon/wear_mask_update(obj/item/clothing/C, toggle_off = 1)
+	if(C.tint || initial(C.tint))
+		update_tint()
+	update_inv_wear_mask()
+
+//handle stuff to update when a mob equips/unequips a headgear.
+/mob/living/carbon/proc/head_update(obj/item/I, forced)
+	if(istype(I, /obj/item/clothing))
+		var/obj/item/clothing/C = I
+		if(C.tint || initial(C.tint))
+			update_tint()
+	if(I.flags_inv & HIDEMASK || forced)
+		update_inv_wear_mask()
+	update_inv_head()

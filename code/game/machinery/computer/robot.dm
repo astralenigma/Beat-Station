@@ -13,7 +13,7 @@
 	var/safety = 1
 
 /obj/machinery/computer/robotics/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
+	return attack_hand(user)
 
 /obj/machinery/computer/robotics/attack_hand(var/mob/user as mob)
 	if(..())
@@ -29,7 +29,7 @@
 
 
 /obj/machinery/computer/robotics/proc/is_authenticated(var/mob/user as mob)
-	if(isobserver(user) && check_rights(R_ADMIN, 0, user))
+	if(user.can_admin_interact())
 		return 1
 	else if(allowed(user))
 		return 1
@@ -120,7 +120,7 @@
 		target.lockcharge = !target.lockcharge
 		to_chat(target, "[!target.lockcharge ? "<span class='notice'>Your lockdown has been lifted!</span>" : "<span class='alert'>You have been locked down!</span>"]")
 		if(target.connected_ai)
-			to_chat(target.connected_ai, "[!target.lockcharge ? "<span class='notice'>NOTICE - Cyborg lockdown lifted</span>" : "<span class='alert'>ALERT - Cyborg lockdown detected</span>"]: <a href='?src=\ref[target.connected_ai];track=[html_encode(target.name)]'>[target.name]</a></span><br>")
+			to_chat(target.connected_ai, "[!target.lockcharge ? "<span class='notice'>NOTICE - Cyborg lockdown lifted</span>" : "<span class='alert'>ALERT - Cyborg lockdown detected</span>"]: <a href='?src=[target.connected_ai.UID()];track=[html_encode(target.name)]'>[target.name]</a></span><br>")
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
 	else if (href_list["hack"])

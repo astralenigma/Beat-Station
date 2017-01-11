@@ -58,13 +58,11 @@
 
 	for(var/mob/M in src)
 		moveMob(M, loc)
-		if(M.client)
-			M.client.eye = M.client.mob
-			M.client.perspective = MOB_PERSPECTIVE
 
 /obj/structure/closet/proc/moveMob(var/mob/M, var/atom/destination)
 	loc.Exited(M)
 	M.loc = destination
+	M.reset_perspective(destination)
 	loc.Entered(M, ignoreRest = 1)
 	for (var/atom/movable/AM in loc)
 		if (istype(AM, /obj/item))
@@ -118,10 +116,6 @@
 			continue
 		if(M.buckled)
 			continue
-
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
 
 		moveMob(M, src)
 		itemcount++
@@ -425,3 +419,7 @@
 	..()
 	visible_message("<span class='danger'>[src] is blown apart by the bolt of electricity!</span>", "<span class='danger'>You hear a metallic screeching sound.</span>")
 	qdel(src)
+
+/obj/structure/closet/get_remote_view_fullscreens(mob/user)
+	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))
+		user.overlay_fullscreen("remote_view", /obj/screen/fullscreen/impaired, 1)

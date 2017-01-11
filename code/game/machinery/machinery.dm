@@ -116,6 +116,7 @@ Class Procs:
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/use_log = list()
 	var/list/settagwhitelist = list()//WHITELIST OF VARIABLES THAT THE set_tag HREF CAN MODIFY, DON'T PUT SHIT YOU DON'T NEED ON HERE, AND IF YOU'RE GONNA USE set_tag (format_tag() proc), ADD TO THIS LIST.
+	var/speed_process = 0 // Process as fast as possible?
 
 /obj/machinery/New()
 	addAtProcessing()
@@ -126,17 +127,17 @@ Class Procs:
 		myArea = get_area_master(src)
 
 	machines += src
-
-/obj/machinery/proc/removeAtProcessing()
-	if(myArea)
-		myArea = null
-
-	machines -= src
+	if(!speed_process)
+		machine_processing += src
+	else
+		fast_processing += src
 
 /obj/machinery/Destroy()
-	if(src in machines)
-		removeAtProcessing()
-
+	if(myArea)
+		myArea = null
+	fast_processing -= src
+	machine_processing -= src
+	machines -= src
 	return ..()
 
 /obj/machinery/proc/locate_machinery()
@@ -568,7 +569,7 @@ Class Procs:
 		ex_act(1)
 
 ////////////////////////////
-/obj/machinery/attacked_by(obj/item/I, mob/living/user)
+/obj/machinery/attackby(obj/item/I, mob/living/user)
 	..()
 	take_damage(I.force, I.damtype, 1)
 

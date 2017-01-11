@@ -29,7 +29,7 @@
 	*/
 	var/obj/screen/zone_sel/zone_sel = null
 	var/obj/screen/leap_icon = null
-	var/obj/screen/healthdoll = null
+	var/obj/screen/healthdoll/healthdoll = null
 
 	var/obj/screen/gun/move/gun_move = null
 	var/obj/screen/gun/move/gun_item = null

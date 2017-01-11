@@ -16,6 +16,7 @@
 				new /obj/item/clothing/suit/apron(src)
 			if(2)
 				new /obj/item/clothing/suit/apron/overalls(src)
+		new /obj/item/clothing/accessory/storage/brown_vest(src)
 		new /obj/item/weapon/storage/bag/plants/portaseeder(src)
 		new /obj/item/clothing/under/rank/hydroponics(src)
 		new /obj/item/device/analyzer/plant_analyzer(src)

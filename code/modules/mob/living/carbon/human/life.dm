@@ -1,8 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-#define TINT_IMPAIR 2			//Threshold of tint level to apply weld mask overlay
-#define TINT_BLIND 3			//Threshold of tint level to obscure vision fully
-
 /mob/living/carbon/human
 
 	var/pressure_alert = 0
@@ -12,11 +9,9 @@
 	var/exposedtimenow = 0
 	var/firstexposed = 0
 	var/heartbeat = 0
-	var/tinttotal = 0				// Total level of visually impairing items
 
 /mob/living/carbon/human/Life()
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
-	tinttotal = tintcheck() //here as both hud updates and status updates call it
 	life_tick++
 
 	in_stasis = 0
@@ -43,6 +38,7 @@
 		handle_lust()
 		species.handle_life(src)
 		swallow_controller.digest()
+
 		if(!client)
 			species.handle_npc(src)
 
@@ -492,13 +488,6 @@
 		return
 	if(on_fire)
 		var/thermal_protection = get_thermal_protection()
-		if(wear_suit)
-			if(wear_suit.max_heat_protection_temperature >= FIRE_SUIT_MAX_TEMP_PROTECT)
-				thermal_protection += (wear_suit.max_heat_protection_temperature*0.7)
-		if(head)
-			if(head.max_heat_protection_temperature >= FIRE_HELM_MAX_TEMP_PROTECT)
-				thermal_protection += (head.max_heat_protection_temperature*THERMAL_PROTECTION_HEAD)
-		thermal_protection = round(thermal_protection)
 		if(thermal_protection >= FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT)
 			return
 		if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT)
@@ -841,10 +830,6 @@
 		if(REGEN in mutations)
 			heal_overall_damage(0.1, 0.1)
 
-		if(!in_stasis)
-			handle_organs()
-			handle_blood()
-
 		//the analgesic effect wears off slowly
 		analgesic = max(0, analgesic - 1)
 
@@ -934,6 +919,10 @@
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 
+		if(!in_stasis)
+			handle_organs()
+			handle_blood()
+
 
 	else //dead
 		blinded = 1
@@ -942,7 +931,7 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(machine)
-		if(!machine.check_eye(src))		reset_view(null)
+		if(!machine.check_eye(src))		reset_perspective(null)
 	else
 		var/isRemoteObserve = 0
 		if((REMOTE_VIEW in mutations) && remoteview_target)
@@ -967,7 +956,7 @@
 
 		if(!isRemoteObserve && client && !client.adminobs)
 			remoteview_target = null
-			reset_view(null)
+			reset_perspective(null)
 
 	species.handle_vision(src)
 

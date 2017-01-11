@@ -23,18 +23,18 @@
 	user.set_machine(src)
 
 	var/dat = "Photocopier<BR><BR>"
-	dat += "<a href='byond://?src=\ref[src];form=1'>Print Form</a><BR>"
+	dat += "<a href='byond://?src=[UID()];form=1'>Print Form</a><BR>"
 	if(copyitem || (ass && (ass.loc == src.loc)))
-		dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><BR>"
+		dat += "<a href='byond://?src=[UID()];remove=1'>Remove Item</a><BR>"
 		if(toner)
-			dat += "<a href='byond://?src=\ref[src];copy=1'>Copy</a><BR>"
+			dat += "<a href='byond://?src=[UID()];copy=1'>Copy</a><BR>"
 			dat += "Printing: [copies] copies."
-			dat += "<a href='byond://?src=\ref[src];min=1'>-</a> "
-			dat += "<a href='byond://?src=\ref[src];add=1'>+</a><BR><BR>"
+			dat += "<a href='byond://?src=[UID()];min=1'>-</a> "
+			dat += "<a href='byond://?src=[UID()];add=1'>+</a><BR><BR>"
 	else if(toner)
 		dat += "Please insert something to copy.<BR><BR>"
 	if(istype(user,/mob/living/silicon))
-		dat += "<a href='byond://?src=\ref[src];aipic=1'>Print photo from database</a><BR><BR>"
+		dat += "<a href='byond://?src=[UID()];aipic=1'>Print photo from database</a><BR><BR>"
 	dat += "Current toner level: [toner]"
 	if(!toner)
 		dat +="<BR>Please insert a new toner cartridge!"
@@ -81,9 +81,9 @@
 		dat += "<table style='width:100%; padding:4px;'><tr>"
 		for(var/i = 1, i <= public_forms.len, i++)
 			dat += "[public_forms[i]]	"
-			dat += "<a href='byond://?src=\ref[src];preform=[public_forms[i]]'>view</a>"
+			dat += "<a href='byond://?src=[UID()];preform=[public_forms[i]]'>view</a>"
 			dat += " - "
-			dat += "<a href='byond://?src=\ref[src];selform=[public_forms[i]]'>print</a><BR>"
+			dat += "<a href='byond://?src=[UID()];selform=[public_forms[i]]'>print</a><BR>"
 		usr << browse(dat, "window=formSelectScreen;size=600x750")
 
 	//Form preview window opens
@@ -95,7 +95,7 @@
 		//The form view stuff
 		var/dat = "<tt><center>Form Preview</center>"
 		dat += formContent
-		dat += "<BR><a href='byond://?src=\ref[src];selform=[form]'>Print</a>"
+		dat += "<BR><a href='byond://?src=[UID()];selform=[form]'>Print</a>"
 		usr << browse(dat, "window=formPreviewScreen")
 
 	//Print selected form

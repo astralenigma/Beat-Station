@@ -209,7 +209,9 @@ var/list/sacrificed = list()
 /////////////////////////////////////////SEVENTH RUNE
 
 /obj/effect/rune/proc/seer()
-	if(usr.loc==src.loc)
+	if(usr.loc == src.loc)
+		// No. Bad cultcode. Bad.
+		var/mob/living/carbon/human/H = usr
 		if(usr.seer==1)
 			usr.say("Rash'tla sektath mal[pick("'","`")]zua. Zasan therium viortia.")
 			to_chat(usr, "\red The world beyond fades from your vision.")
@@ -224,6 +226,7 @@ var/list/sacrificed = list()
 			to_chat(usr, "\red The world beyond opens to your eyes.")
 			usr.see_invisible = SEE_INVISIBLE_OBSERVER
 			usr.seer = 1
+		H.update_sight()
 		return
 	return fizzle()
 
@@ -564,7 +567,7 @@ var/list/sacrificed = list()
 			to_chat(H.current, "<span class='cultspeech'><span class='name'>[cultName]: </span><span class='message'>[input]</span></span>")
 
 	for(var/mob/spirit/spirit in spirits)
-		to_chat(spirit, "<span class='cultspeech'><span class='name'><a href='byond://?src=\ref[spirit];track2=\ref[spirit];track=\ref[usr]'>[displayName]: </a></span><span class='message'>[input]</span></span>")
+		to_chat(spirit, "<span class='cultspeech'><span class='name'><a href='byond://?src=[spirit.UID()];track2=\ref[spirit];track=\ref[usr]'>[displayName]: </a></span><span class='message'>[input]</span></span>")
 
 
 	for(var/mob/dead/observer/G in player_list)
